@@ -12,28 +12,24 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('.btn-floating').unbind('click');
         $('.fixed-action-btn').unbind('click');
+        attachFooter();
     });
 
-    if ($(document.body).height() <= $(window).height()) {
-            $('#footer').attr('style', 'position: fixed!important; bottom: 0px;');
-        }
+    $(window).on('resize', function() {
+        attachFooter();
+    });
 
-        $(window).on('resize', function() {
-            if ($(document.body).height() < $(window).height()) {
-                $('#footer').attr('style', 'position: fixed!important; bottom: 0px;');
-            }
-        });
+    function attachFooter() {
+        console.log($(document.body).height() + " | " + $(window).height());
+        if ($(document.body).height() < $(window).height()) {
+            $('#footer').attr('style', 'position: fixed!important; bottom: 0px;');
+        } else {
+            $('#footer').removeAttr('style');
+        }
+    }
 
     $('.dropdown-menu').find('form').click(function (e) {
         e.stopPropagation();
-    });
-
-    $('.carouselCourse').on('slide.bs.carousel', function(e) {
-        $('#pNormalCollapse').collapse('hide');
-        $('#pJEMSCollapse').collapse('hide');
-        $('#sNormalCollapse').collapse('hide');
-        $('#sSEMSCollapse').collapse('hide');
-        $('#sSCiUSCollapse').collapse('hide');
     });
 
     $('.carouselsmoothanimated').on('slide.bs.carousel', function(e) {
@@ -42,8 +38,5 @@
         }, 500);
     });
 </script>
-
-<div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v7.0&appId=2529205720433288&autoLogAppEvents=1" nonce="2UGIjGvo"></script>
-
 <?php $_SESSION['isDarkProfile'] = 0; ?>
 <?php mysqli_close($conn); ?>

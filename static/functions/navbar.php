@@ -14,17 +14,26 @@
                 <a class="nav-link" href="../problem/">Problem</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Submission</a>
+                <a class="nav-link" href="../submission/">Submission</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contest</a>
+                <a class="nav-link" href="../contest/">Contest</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Editorial</a>
+                <a class="nav-link" href="../editorial/">Editorial</a>
             </li>
         </ul>
         <div class="my-2 my-lg-0">
-                <a class="nav-link" href="#login">Login</a>
-        </form>
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-pharm" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item text-danger" id="logoutBtn">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

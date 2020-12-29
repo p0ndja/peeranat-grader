@@ -2,10 +2,21 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^home/$ pages/home.php
-RewriteRule ^template/$ pages/template.php
-RewriteRule ^problem/$ pages/problem.php
-RewriteRule ^problem/([0-9]+)$ pages/problem_id.php?id=$1 [L]
+RewriteRule ^home/$ pages/page_loader.php?target=home.php
+RewriteRule ^template/$ pages/page_loader.php?target=template.php
+RewriteRule ^problem/$ pages/page_loader.php?target=problem.php
+RewriteRule ^problem/([0-9]+)$ pages/page_loader.php?target=problem_id.php&id=$1 [L]
+RewriteRule ^submission/$ pages/page_loader.php?target=submission.php
+RewriteRule ^submission/([0-9]+)$ pages/page_loader.php?target=submission.php&id=$1 [L]
+RewriteRule ^contest/$ pages/page_loader.php?target=contest.php
+RewriteRule ^contest/([0-9]+)$ pages/page_loader.php?target=contest.php&id=$1 [L]
+RewriteRule ^scoreboard/$ pages/page_loader.php?target=scoreboard.php
+RewriteRule ^scoreboard/([0-9]+)$ pages/page_loader.php?target=scoreboard.php&id=$1 [L]
+RewriteRule ^profile/$ pages/page_loader.php?target=profile.php
+RewriteRule ^profile/([0-9]+)$ pages/page_loader.php?target=profile.php&id=$1 [L]
+
+RewriteRule ^login/$ pages/page_loader.php?target=login.php
+RewriteRule ^register/$ pages/register.php?target=register.php
 
 Options +FollowSymlinks
 Options +Indexes

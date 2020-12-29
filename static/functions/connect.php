@@ -2,9 +2,9 @@
     ob_start();
     session_start();
     $dbhost = "p0nd.ga";
-    $dbuser = "pondjaco";
-    $dbpass = "11032545";
-    $dbdatabase = "pondjaco_smdkku";
+    $dbuser = "pondjaco_graderga";
+    $dbpass = "Apo4J8fKBv";
+    $dbdatabase = "pondjaco_graderga";
     $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbdatabase); 
     mysqli_set_charset($conn, 'utf8');
 

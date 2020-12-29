@@ -42,6 +42,11 @@
         height: 100%;
     }
 
+    .table tbody > tr > td.vert-align_td,
+    .table tbody > tr > th.vert-align_th {
+       white-space: normal;
+    }
+
     footer {
         flex-shrink: 0;
         width: 100%;
@@ -270,12 +275,6 @@
 
     body .admin {
         background-color: #4b4b4b;
-    }
-
-    @media only screen and (max-width: 666px) {
-        body {
-            background-color: rgba(241, 241, 243);
-        }
     }
 
     .display-5 {
