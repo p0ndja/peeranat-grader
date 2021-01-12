@@ -1,36 +1,28 @@
-<div class="center container" id="container" style="padding-top: 88px">
+<div class="container" id="container" style="padding-top: 88px">
+    <div class="center">
+    <h1 class="display-5 font-weight-bold text-center text-coe">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
     <form method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
-        <div class="card">
+        <div class="card z-depth-1">
             <!--Body-->
             <div class="card-body mb-1">
-                <h1 class="display-5 text-center">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
                 <?php if (isset($_SESSION['error'])) {echo '<div class="alert alert-danger" role="alert">'. $_SESSION['error'] .'</div>'; $_SESSION['error'] = null;} ?>
                 <div class="md-form form-sm mb-5">
-                    <i class="fas fa-user prefix"></i>
+                    <i class="fas fa-user prefix text-coekku"></i>
                     <input type="text" name="login_username" id="login_username"
                         class="form-control form-control-sm validate" required>
                     <label for="login_username">Username</label>
                 </div>
                 <div class="md-form form-sm mb-4">
-                    <i class="fas fa-lock prefix"></i>
+                    <i class="fas fa-lock prefix text-coekku"></i>
                     <input type="password" name="login_password" id="login_password"
                         class="form-control form-control-sm validate" required>
                     <label for="login_password">Password</label>
                 </div>
+                <button type="submit" class="btn btn-block bg-coekku text-white mb-3" href="../logout/">Login</button>
                 <input type="hidden" name="method" value="loginPage">
-            </div>
-            <!--Footer-->
-            <div class="card-footer">
-                <div class="d-flex justify-content-between">
-                    <div class="align-self-center">
-                        <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../register/" class="text-pharm">สมัครเข้าใช้งานที่นี่!</a>
-                    </div>
-                    <div>
-                        <input class="btn btn-success" type="submit" name="login_submit" value="ล็อกอิน"></input>
-                        <a class="btn btn-danger" href="../home/">ยกเลิก</a>
-                    </div>
-                </div>
+                <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../register/" class="text-pharm">สมัครเข้าใช้งานที่นี่!</a>
             </div>
         </div>
     </form>
+    </div>
 </div>

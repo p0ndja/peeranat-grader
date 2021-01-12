@@ -41,7 +41,7 @@
             </div>
             <div class="modal-body">
                 <a class="dropdown-item" href="../profile/edit"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user-tie"></i></a>
-                <?php if (isAdmin($_SESSION['id'], $conn)) { ?>
+                <?php if (isAdmin($_SESSION['id'], $conn)) { //Check Admin?>
                     <hr>
                     <a class="dropdown-item text-secondary" href="../a/config"> Server Settings <i class="fas fa-user-tie"></i></a>
                     <a class="dropdown-item text-secondary" href="../a/user"> User Management <i class="fas fa-user-tie"></i></a>

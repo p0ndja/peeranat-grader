@@ -28,18 +28,17 @@
 
     .btn-coe {
         color: white !important;
-        background-color: #bd6769 !important;     
+        background-color: #9a1518 !important;     
         transition: 0.3s;        
     }
 
     .btn-coe:hover {
         color: white !important;
-        background-color:#9a1518 !important;            
+        background-color:#770f11 !important;            
     }
 
-    html,
-    body {
-        height: 100%;
+    .homepage {
+        height: 100vh;
     }
 
     .table tbody > tr > td.vert-align_td,
@@ -221,7 +220,6 @@
         color: #606060;
     }
     */
-
     .dropdown .dropdown-menu.dropdown-coekku .dropdown-item:hover,
     .dropdown .dropdown-menu.dropdown-coekku .dropdown-item:active,
     .dropdown .dropdown-menu.dropdown-coekku .dropdown-item.active,

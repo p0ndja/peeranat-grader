@@ -2,7 +2,7 @@
     require '../connect.php';
 
     //กรณี Login
-if (isset($_POST['login_submit'])) {
+if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     $user = $_POST['login_username'];
     $pass = $_POST['login_password']; $md5_pass = md5($pass);
 

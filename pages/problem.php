@@ -1,6 +1,7 @@
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">
-        <h1 class="display-4 font-weight-bold text-center text-coe">Problem</div>
+        <h1 class="display-4 font-weight-bold text-center text-coe">Problem</h1>
+        <a href="../problem/create" class="btn btn-coe btn-sm">+ Add Problem</a>
         <table class="table table-responsive w-100 d-block d-md-table">
             <thead>
                 <tr class="text-nowrap">

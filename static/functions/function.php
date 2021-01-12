@@ -1,4 +1,8 @@
 <?php declare(strict_types=1);
+
+    function latestIncrement($dbdatabase, $db, $conn) {
+        return mysqli_fetch_array(mysqli_query($conn,"SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$dbdatabase' AND TABLE_NAME = '$db'"), MYSQLI_ASSOC)["AUTO_INCREMENT"];
+    }
     function isLogin() {
         if (isset($_SESSION['id'])) return true;
         return false;
@@ -169,16 +173,16 @@
         <meta property="og:image:width" content="<?php echo $ogwidth; ?>" />
         <meta property="og:image:height" content="<?php echo $ogheight; ?>" />
         <meta property="og:title" content="<?php echo $topic;?>" />
-        <title><?php echo $topic;?> | {TITLE}</title>
-        <meta property="og:description" content="{TITLE}" />
+        <title><?php echo $topic;?> | Grader.GA</title>
+        <meta property="og:description" content="Grader.GA" />
             <?php }
         } else { ?>
         <meta property="og:image" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST']; ?>/static/elements/logo/logo.jpg" />
         <?php list($ogwidth, $ogheight, $ogtype, $ogattr) = getimagesize("../static/elements/logo/logo.jpg"); ?>
         <meta property="og:image:width" content="<?php echo $ogwidth; ?>" />
         <meta property="og:image:height" content="<?php echo $ogheight; ?>" />
-        <meta property="og:title" content="{TITLE}" />
-        <title>{TITLE}</title>
+        <meta property="og:title" content="Grader.GA" />
+        <title>Grader.GA</title>
         <meta property="og:description" content="{DESCRIPTION}" />
         <?php } ?>
         <meta name="twitter:card" content="summary"></meta>
