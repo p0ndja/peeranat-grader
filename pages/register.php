@@ -30,8 +30,8 @@
                         class="form-control form-control-sm validate" required>
                     <label for="register_name">Display name</label>
                 </div>
-                <a class="btn btn-block bg-coekku text-white mb-3" href="../logout/">Login</a>
-                <input type="hidden" name="method" value="loginPage">
+                <button type="submit" class="btn btn-block btn-coe mb-3">Register</button>
+                <input type="hidden" name="method" value="registerPage">
                 <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../login/" class="text-pharm">ต้องการเข้าสู่ระบบ!</a>
             </div>
         </div>

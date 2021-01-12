@@ -18,7 +18,7 @@
                         class="form-control form-control-sm validate" required>
                     <label for="login_password">Password</label>
                 </div>
-                <button type="submit" class="btn btn-block bg-coekku text-white mb-3" href="../logout/">Login</button>
+                <button type="submit" class="btn btn-block btn-coe mb-3">Login</button>
                 <input type="hidden" name="method" value="loginPage">
                 <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../register/" class="text-pharm">สมัครเข้าใช้งานที่นี่!</a>
             </div>
