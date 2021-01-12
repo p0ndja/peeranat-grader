@@ -10,7 +10,7 @@
         text-rendering: optimizelegibility;
     }
 
-    .text-coe{
+    .text-coe {
         color: #9A1518 !important;
         transition: 0.3s;
     }
@@ -25,28 +25,28 @@
     }
 
     a:hover {
-        color:#9a1518;
+        color: #9a1518;
         transition: 0.3s;
     }
 
     .btn-coe {
         color: white !important;
-        background-color: #9a1518 !important;     
-        transition: 0.3s;        
+        background-color: #9a1518 !important;
+        transition: 0.3s;
     }
 
     .btn-coe:hover {
         color: white !important;
-        background-color:#770f11 !important;            
+        background-color: #770f11 !important;
     }
 
     .homepage {
         height: 100vh;
     }
 
-    .table tbody > tr > td.vert-align_td,
-    .table tbody > tr > th.vert-align_th {
-       white-space: normal;
+    .table tbody>tr>td.vert-align_td,
+    .table tbody>tr>th.vert-align_th {
+        white-space: normal;
     }
 
     footer {
@@ -99,6 +99,14 @@
 
     .stick-bottom {
         bottom: 0;
+    }
+
+    #watermark {
+        position: fixed;
+        bottom: 5vh;
+        right: 5vh;
+        opacity: 0.5;
+        z-index: 99;
     }
 
     @media only screen and (max-width: 768px) {
