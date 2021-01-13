@@ -34,28 +34,6 @@
     }
     //saveUserdata('604019', 'username', 'PondJaTH', $conn);
 
-    function getEventdata($id, $data, $conn) {
-        return getAnySQL('event', $data, 'id', $id, $conn);
-    }
-    //getEventdata('1', 'name', $conn);
-
-    function saveEventdata($id, $data, $val, $conn) {
-        if (saveAnySQL('event', $data, $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-    //saveEventdata('1', 'name', 'PondJaTH', $conn);
-
-    function getReservedata($id, $conn) {
-        return getAnySQL('reserve', 'list', 'id', $id, $conn);
-    }
-    //getEventdata('1', 'name', $conn);
-
-    function saveReservedata($id, $val, $conn) {
-        if (saveAnySQL('reserve', 'list', $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-    //saveEventdata('1', 'name', 'PondJaTH', $conn);
-
     function isValidUserID($id, $conn) {
         $query = "SELECT * FROM `user` WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
@@ -63,32 +41,22 @@
         return false;
     }
 
-    function isValidEventID($id, $conn) {
-        $query = "SELECT * FROM `event` WHERE id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) return true;
-        return false;
+    function rating($rate) {
+        switch($rate) {
+            case 0:
+                return "<text class='text-secondary'>Peaceful</text>";
+            case 1:
+                return "<text class='text-success'>Easy</text>";
+            case 2:
+                return "<text class='text-warning'>Normal</text>";
+            case 3:
+                return "<text class='text-danger'>Hard</text>";
+            default:
+                return "<text class='text-muted'>Unrated</text>";
+        }
     }
 
-    function isReserved($uid, $eid, $conn) {
-        if (!empty(getReservedata($eid, $conn)) && strpos(getReservedata($eid, $conn), "|" . $uid) !== false) return true;
-        else return false;
-    }
-
-    function countCapacity($eid, $conn) {
-        if (!empty(getReservedata($eid, $conn))) return sizeof(explode("|", getReservedata($eid, $conn))) - 1;
-        else return 0;
-    }
-
-    function isFull($eid, $conn) {
-        if (countCapacity($eid, $conn) < getEventdata($eid, 'capacity', $conn)) return false;
-        else return true;
-    }
-
-    function isOvertime($eid, $conn) {
-        if (!(getEventdata($eid, 'start_reserve_date', $conn) <= curFullTime() && getEventdata($eid, 'end_reserve_date', $conn) >= curFullTime())) return true;
-        else return false;
-    }
+    
 ?>
 <?php
 
@@ -217,9 +185,9 @@
 <?php die(); }} ?>
 
 <?php
-    function needPermission($perm, $conn) {
-    if (!isset($_SESSION['id']) || !isLogin()) { needLogin(); die(); return false; }
-    if (!getUserdata($_SESSION['id'], $perm, $conn) && !getUserdata($_SESSION['id'], 'isAdmin', $conn)) { ?>
+    function needAdmin($conn) {
+    if (!isLogin()) { needLogin(); die(); return false; }
+    if (!isAdmin($_SESSION['id'], $conn)) { ?>
 <script>
     swal({
         title: "ACCESS DENIED",

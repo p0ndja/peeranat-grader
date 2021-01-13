@@ -1,3 +1,4 @@
+<?php needAdmin($conn); ?>
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">
         <form method="post" action="../pages/problem_save.php" enctype="multipart/form-data">
