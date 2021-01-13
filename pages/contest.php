@@ -1,6 +1,6 @@
 
     <?php $incoming = false; $contest = true; ?>
-    <div class="container" style="padding-top: 88px;">
+    <div class="container mb-3" style="padding-top: 88px;">
         <?php if ($contest) { ?>
         <div align="center">
             <h3 class="font-weight-bold text-coe">Contest Name</h3>
