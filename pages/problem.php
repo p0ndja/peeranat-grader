@@ -22,10 +22,10 @@
                     while ($row = $result->fetch_assoc()) {
                         $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Second";
                         if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
-                        $html .= "<tr onclick='window.location=\"../problem/$id\"'>
+                        $html .= "<tr onclick='window.location=\"../problem/$id\"' class='table-success'>
                             <th scope='row'>$id</th>
                             <td>$name <span class='badge badge-coekku'>$codename</span></td>
-                            <td>" . rating($rate)."</td>
+                            <td>".rating($rate)."</td>
                             <td>$time</td>
                             <td>$mem</td>
                         </tr>";
