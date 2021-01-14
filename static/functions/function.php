@@ -32,7 +32,34 @@
         if (saveAnySQL('user', $data, $val, 'id', $id, $conn)) return true;
         return false;
     }
-    //saveUserdata('604019', 'username', 'PondJaTH', $conn);
+    //saveUserdata('604019', 'username', 'PondJaTH', $conn);\
+
+    function getProbdata($id, $data, $conn) {
+        return getAnySQL('problem', $data, 'id', $id, $conn);
+    }
+
+    function saveProbdata($id, $data, $val, $conn) {
+        if (saveAnySQL('problem', $data, $val, 'id', $id, $conn)) return true;
+        return false;
+    }
+
+    function getSubmissiondata($id, $data, $conn) {
+        return getAnySQL('submission', $data, 'id', $id, $conn);
+    }
+
+    function saveSubmissiondata($id, $data, $val, $conn) {
+        if (saveAnySQL('submission', $data, $val, 'id', $id, $conn)) return true;
+        return false;
+    }
+
+    function getContestdata($id, $data, $conn) {
+        return getAnySQL('contest', $data, 'id', $id, $conn);
+    }
+
+    function saveContestdata($id, $data, $val, $conn) {
+        if (saveAnySQL('contest', $data, $val, 'id', $id, $conn)) return true;
+        return false;
+    }
 
     function isValidUserID($id, $conn) {
         $query = "SELECT * FROM `user` WHERE id = '$id'";
@@ -56,14 +83,17 @@
         }
     }
 
+    function prob($id, $conn) {
+        return "<a href='../problem/$id'>".getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span></a>";
+    }
+
+    function countScore($result, $full = 100) {
+        return number_format((float) count_chars(strtoupper($result))[80]*($full/strlen($result)), 2, '.', '');
+    }
+
     
 ?>
 <?php
-
-    function getDisplayName($id, $conn) {
-        return getUserdata($id, 'prefix', $conn) . getUserdata($id, 'firstname', $conn) . ' ' . getUserdata($id, 'lastname', $conn);
-    }
-
     function getClientIP() {
         if(!empty($_SERVER['HTTP_CLIENT_IP'])) return $_SERVER['HTTP_CLIENT_IP'];
         else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) return $_SERVER['HTTP_X_FORWARDED_FOR'];
