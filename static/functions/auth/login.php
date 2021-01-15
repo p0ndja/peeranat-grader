@@ -26,7 +26,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     } else {
         $_SESSION['error'] = "พบข้อผิดพลาดในการเข้าถึงฐานข้อมูล";
     }
-    if (isset($_SESION['error']))
+    if (isset($_SESSION['error']))
         header("Location: ../../../login/");
     else
         header("Location: ../../../");
@@ -67,7 +67,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
         $_SESSION['error'] = "พบข้อผิดพลาดในการเข้าถึงฐานข้อมูล";
     }
 
-    if (isset($_SESION['error']))
+    if (isset($_SESSION['error']))
         header("Location: ../../../register/");
     else
         header("Location: ../../../");    
