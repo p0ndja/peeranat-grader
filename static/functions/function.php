@@ -52,6 +52,7 @@
         return false;
     }
 
+    /*
     function getContestdata($id, $data, $conn) {
         return getAnySQL('contest', $data, 'id', $id, $conn);
     }
@@ -60,9 +61,17 @@
         if (saveAnySQL('contest', $data, $val, 'id', $id, $conn)) return true;
         return false;
     }
+    */
 
     function isValidUserID($id, $conn) {
-        $query = "SELECT * FROM `user` WHERE id = '$id'";
+        $query = "SELECT `id` FROM `user` WHERE id = '$id'";
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) return true;
+        return false;
+    }
+
+    function isValidProbID($id, $conn) {
+        $query = "SELECT `id` FROM `problem` WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) return true;
         return false;
@@ -81,6 +90,36 @@
             default:
                 return "<text class='text-muted'>Unrated</text>";
         }
+    }
+
+    function isPassed($uID, $pID, $conn) {
+        $arr = lastSubmission($uID,$pID,$conn);
+        if (!$arr) return 0; //Case not any submission yet.
+        if ($arr['score'] == $arr['maxScore']) return 1; //Case full score.
+        if ($arr['score'] != 0 && $arr['score'] < $arr['maxScore']) return -1;
+    }
+
+    function lastSubmission($uID, $pID, $conn) {
+        if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
+        if ($stmt = $conn -> prepare("SELECT `result`,`score`,`maxScore` FROM `submission` WHERE problem = ? AND user = ? ORDER BY id DESC limit 1")) {
+            $stmt->bind_param('ii', $pID, $uID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                while ($row = $result->fetch_assoc()) {
+                    $arr = array();
+                    $arr["score"] = $row['score'];
+                    $arr["maxScore"] = $row['maxScore'];
+                    $arr["result"] = $row['result'];
+                    return $arr;
+                }
+                $stmt->free_result();
+                $stmt->close();  
+            } else {
+                return 0;
+            }
+        }
+        
     }
 
     function prob($id, $conn) {
