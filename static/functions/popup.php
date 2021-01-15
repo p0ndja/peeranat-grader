@@ -1,7 +1,6 @@
-
 <!-- Announcement Modal -->
-<div class="modal animated jackInTheBox fadeOut" id="announcementPopup" name="announcementPopup" tabindex="-1" role="dialog"
-    aria-labelledby="announcementTitle" aria-hidden="true">
+<div class="modal animated jackInTheBox fadeOut" id="announcementPopup" name="announcementPopup" tabindex="-1"
+    role="dialog" aria-labelledby="announcementTitle" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,8 +13,13 @@
                 <img src="https://repository-images.githubusercontent.com/216790969/da52a000-7792-11ea-997b-7503371435f0"
                     class="img-fluid w-100 d-flex justify-content-center mb-3 z-depth-2">
                 <div class="modal-text">
-                    <p class="text-center">ทางผู้พัฒนาขอความร่วมมือจากผู้เข้าชมเว็บไซต์ทุก ๆ ท่าน ร่วมตอบแบบสอบถามความพึงพอใจในการใช้งานเว็บไซต์ <a href="https://smd.pondja.com">smd.pondja.com</a> / <a href="https://smd.p0nd.ga">smd.p0nd.ga</a></p>
-                    <a href="https://forms.gle/HfxaWmjVGKjARUR18" target="_blank" class="text-center text-smd"><h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1></a>
+                    <p class="text-center">ทางผู้พัฒนาขอความร่วมมือจากผู้เข้าชมเว็บไซต์ทุก ๆ ท่าน
+                        ร่วมตอบแบบสอบถามความพึงพอใจในการใช้งานเว็บไซต์ <a
+                            href="https://smd.pondja.com">smd.pondja.com</a> / <a
+                            href="https://smd.p0nd.ga">smd.p0nd.ga</a></p>
+                    <a href="https://forms.gle/HfxaWmjVGKjARUR18" target="_blank" class="text-center text-smd">
+                        <h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1>
+                    </a>
                 </div>
             </div>
             <div class="modal-footer">
@@ -25,37 +29,60 @@
     </div>
 </div>
 <!-- Announcement Modal -->
-
-<!-- Mobile Cpanel Modal -->
-<?php if (isLogin()) { ?>
-<div class="modal fade right" id="futureCpanel" tabindex="-1" role="dialog" aria-labelledby="cpanelTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-full-width modal-right modal-sm" role="document">
-        <div class="modal-content-full-width modal-content">
+<script>
+    $('.launchModal').on('click', function () {
+        $('#modalTitle').html('Loading...');
+        $('#modalBody').html('<div class="d-flex justify-content-center"><img class="img-fluid" align="center" src="https://cdn.dribbble.com/users/1284666/screenshots/6321168/__3.gif"></div>');
+        $('#modalBodyCode').html("<div></div>");
+        var title = $(this).data('title');
+        var subID = $(this).data('id');
+        var userID = $(this).data('uid');
+            $.ajax({
+                type: 'GET',
+                url: '../pages/submission_gen.php',
+                data: {
+                    'id': subID
+                },
+                success: function (data) {
+                    $('#modalBody').html(data);
+                }
+            }).then(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: '../pages/submission_code.php?target=' + subID,
+                    data: {
+                        'id': subID
+                    },
+                    success: function (data) {
+                        $('#modalBodyCode').html('<pre><code>' + data + '</code></pre>');
+                        $('pre > code').each(function() {
+                            hljs.highlightBlock(this);
+                        });
+                    }
+                });
+            }).then(function() {
+                $('#modalTitle').html(title);
+            });
+        });
+</script>
+<!-- Popup Modal -->
+<div class="modal animated fade" id="modalPopup" name="modalPopup" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-notify modal-coekku modal-lg" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cpanelTitle">สวัสดี!
-                    <?php echo $_SESSION['name'] . ' (' . $_SESSION['username'] . ')'; ?></h5>
+                <h5 class="modal-title" id="modalTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <a class="dropdown-item" href="../profile/edit"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user-tie"></i></a>
-                <?php if (isAdmin($_SESSION['id'], $conn)) { //Check Admin?>
-                    <hr>
-                    <a class="dropdown-item text-secondary" href="../a/config"> Server Settings <i class="fas fa-user-tie"></i></a>
-                    <a class="dropdown-item text-secondary" href="../a/user"> User Management <i class="fas fa-user-tie"></i></a>
-                    <a class="dropdown-item text-secondary" href="../a/#" disabled> Forum Administrator <i class="fas fa-user-tie"></i></a>
-                    <a class="dropdown-item text-secondary" href="../a/#" disabled> News Editorial <i class="fas fa-user-tie"></i></a>
-                <?php } ?>
-                <hr>
-                <a class="dropdown-item text-danger" href="../logout/">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+            <div class="modal-body" id="modalBodyBody">
+                <div id="modalBody"></div>
+                <div id="<?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) echo 'modalBodyCode'; else echo 'CapooCat'; ?>"></div>
             </div>
         </div>
     </div>
 </div>
-<?php } ?>
-<!-- Mobile Cpanel Modal -->
+<!-- Popup Modal -->
 <?php 
     if (isset($_SESSION['swal_error']) && isset($_SESSION['swal_error_msg'])) { 
         errorSwal($_SESSION['swal_error'],$_SESSION['swal_error_msg']);
@@ -84,10 +111,11 @@
             text: "คุณต้องการออกจากระบบหรือไม่?",
             icon: "warning",
             buttons: true,
-            dangerMode: true}).then((willDelete) => { 
-                if (willDelete) { 
-                    window.location = "../logout/";
-                }
-            });
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location = "../logout/";
+            }
+        });
     });
 </script>

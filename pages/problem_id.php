@@ -32,12 +32,13 @@
         <div class="col-12 col-md-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="font-weight-bold text-coe">Task</h5>
-                    Time Limit: <?php echo $time; ?>
-                    <br>Memory Limit: <?php echo $mem; ?> ❓
-                    <br>Testcase: <?php echo '<code>//TODO</code>'; ?>
-                    <br>Score: <?php echo $score; ?> pts.
-                    <br>Difficulty: <?php echo rating($rate); ?>
+                    <div class="card-text">
+                        <h5 class="font-weight-bold text-coe">Task</h5>
+                        Time Limit: <?php echo $time; ?>
+                        <br>Memory Limit: <?php echo $mem; ?> ❓
+                        <br>Score: <?php echo $score; ?> pts.
+                        <br>Difficulty: <?php echo rating($rate); ?>
+                    </div>
                 </div>
             </div>
             <?php if (!isLogin()) { ?>
@@ -50,82 +51,50 @@
                         <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py">
                         <label class="custom-file-label" for="submission">Choose file</label>
                     </div>
-                    <select class="form-control mb-2" id="register_prefix" name="register_prefix" required>
-                        <option value="C">C</option>
-                        <option value="C++">C++</option>
-                        <option value="Python">Python</option>
-                        <option value="Java">Java</option>
-                    </select>
-                    <a class="btn btn-block btn-coe">Submit</a>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6">
+                            <select class="form-control mb-2" id="register_prefix" name="register_prefix" required>
+                                <option value="C">C</option>
+                                <option value="C++">C++</option>
+                                <option value="Python">Python</option>
+                                <option value="Java">Java</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <button type="submit" value="prob" name="submit" class="btn btn-block btn-coe btn-md">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="font-weight-bold text-coe">History</h5>
-                    <div class="table-responsive" style="max-height: 180px;">
-                        <table class="table table-sm w-100 d-table">
+                    <div class="table-responsive" style="max-height: 248px;">
+                        <table class="table table-sm table-hover w-100 d-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Timestamp</th>
                                     <th scope="col">Result</th>
-                                    <th scope="col">Language</th>
                                 </tr>
                             </thead>
                             <tbody class="text-nowrap">
                             <?php
                                 $html = "";
-                                if ($stmt = $conn -> prepare("SELECT `lang`,`runningtime`,`uploadtime`,`result` FROM `submission` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
+                                if ($stmt = $conn -> prepare("SELECT `id`,`runningtime`,`uploadtime`,`result` FROM `submission` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
                                     $user = $_SESSION['id'];
                                     $stmt->bind_param('ii', $user, $id);
                                     $stmt->execute();
                                     $result = $stmt->get_result();
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
-                                            $subLang = $row['lang'];
+                                            $subID = $row['id'];
                                             $subResult = $row['result'];
                                             $subRuntime = $row['runningtime']/1000;
                                             $subUploadtime = str_replace("-", "/", $row['uploadtime']);
-                                            $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
+                                            $html .= "<tr class='launchModal' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #$subID' data-id='$subID'>
+                                                <th scope='row'>$subUploadtime</th>
                                                 <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
                                                     </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-                                                    $html .= "<tr>
-                                                <th scope='row'><a href='#'><i class='fas fa-search'></i> $subUploadtime</a></th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                <td>$subLang</td>
-                                                    </tr>";
-
                                         }
                                         $stmt->free_result();
                                         $stmt->close();  

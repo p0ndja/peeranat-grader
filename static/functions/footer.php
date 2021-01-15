@@ -5,6 +5,7 @@
         <br>
     </div>
 </footer>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
     // Tooltips Initialization
     $(document).ready(function () {

@@ -64,3 +64,7 @@
     
     <!-- Fontawesome -->
     <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" />
+
+    
+    <script src="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
+    <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">

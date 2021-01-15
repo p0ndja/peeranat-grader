@@ -1,7 +1,7 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coe">Problem</h1>
     <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coe btn-sm">+ Add Problem</a><?php } ?>
-    <table class="table table-responsive w-100 d-block d-md-table">
+    <table class="table table-responsive table-hover w-100 d-block d-md-table">
         <thead>
             <tr class="text-nowrap">
                 <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
@@ -22,7 +22,11 @@
                     while ($row = $result->fetch_assoc()) {
                         $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Second";
                         if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
-                        $html .= "<tr onclick='window.location=\"../problem/$id\"' class='table-success'>
+                        $method = isLogin() ? isPassed($_SESSION['id'], $id, $conn) : "";
+                        if ($method == 1) $method = "class='table-success'";
+                        else if ($method == -1) $method = "class='table-warning'";
+                        else $method = "";
+                        $html .= "<tr onclick='window.location=\"../problem/$id\"' ".$method.">
                             <th scope='row'>$id</th>
                             <td>$name <span class='badge badge-coekku'>$codename</span></td>
                             <td>".rating($rate)."</td>
