@@ -46,24 +46,26 @@
             <?php } else {?>
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="font-weight-bold text-coe">Submission</h5>
-                    <div class="custom-file mb-2">
-                        <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py">
-                        <label class="custom-file-label" for="submission">Choose file</label>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-12 col-md-6">
-                            <select class="form-control mb-2" id="register_prefix" name="register_prefix" required>
-                                <option value="C">C</option>
-                                <option value="C++">C++</option>
-                                <option value="Python">Python</option>
-                                <option value="Java">Java</option>
-                            </select>
+                    <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
+                        <h5 class="font-weight-bold text-coe">Submission</h5>
+                        <div class="custom-file mb-2">
+                            <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py" required>
+                            <label class="custom-file-label" for="submission">Choose file</label>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <button type="submit" value="prob" name="submit" class="btn btn-block btn-coe btn-md">Submit</button>
+                        <div class="form-row">
+                            <div class="col-12 col-md-6">
+                                <select class="form-control mb-2" id="lang" name="lang" required>
+                                    <option value="C">C</option>
+                                    <option value="C++">C++</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Java" selected>Java</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <button type="submit" value="prob" name="submit" class="btn btn-block btn-coe btn-md">Submit</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="card mb-3">
