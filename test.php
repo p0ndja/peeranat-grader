@@ -1,4 +1,6 @@
 <?php
-chdir('/var/www/');
+chdir('/root/graderga-grader/');
+mkdir('test');
+chdir('./test/');
 echo getcwd();
 ?>
