@@ -1,10 +1,10 @@
 <?php
     ob_start();
     session_start();
-    $dbhost = "pondhub.ga";
-    $dbuser = "pondjaco_graderga";
-    $dbpass = "Apo4J8fKBv";
-    $dbdatabase = "pondjaco_graderga";
+    $dbhost = "196.53.250.111";
+    $dbuser = "graderga";
+    $dbpass = "8db!#yYvK]8Lw6F|37wz:UwU";
+    $dbdatabase = "graderga";
     $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbdatabase); 
     mysqli_set_charset($conn, 'utf8');
 
