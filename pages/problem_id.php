@@ -19,6 +19,14 @@
 ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h2 class="font-weight-bold text-coe"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span></h2>
+    <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?>
+    <div id="adminZone" class="border border-danger text-coe">&nbsp;&nbsp;สำหรับ Admin:
+        <a href="../file/testcase/<?php echo $id; ?>/" class="btn btn-sm btn-success">View Testcase</a>
+        <a href="../problem/edit-<?php echo $id; ?>" class="btn btn-sm btn-primary">Edit</a>
+        <a href="#notready" class="btn btn-sm btn-warning">Rejudge</a>
+        <a href="#notready" class="btn btn-sm btn-danger">Delete</a>
+    </div>
+    <?php } ?>
     <hr>
     <div class="row">
         <div class="col-12 col-md-8">
@@ -49,6 +57,8 @@
                     <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
                         <h5 class="font-weight-bold text-coe">Submission</h5>
                         <div class="custom-file mb-2">
+                            <input type="hidden" name="probID" value="<?php echo $id; ?>"/>
+                            <input type="hidden" name="probCodename" value="<?php echo $codename; ?>"/>
                             <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py" required>
                             <label class="custom-file-label" for="submission">Choose file</label>
                         </div>
