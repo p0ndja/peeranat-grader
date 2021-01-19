@@ -1,5 +1,7 @@
 <?php
     include '../static/functions/connect.php';
+    include '../static/functions/function.php';
+
     if (isLogin()) {
         $userID = $_SESSION['id'];
         $probID = $_POST['probID'];
@@ -14,6 +16,7 @@
             $name_file = "$probCodename-$fileName.$ext";
             
             $locate ="../file/judge/upload/$userID/";
+            print_r($locate);
             if (!file_exists($locate)) {
                 if (!mkdir($locate)) die("Can't mkdir");
             }
@@ -22,7 +25,7 @@
 
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
-            if ($stmt = $conn -> prepare("INSERT INTO `payload` (user, problem, lang, script) VALUES (?,?,?,?)")) {
+            if ($stmt = $conn -> prepare("INSERT INTO `submission` (user, problem, lang, script, result) VALUES (?,?,?,?,'W')")) {
                 $stmt->bind_param('iiss', $userID, $probID, $userCodeLang, $userCodeLocate);
                 if (!$stmt->execute()) {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";

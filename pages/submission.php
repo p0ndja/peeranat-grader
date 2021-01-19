@@ -30,34 +30,34 @@
         </thead>
         <tbody class="text-nowrap">
             <?php
-            if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC")) {
-                //$stmt->bind_param('ii', $page, $limit);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $me = (isLogin() && $_SESSION['id'] == $row['user']) ? "me" : "";
-                        $subID = $row['id'];
-                        $subUser = $row['user'];
-                        $subProb = $row['problem'];
-                        $subLang = $row['lang'];
-                        $subResult = $row['result'];
-                        $subRuntime = $row['runningtime']/1000;
-                        $subUploadtime = $row['uploadtime']; ?>
-                        <tr class='launchModal <?php echo $me;?>' id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
-                            <th scope='row'><?php echo $subID; ?></th>
-                            <td><?php echo $subUploadtime; ?></td>
-                            <td><?php echo getUserdata($subUser, 'username', $conn); ?></td>
-                            <td><?php echo prob($subProb, $conn); ?></td>
-                            <td><?php echo $subLang; ?></td>
-                            <td><code><?php echo $subResult . ' (' . $subRuntime . 's)';?></code></td>
-                        <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) echo "<td><a href='#'><i class='fas fa-search'></i></a></td>"; ?>
-                        </tr>
-                    <?php }
-                    $stmt->free_result();
-                    $stmt->close();  
+                if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC")) {
+                    //$stmt->bind_param('ii', $page, $limit);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $me = (isLogin() && $_SESSION['id'] == $row['user']) ? "me" : "";
+                            $subID = $row['id'];
+                            $subUser = $row['user'];
+                            $subProb = $row['problem'];
+                            $subLang = $row['lang'];
+                            $subResult = $row['result'] != 'W' ? $row['result'] : 'รอผลตรวจ...';
+                            $subRuntime = $row['runningtime']/1000;
+                            $subUploadtime = $row['uploadtime']; ?>
+                            <tr class='launchModal <?php echo $me;?>' id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
+                                <th scope='row'><?php echo $subID; ?></th>
+                                <td><?php echo $subUploadtime; ?></td>
+                                <td><?php echo getUserdata($subUser, 'username', $conn); ?></td>
+                                <td><?php echo prob($subProb, $conn); ?></td>
+                                <td><?php echo $subLang; ?></td>
+                                <td><code><?php echo $subResult . ' (' . $subRuntime . 's)';?></code></td>
+                            <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) echo "<td><a href='#'><i class='fas fa-search'></i></a></td>"; ?>
+                            </tr>
+                        <?php }
+                        $stmt->free_result();
+                        $stmt->close();  
+                    }
                 }
-            }
             ?>
         </tbody>
     </table>

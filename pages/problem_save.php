@@ -1,5 +1,7 @@
 <?php
     include '../static/functions/connect.php';
+    include '../static/functions/function.php';
+
     $id = "";
     if (isLogin() && isAdmin($_SESSION['id'], $conn)) {
         if (isset($_POST['problem'])) {
@@ -10,35 +12,20 @@
             $probRate = $_POST['rating'];
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
-            $probScript = $_POST['script'];
 
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
-            $probDoc = $_POST['probDoc'];
-            if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
-                $name_file = $probCodename . ".pdf";
-                $tmp_name = $_FILES['pdfPreview']['tmp_name'];
-                $locate ="../file/task/$id/";
-                if (!file_exists($locate)) {
-                    if (!mkdir($locate)) die("Can't mkdir");
-                }
-                if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
-                $probDoc = $locate.$name_file;
-            }
-
-            $probTestcase = $_POST['testcaseFile'];
             if (isset($_FILES['testcase']['name']) && $_FILES['testcase']['name'] != "") {
                 $name_file = $probCodename . ".zip";
                 $tmp_name = $_FILES['testcase']['tmp_name'];
-                $locate ="../file/prob/$id/";
+                $locate ="../file/judge/prob/$id/";
                 if (!file_exists($locate)) {
                     if (!mkdir($locate)) die("Can't mkdir");
                 } else {
-                    $files = glob("$locate*"); // get all file names
+                    $files = glob($locate . "*.{in,sol}", GLOB_BRACE); // get all file names
                     foreach($files as $file){ // iterate files
-                        if(is_file($file)) {
+                        if(is_file($file))
                             unlink($file); // delete file
-                        }
                     }
                 }
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
@@ -54,6 +41,16 @@
                 } else {
                     echo 'doh!';
                 }
+            }
+
+            if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
+                $name_file = $probCodename . ".pdf";
+                $tmp_name = $_FILES['pdfPreview']['tmp_name'];
+                $locate ="../file/judge/prob/$id/";
+                if (!file_exists($locate)) {
+                    if (!mkdir($locate)) die("Can't mkdir");
+                }
+                if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19

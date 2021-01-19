@@ -1,5 +1,6 @@
 <?php 
     require '../static/functions/connect.php';
+    require '../static/functions/function.php';
 ?>
 
 <!DOCTYPE html>

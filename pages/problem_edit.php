@@ -106,10 +106,6 @@
                                 <input type="text" id="memory" name="memory" class="form-control" value="<?php echo $probMemory; ?>" required />
                                 <label class="form-label" for="memory">Memory (Megabyte)</label>
                             </div>
-                            <div class="md-form">
-                                <input type="text" id="script" name="script" class="form-control" value="<?php echo $probScript; ?>" disabled/>
-                                <label class="form-label" for="script">Custom Judgement Script [DISABLED]</label>
-                            </div>
                         </div>
                     </div>
                     <div class="card mb-3">

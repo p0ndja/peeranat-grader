@@ -19,6 +19,8 @@ RewriteRule ^profile/([0-9]+)$ pages/page_loader.php?target=profile.php&id=$1 [L
 RewriteRule ^editorial/$ pages/page_loader.php?target=editorial.php
 RewriteRule ^editorial/([0-9]+)$ pages/page_loader.php?target=editorial.php&id=$1 [L]
 
+RewriteRule ^doc/([0-9]+)-(.*)$ file/judge/prob/$1/$2.pdf
+
 RewriteRule ^login/$ pages/page_loader.php?target=login.php
 RewriteRule ^logout/$ static/functions/auth/logout.php
 RewriteRule ^register/$ pages/page_loader.php?target=register.php

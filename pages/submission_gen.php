@@ -1,5 +1,6 @@
 <?php
     include '../static/functions/connect.php';
+    include '../static/functions/function.php';
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
     $html = "";
     if ($stmt = $conn -> prepare("SELECT * FROM `submission` WHERE id = ? LIMIT 1")) {

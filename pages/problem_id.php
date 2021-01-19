@@ -21,7 +21,7 @@
     <h2 class="font-weight-bold text-coe"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span></h2>
     <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?>
     <div id="adminZone" class="border border-danger text-coe">&nbsp;&nbsp;สำหรับ Admin:
-        <a href="../file/testcase/<?php echo $id; ?>/" class="btn btn-sm btn-success">View Testcase</a>
+        <a href="../file/judge/prob/<?php echo $id; ?>/" target="_blank" class="btn btn-sm btn-success">View Testcase</a>
         <a href="../problem/edit-<?php echo $id; ?>" class="btn btn-sm btn-primary">Edit</a>
         <a href="#notready" class="btn btn-sm btn-warning">Rejudge</a>
         <a href="#notready" class="btn btn-sm btn-danger">Delete</a>
@@ -31,10 +31,10 @@
     <div class="row">
         <div class="col-12 col-md-8">
             <a href="../problem/" class="float-left"><i class="fas fa-arrow-left"></i> ย้อนกลับ</a>
-            <a target="_blank" href="../file/task/<?php echo $id; ?>/<?php echo $codename; ?>.pdf" class="float-right">เปิดในแท็บใหม่ <i
+            <a target="_blank" href="../doc/<?php echo $id; ?>-<?php echo $codename; ?>" class="float-right">เปิดในแท็บใหม่ <i
                     class="fas fa-location-arrow"></i></a>
             <iframe
-                src="../static/interface/js/pdf.js/web/viewer.html?file=../../../../../file/task/<?php echo $id; ?>/<?php echo $codename; ?>.pdf"
+                src="../static/interface/js/pdf.js/web/viewer.html?file=../../../../../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
                 width="100%" height="650" class="z-depth-1 mb-3"></iframe>
         </div>
         <div class="col-12 col-md-4">
@@ -66,7 +66,7 @@
                             <div class="col-12 col-md-6">
                                 <select class="form-control mb-2" id="lang" name="lang" required>
                                     <option value="C">C</option>
-                                    <option value="C++">C++</option>
+                                    <option value="Cpp">C++</option>
                                     <option value="Python">Python</option>
                                     <option value="Java" selected>Java</option>
                                 </select>

@@ -10,13 +10,6 @@
 
     if(!$conn)  die('Could not connect: ' . mysqli_error($conn));
     
-    require 'function.php';
-
-    if (isLogin() && !isValidUserID($_SESSION['id'], $conn)) {
-        session_destroy();
-        header("Location: ../home/");
-    }
-
     @ini_set('upload_max_size','64M');
     @ini_set('post_max_size','64M');
     @ini_set('max_execution_time','300');
