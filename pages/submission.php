@@ -25,7 +25,6 @@
                 <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
                 <th scope="col" class="font-weight-bold text-coe">Language</th>
                 <th scope="col" class="font-weight-bold text-coe">Result</th>
-                <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><th scope="col" class="font-weight-bold text-coe">#</th><?php } ?>
             </tr>
         </thead>
         <tbody class="text-nowrap">
@@ -51,7 +50,6 @@
                                 <td><?php echo prob($subProb, $conn); ?></td>
                                 <td><?php echo $subLang; ?></td>
                                 <td><code><?php echo $subResult . ' (' . $subRuntime . 's)';?></code></td>
-                            <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) echo "<td><a href='#'><i class='fas fa-search'></i></a></td>"; ?>
                             </tr>
                         <?php }
                         $stmt->free_result();

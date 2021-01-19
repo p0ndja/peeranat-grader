@@ -15,9 +15,9 @@
                 $subLang = $row['lang'];
                 $subResult = $row['result'];
                 $subRuntime = $row['runningtime']; //ms
-                $subMemory = $row['runningtime']; //MB
+                $subMemory = $row['memory'] ? $row['memory'] . " MB": "UNSUPPORTED"; //MB
                 $subUploadtime = $row['uploadtime'];
-                $html .= "<p>User: ".getUserdata($subUser, 'username', $conn)."<br>Problem: ".prob($subProb, $conn)."<br>Result: <code>$subResult</code><br>Language: $subLang<br>Running Time: $subRuntime ms<br>Memory: $subMemory MB<br>$subUploadtime</p>";
+                $html .= "<p>User: <code>".getUserdata($subUser, 'username', $conn)."</code><br>Problem: ".prob($subProb, $conn)."<br>Result: <code>$subResult</code><br>Language: <code>$subLang</code><br>Running Time: <code>$subRuntime ms</code><br>Memory: <code>$subMemory</code><br>Submit Time: $subUploadtime</p>";
             }
             $stmt->free_result();
             $stmt->close();  
