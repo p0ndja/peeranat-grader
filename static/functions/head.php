@@ -68,7 +68,7 @@
 
     <!-- Dropzone -->
     <link rel="stylesheet" href="../vendor/dropzone/min/basic.min.css" />
-    <link rel="stylesheet" href="../vendor/dropzone/min/dropzone.css" />
+    <link rel="stylesheet" href="../vendor/dropzone/min/dropzone.min.css" />
     <script src="../vendor/dropzone/dropzone.js"></script>
     
     <!-- Fontawesome -->

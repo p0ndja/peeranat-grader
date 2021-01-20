@@ -6,6 +6,7 @@
         var title = $(this).data('title');
         var subID = $(this).data('id');
         var userID = $(this).data('uid');
+        var owner = $(this).data('owner');
             $.ajax({
                 type: 'GET',
                 url: '../pages/submission_gen.php',
@@ -16,19 +17,21 @@
                     $('#modalBody').html(data);
                 }
             }).then(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: '../pages/submission_code.php?target=' + subID,
-                    data: {
-                        'id': subID
-                    },
-                    success: function (data) {
-                        $('#modalBodyCode').html('<pre><code>' + data + '</code></pre>');
-                        $('pre > code').each(function() {
-                            hljs.highlightBlock(this);
-                        });
-                    }
-                });
+                if (owner) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '../pages/submission_code.php?target=' + subID,
+                        data: {
+                            'id': subID
+                        },
+                        success: function (data) {
+                            $('#modalBodyCode').html('<pre><code>' + data + '</code></pre>');
+                            $('pre > code').each(function() {
+                                hljs.highlightBlock(this);
+                            });
+                        }
+                    });
+                }
             }).then(function() {
                 $('#modalTitle').html(title);
             });
@@ -46,7 +49,7 @@
             </div>
             <div class="modal-body" id="modalBodyBody">
                 <div id="modalBody"></div>
-                <div id="<?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) echo 'modalBodyCode'; else echo 'CapooCat'; ?>"></div>
+                <div id="modalBodyCode"></div>
             </div>
         </div>
     </div>
