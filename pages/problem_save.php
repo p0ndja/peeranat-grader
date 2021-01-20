@@ -12,7 +12,8 @@
             $probRate = $_POST['rating'];
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
-            $probScript = "#Not Support"; //Not support yet.
+            $probScript = ""; //Not support yet.
+            $probLastEditUser = $_SESSION['id'];
 
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
@@ -68,7 +69,6 @@
                 } else {
                     echo "Can't establish database";
                 }
-                die();
             } else {
                 if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, script=? WHERE id = ?")) {
                     $stmt->bind_param('ssiiiisi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript, $id);

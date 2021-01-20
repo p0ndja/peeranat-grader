@@ -21,7 +21,7 @@
     }
     $probDoc = "static/elements/demo.pdf";
     if (isset($probCodename) && !empty($probCodename)) {
-        $probDoc = "file/task/$id/$probCodename.pdf";
+        $probDoc = "doc/$id-$probCodename";
     }
 
 ?>
