@@ -12,6 +12,7 @@
             $probRate = $_POST['rating'];
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
+            $probScript = "#Not Support"; //Not support yet.
 
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
@@ -37,9 +38,6 @@
                 if ($res === TRUE) {
                     $zip->extractTo($locate);
                     $zip->close();
-                    echo 'woot!';
-                } else {
-                    echo 'doh!';
                 }
             }
 
@@ -47,35 +45,44 @@
                 $name_file = $probCodename . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
                 $locate ="../file/judge/prob/$id/";
-                if (!file_exists($locate)) {
-                    if (!mkdir($locate)) die("Can't mkdir");
-                }
+                if (!file_exists($locate))
+                    if (!mkdir($locate))
+                        die("Can't mkdir");
+                
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
             if ($isCreate) {
-                if ($stmt = $conn -> prepare("INSERT INTO `problem` (id, name, codename, score, memory, time, rating, script) VALUES (?,?,?,?,?,?,?,?)")) {
-                    $arr = array($id, $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript);
-                    $stmt->bind_param('issiiiis', $id, $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript);
+                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, rating, script) VALUES (?,?,?,?,?,?,?)")) {
+                    $stmt->bind_param('ssiiiis', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                        echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "เพิ่มโจทย์ $probCodename แล้ว!";
+                        echo "Created";
                     }
+                } else {
+                    echo "Can't establish database";
                 }
+                die();
             } else {
                 if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, script=? WHERE id = ?")) {
                     $stmt->bind_param('ssiiiisi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                        echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";
+                        echo "Created";
                     }
+                } else {
+                    echo "Can't establish database";
                 }
             }
         }
