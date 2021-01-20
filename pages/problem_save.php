@@ -17,31 +17,6 @@
 
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
-            if (isset($_FILES['testcase']['name']) && $_FILES['testcase']['name'] != "") {
-                $name_file = $probCodename . ".zip";
-                $tmp_name = $_FILES['testcase']['tmp_name'];
-                $locate ="../file/judge/prob/$id/";
-                if (!file_exists($locate)) {
-                    if (!mkdir($locate)) die("Can't mkdir");
-                } else {
-                    $files = glob($locate . "*.{in,sol}", GLOB_BRACE); // get all file names
-                    foreach($files as $file){ // iterate files
-                        if(is_file($file))
-                            unlink($file); // delete file
-                    }
-                }
-                if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
-
-                $zipFile = $locate.$name_file;
-
-                $zip = new ZipArchive;
-                $res = $zip->open($zipFile);
-                if ($res === TRUE) {
-                    $zip->extractTo($locate);
-                    $zip->close();
-                }
-            }
-
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $name_file = $probCodename . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
@@ -85,6 +60,33 @@
                     echo "Can't establish database";
                 }
             }
+
+
+            if (isset($_FILES['testcase']['name']) && $_FILES['testcase']['name'] != "") {
+                $name_file = $probCodename . ".zip";
+                $tmp_name = $_FILES['testcase']['tmp_name'];
+                $locate ="../file/judge/prob/$id/";
+                if (!file_exists($locate)) {
+                    if (!mkdir($locate)) die("Can't mkdir");
+                } else {
+                    $files = glob($locate . "*.{in,sol}", GLOB_BRACE); // get all file names
+                    foreach($files as $file){ // iterate files
+                        if(is_file($file))
+                            unlink($file); // delete file
+                    }
+                }
+                if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
+
+                $zipFile = $locate.$name_file;
+
+                $zip = new ZipArchive;
+                $res = $zip->open($zipFile);
+                if ($res === TRUE) {
+                    $zip->extractTo($locate);
+                    $zip->close();
+                }
+            }
+
         }
     }
     header("Location: ../problem/$id");
