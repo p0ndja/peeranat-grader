@@ -207,48 +207,6 @@
         return $msg;
     }
 
-
-    function generateOpenGraphMeta($conn) {
-        $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        
-        if (strpos($current_url, "/event/")) {
-            //Mean you're currently browsing in post page
-            if (isset($_GET['id']) && isValidEventID($_GET['id'], $conn)) {
-                $postID = $_GET['id'];
-                $topic = getEventdata($postID, 'name', $conn);
-                $img = getEventdata($postID, 'thumbnail', $conn);
-                
-                if ($img == null) {
-                    list($ogwidth, $ogheight, $ogtype, $ogattr) = getimagesize("../static/elements/logo/logo.jpg");
-                    $img = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/static/elements/logo/logo.jpg";
-                } else {
-                    list($ogwidth, $ogheight, $ogtype, $ogattr) = getimagesize($img);
-                    $img = str_replace("..", (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'], $img);
-                }
-                
-                ?>
-        <meta property="og:image" content="<?php echo $img; ?>" />
-        <meta property="og:image:width" content="<?php echo $ogwidth; ?>" />
-        <meta property="og:image:height" content="<?php echo $ogheight; ?>" />
-        <meta property="og:title" content="<?php echo $topic;?>" />
-        <title><?php echo $topic;?> | Grader.GA</title>
-        <meta property="og:description" content="Grader.GA" />
-            <?php }
-        } else { ?>
-        <meta property="og:image" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST']; ?>/static/elements/logo/logo.jpg" />
-        <?php list($ogwidth, $ogheight, $ogtype, $ogattr) = getimagesize("../static/elements/logo/logo.jpg"); ?>
-        <meta property="og:image:width" content="<?php echo $ogwidth; ?>" />
-        <meta property="og:image:height" content="<?php echo $ogheight; ?>" />
-        <meta property="og:title" content="Grader.GA" />
-        <title>Grader.GA</title>
-        <meta property="og:description" content="{DESCRIPTION}" />
-        <?php } ?>
-        <meta name="twitter:card" content="summary"></meta>
-        <link rel="image_src" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST']; ?>/static/elements/logo/logo.jpg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="<?php echo $current_url; ?>" />
-    <?php }
-
     function generateRandom($length = 16) {
         $characters = md5(time());
         $randomString = '';

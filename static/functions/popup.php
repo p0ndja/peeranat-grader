@@ -1,34 +1,3 @@
-<!-- Announcement Modal -->
-<div class="modal animated jackInTheBox fadeOut" id="announcementPopup" name="announcementPopup" tabindex="-1"
-    role="dialog" aria-labelledby="announcementTitle" aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="annoucementTitle">ข่าวประชาสัมพันธ์</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="https://repository-images.githubusercontent.com/216790969/da52a000-7792-11ea-997b-7503371435f0"
-                    class="img-fluid w-100 d-flex justify-content-center mb-3 z-depth-2">
-                <div class="modal-text">
-                    <p class="text-center">ทางผู้พัฒนาขอความร่วมมือจากผู้เข้าชมเว็บไซต์ทุก ๆ ท่าน
-                        ร่วมตอบแบบสอบถามความพึงพอใจในการใช้งานเว็บไซต์ <a
-                            href="https://smd.pondja.com">smd.pondja.com</a> / <a
-                            href="https://smd.p0nd.ga">smd.p0nd.ga</a></p>
-                    <a href="https://forms.gle/HfxaWmjVGKjARUR18" target="_blank" class="text-center text-smd">
-                        <h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1>
-                    </a>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-md btn-warning" data-dismiss="modal">ปิดหน้าต่าง</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Announcement Modal -->
 <script>
     $('.launchModal').on('click', function () {
         $('#modalTitle').html('Loading...');

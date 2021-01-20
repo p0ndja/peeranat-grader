@@ -57,7 +57,6 @@
             if ($isCreate) {
                 if ($stmt = $conn -> prepare("INSERT INTO `problem` (id, name, codename, score, memory, time, rating, script) VALUES (?,?,?,?,?,?,?,?)")) {
                     $arr = array($id, $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript);
-                    die(print_r($arr));
                     $stmt->bind_param('issiiiis', $id, $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
