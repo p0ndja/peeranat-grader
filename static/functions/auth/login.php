@@ -1,5 +1,6 @@
 <?php
     require '../connect.php';
+    require '../function.php';
 
 if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     $user = $_POST['login_username'];
