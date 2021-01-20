@@ -54,13 +54,11 @@
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
                         echo $conn->error;
                     } else {
-                        die("NORMAL");
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";
                         echo "Created";
                     }
                 } else {
-                    die("WTF PREPARE");
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                     $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
                     echo "Can't establish database";
