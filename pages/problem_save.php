@@ -50,7 +50,7 @@
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
-                        echo $conn->error;
+                        die($conn->error);
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";
