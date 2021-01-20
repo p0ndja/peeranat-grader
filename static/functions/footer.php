@@ -24,12 +24,28 @@
         $('.btn-floating').unbind('click');
         $('.fixed-action-btn').unbind('click');
         attachFooter();
-        
+        checkResult();
     });
 
     $(window).on('resize', function() {
         attachFooter();
     });
+
+    function checkResult() {
+        setTimeout(function() {
+            ($('[data-wait=true]').each(function(index) {
+                var subID = $(this).data('sub-id');
+                $(this).load('../pages/prob_result.php?id='+subID+"&time");
+                if ($(this).html().indexOf("รอผลตรวจ...") === -1) {
+                    $(this).removeAttr("data-wait");
+                    console.log("Finished Juding " + subID + " -> " + $(this).html());  
+                } else {
+                    console.log("Waiting for Juding " + subID);  
+                }
+            }));
+            checkResult();
+        }, 2500)
+    }
 
     function attachFooter() {
         console.log($(document.body).height() + " | " + $(window).height());

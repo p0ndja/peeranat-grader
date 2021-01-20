@@ -100,14 +100,14 @@
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
                                             $subID = $row['id'];
-                                            $subResult = $row['result'];
+                                            $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
                                             $subRuntime = $row['runningtime']/1000;
-                                            $subUploadtime = str_replace("-", "/", $row['uploadtime']);
-                                            $html .= "<tr class='launchModal' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #$subID' data-id='$subID'>
-                                                <th scope='row'>$subUploadtime</th>
-                                                <td><code>$subResult ($subRuntime" . "s)</code></td>
-                                                    </tr>";
-                                        }
+                                            $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
+                                            <tr class='launchModal' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
+                                                <th scope='row'><?php echo $subUploadtime; ?></th>
+                                                <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult ($subRuntime" . "s)"; ?></code></td>
+                                            </tr>
+                                        <?php }
                                         $stmt->free_result();
                                         $stmt->close();  
                                     }

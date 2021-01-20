@@ -139,6 +139,27 @@
         return $_SERVER['REMOTE_ADDR'];
     }
 
+    function randomErrorMessage() {
+        $message = array(
+            "(╯°□°）╯︵ ┻━┻",
+            "┬─┬ ノ( ゜-゜ノ)",
+            "ლ(ಠ益ಠლ)",
+            "¯\_(ツ)_/¯",
+            "‎(ﾉಥ益ಥ）ﾉ ┻━┻",
+            "┬┴┬┴┤(･_├┬┴┬┴",
+            "ᕙ(⇀‸↼‶)ᕗ",
+            "(づ｡◕‿‿◕｡)づ",
+            "(ノ^_^)ノ┻━┻ ┬─┬ ノ( ^_^ノ)",
+            "(⌐■_■)","─=≡Σ(([ ⊐•̀⌂•́]⊐",
+            "(　-_･)σ - - - - - - - - ･",
+            "┌( ಠ_ಠ)┘",
+            "♪ (｡´＿●`)ﾉ┌iiii┐ヾ(´○＿`*) ♪",
+            "ᕙ( ͡° ͜ʖ ͡°)ᕗ",
+            "(ÒДÓױ)"
+        );
+        return $message[rand(0,count($message)-1)];
+    }
+
     function path_curTime() {
         date_default_timezone_set('Asia/Bangkok'); return date('Y/m/d', time());
     }
