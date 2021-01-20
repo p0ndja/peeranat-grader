@@ -43,7 +43,7 @@
                             $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
                             $subRuntime = $row['runningtime']/1000;
                             $subUploadtime = $row['uploadtime']; ?>
-                            <tr style="cursor: pointer;"  class='launchModal <?php echo $me;?>' id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
+                            <tr style="cursor: pointer;" class='launchModal <?php echo $me;?>' id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
                                 <th scope='row'><?php echo $subID; ?></th>
                                 <td><?php echo $subUploadtime; ?></td>
                                 <td><?php echo getUserdata($subUser, 'username', $conn); ?></td>

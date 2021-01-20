@@ -1,5 +1,5 @@
 <?php needAdmin($conn); 
-    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = "";$probScript = ""; $id = -1;
+    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1;
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
@@ -8,7 +8,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probRate = $row['rating']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probScript = $row['script'];
+                    $probName = $row['name']; $probCodename = $row['codename']; $probRate = $row['rating']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer'];
                 }
                 $stmt->free_result();
                 $stmt->close();  
@@ -30,22 +30,26 @@
         <form method="post" action="../pages/problem_save.php<?php if (isset($_GET['id'])) echo '?id=' . $_GET['id']; ?>" enctype="multipart/form-data">
             <div class="font-weight-bold text-coe">
                 <div class="row">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-6">
                         <div class="md-form">
                             <input type="text" id="name" name="name" class="form-control" value="<?php echo $probName; ?>" required/>
                             <label class="form-label" for="name">Problem Name</label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-3">
                         <div class="md-form">
                             <input type="text" id="codename" name="codename" class="form-control" value="<?php echo $probCodename; ?>" required />
                             <label class="form-label" for="codename">Codename</label>
                         </div>
                     </div>
+                    <div class="col-12 col-md-3">
+                        <div class="md-form">
+                            <input type="text" id="writer" name="writer" class="form-control" value="<?php echo $probAuthor; ?>"/>
+                            <label class="form-label" for="writer">Author</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p>By PondJaᵀᴴ</p>
-            <hr>
             <div class="row">
                 <div class="col-12 col-md-8">
                     <input type="file" accept=".pdf" class="mb-1" name="pdfPreview" id="pdfPreview">

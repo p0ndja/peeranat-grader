@@ -80,7 +80,7 @@
     function rating($rate) {
         switch($rate) {
             case 0:
-                return "<text class='text-default'>Peaceful</text>";
+                return "<text class='light-blue-text'>Peaceful</text>";
             case 1:
                 return "<text class='text-primary'>Easy</text>";
             case 2:
