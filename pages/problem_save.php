@@ -45,7 +45,6 @@
                     echo "Can't establish database";
                 }
             } else {
-                die("Updated'");
                 if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, script=?, writer=? WHERE id = ?")) {
                     $stmt->bind_param('ssiiiisis', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probScript, $id, $probAuthor);
                     if (!$stmt->execute()) {
@@ -61,7 +60,6 @@
                     echo "Can't establish database";
                 }
             }
-
 
             if (isset($_FILES['testcase']['name']) && $_FILES['testcase']['name'] != "") {
                 $name_file = $probCodename . ".zip";
