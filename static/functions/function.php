@@ -80,13 +80,17 @@
     function rating($rate) {
         switch($rate) {
             case 0:
-                return "<text class='text-secondary'>Peaceful</text>";
+                return "<text class='text-default'>Peaceful</text>";
             case 1:
-                return "<text class='text-success'>Easy</text>";
+                return "<text class='text-primary'>Easy</text>";
             case 2:
-                return "<text class='text-warning'>Normal</text>";
+                return "<text class='text-success'>Normal</text>";
             case 3:
-                return "<text class='text-danger'>Hard</text>";
+                return "<text class='text-warning'>Hard</text>";
+            case 4:
+                return "<text class='text-danger'>Insane</text>";
+            case 4:
+                return "<text class='text-pink font-weight-bold'>Merciless</text>";
             default:
                 return "<text class='text-muted'>Unrated</text>";
         }

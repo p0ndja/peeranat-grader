@@ -89,6 +89,8 @@
                                     <option value="1">Easy</option>
                                     <option value="2">Normal</option>
                                     <option value="3">Hard</option>
+                                    <option value="4">Insane</option>
+                                    <option value="5">MERCILESS</option>
                                 </select>
                                 <script>
                                     $('#rating option[value=<?php echo $probRate; ?>]').attr('selected', 'selected');
