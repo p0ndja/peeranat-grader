@@ -30,7 +30,7 @@
             <a target="_blank" href="../doc/<?php echo $id; ?>-<?php echo $codename; ?>" class="float-right">เปิดในแท็บใหม่ <i
                     class="fas fa-location-arrow"></i></a>
             <iframe
-                src="../static/interface/js/pdf.js/web/viewer.html?file=../../../../../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
+                src="../vendor/pdf.js/web/viewer.html?file=../../../../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
                 width="100%" height="650" class="z-depth-1 mb-3"></iframe>
         </div>
         <div class="col-12 col-md-4">
