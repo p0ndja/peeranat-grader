@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-normal fixed-top bg-white z-depth-0" id="nav" role="navigation">
+<nav class="navbar navbar-expand-lg navbar-normal fixed-top navbar-transparent z-depth-0" id="nav" role="navigation">
     <a class="navbar-brand" href="../home/"><img src="../static/elements/logo/logo.png" width="32" alt="PharmMDKKU" align="center"></a>
     <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
