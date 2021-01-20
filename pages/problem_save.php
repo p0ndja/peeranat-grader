@@ -34,7 +34,7 @@
                     $stmt->bind_param('ssiiiis', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
                         echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
@@ -49,8 +49,8 @@
                     $stmt->bind_param('ssiiiisi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
-                        die($conn->error);
+                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
+                        echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";
