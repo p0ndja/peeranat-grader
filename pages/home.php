@@ -9,12 +9,16 @@
                     <a class="btn btn-coe" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
                 </div>
                 <div class="fadeIn animated">
-                    <img src="../static/elements/index/3255466.png" class="mt-3 img-fluid w-100 d-block d-md-none">
+                    <?php
+                        $files = glob("../static/elements/index/*.*", GLOB_BRACE);
+                        $targetSrc = $files[rand(0,count($files)-1)];
+                    ?>
+                    <img src="<?php echo $targetSrc; ?>" class="mt-3 img-fluid w-100 d-block d-md-none">
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
                 <div class="fadeIn animated">
-                    <img src="../static/elements/index/3255466.png" class="img-fluid w-100">
+                    <img src="<?php echo $targetSrc; ?>" class="img-fluid w-100">
                 </div>
             </div>
         </div>
