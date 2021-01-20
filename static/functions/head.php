@@ -67,12 +67,12 @@
     <script src="../vendor/croppie/croppie.js"></script>
 
     <!-- Dropzone -->
-    <link rel="stylesheet" href="../vendor/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="../vendor/dropzone/min/basic.min.css" />
+    <link rel="stylesheet" href="../vendor/dropzone/min/dropzone.css" />
     <script src="../vendor/dropzone/dropzone.js"></script>
     
     <!-- Fontawesome -->
-    <link href="//use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" />
+    <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" />
 
-    
     <script src="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
     <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
