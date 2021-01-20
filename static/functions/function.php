@@ -89,7 +89,7 @@
                 return "<text class='text-warning'>Hard</text>";
             case 4:
                 return "<text class='text-danger'>Insane</text>";
-            case 4:
+            case 5:
                 return "<text class='text-pink font-weight-bold'>Merciless</text>";
             default:
                 return "<text class='text-muted'>Unrated</text>";
