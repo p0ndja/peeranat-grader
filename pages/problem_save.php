@@ -28,13 +28,13 @@
             }
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
+            print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor));
             if ($isCreate) {
                 if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, rating, writer) VALUES (?,?,?,?,?,?,?)")) {
-                    $arr = array($probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor);
                     $stmt->bind_param('ssiiiis', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
+                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
                         echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
@@ -42,6 +42,8 @@
                         echo "Created";
                     }
                 } else {
+                    $_SESSION['swal_error'] = "พบข้อผิดพลาด";
+                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
                     echo "Can't establish database";
                 }
             } else {
@@ -49,14 +51,18 @@
                     $stmt->bind_param('ssiiiisi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
+                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
                         echo $conn->error;
                     } else {
+                        die("NORMAL");
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";
                         echo "Created";
                     }
                 } else {
+                    die("WTF PREPARE");
+                    $_SESSION['swal_error'] = "พบข้อผิดพลาด";
+                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
                     echo "Can't establish database";
                 }
             }
