@@ -35,7 +35,7 @@
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $me = (isLogin() && $_SESSION['id'] == $row['user'] || isAdmin($_SESSION['id'], $conn)) ? "data-owner='true'" : "data-owner='false'";
+                            $me = (isLogin() && ($_SESSION['id'] == $row['user'] || isAdmin($_SESSION['id'], $conn))) ? "data-owner='true'" : "data-owner='false'";
                             $subID = $row['id'];
                             $subUser = $row['user'];
                             $subProb = $row['problem'];

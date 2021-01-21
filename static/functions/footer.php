@@ -30,10 +30,6 @@
         checkResult();
     });
 
-    $(window).on('resize', function() {
-        attachFooter();
-    });
-
     function checkResult() {
         setTimeout(function() {
             ($('[data-wait=true]').each(function(index) {
@@ -47,11 +43,17 @@
                 }
             }));
             checkResult();
-        }, 2500)
+        }, 1250)
     }
 
+    // create an Observer instance
+    const resizeObserver = new ResizeObserver(entries => attachFooter());
+
+    // start observing a DOM node
+    resizeObserver.observe(document.body);
+
     function attachFooter() {
-        console.log($(document.body).height() + " | " + $(window).height());
+        //console.log($(document.body).height() + " | " + $(window).height());
         if ($(document.body).height() < $(window).height()) {
             $('#footer').attr('style', 'position: fixed!important; bottom: 0px;');
         } else {

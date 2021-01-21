@@ -1,7 +1,7 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coe">Problem</h1>
     <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coe btn-sm">+ Add Problem</a><?php } ?>
-    <table class="table table-responsive table-hover w-100 d-block d-md-table">
+    <table class="table table-responsive table-hover w-100 d-block d-md-table" id="problemTable">
         <thead>
             <tr class="text-nowrap">
                 <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
@@ -39,4 +39,12 @@
             ?>
         </tbody>
     </table>
+    <script>
+        $(document).ready(function () {
+            $('#problemTable').DataTable({
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
 </div>

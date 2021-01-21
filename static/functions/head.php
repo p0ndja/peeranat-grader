@@ -43,9 +43,8 @@
     <script src="../vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Bootstrap-Table -->
-    <link rel="stylesheet" href="../vendor/bootstrap-table/bootstrap-table.min.css">
-    <script src="../vendor/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="../vendor/bootstrap-table/locale/bootstrap-table-en-US.min.js"></script>
+    <link href="../vendor/dataTable/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="../vendor/dataTable/jquery.dataTables.min.js"></script>
 
     <!-- Summernote -->
     <link href="../vendor/summernote/summernote-bs4.min.css" rel="stylesheet">
