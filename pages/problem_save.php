@@ -72,7 +72,7 @@
                 if (!file_exists($locate)) {
                     if (!mkdir($locate)) die("Can't mkdir");
                 } else {
-                    $files = glob($locate . "*.{in,sol}", GLOB_BRACE); // get all file names
+                    $files = glob($locate . "*.{in,sol,zip}", GLOB_BRACE); // get all file names
                     foreach($files as $file){ // iterate files
                         if(is_file($file))
                             unlink($file); // delete file
