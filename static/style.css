@@ -116,7 +116,7 @@
     #watermark {
         position: fixed;
         bottom: 5vh;
-        right: 5vh;
+        left: 5vh;
         opacity: 0.5;
         z-index: 99;
     }
