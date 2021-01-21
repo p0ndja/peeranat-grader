@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+    require_once('connect.php');
+
     function latestIncrement($dbdatabase, $db, $conn) {
         return mysqli_fetch_array(mysqli_query($conn,"SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$dbdatabase' AND TABLE_NAME = '$db'"), MYSQLI_ASSOC)["AUTO_INCREMENT"];
     }

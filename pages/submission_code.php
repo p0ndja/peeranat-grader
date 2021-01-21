@@ -1,5 +1,5 @@
 <?php
-    include '../static/functions/connect.php';
+    require_once '../static/functions/connect.php';
     $subID = (int) $_GET['target'];
     $r = "FILE NOT FOUND";
     if ($stmt = $conn -> prepare("SELECT `result`,`comment`,`script` FROM `submission` WHERE id = ? LIMIT 1")) {

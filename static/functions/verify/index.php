@@ -1,5 +1,5 @@
 <?php
-    require '../connect.php';
+    require_once '../connect.php';
     $key = $_GET['key'];
     $email = $_GET['email'];
 

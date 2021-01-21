@@ -1,6 +1,6 @@
 <?php
-    include '../static/functions/connect.php';
-    include '../static/functions/function.php';
+    require_once '../static/functions/connect.php';
+    require_once '../static/functions/function.php';
     $problem_id = "";
     if (isLogin() && isAdmin($_SESSION['id'], $conn) && isset($_GET['problem_id'])) {
         $problem_id = (int) $_GET['problem_id'];

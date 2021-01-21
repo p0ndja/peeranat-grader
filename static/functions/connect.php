@@ -1,6 +1,7 @@
 <?php
     ob_start();
     session_start();
+    $start_time = microtime(TRUE);
     $dbhost = "196.53.250.111";
     $dbuser = "graderga";
     $dbpass = "8db!#yYvK]8Lw6F|37wz:UwU";

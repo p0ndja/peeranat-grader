@@ -1,6 +1,6 @@
 <?php
-    include '../static/functions/connect.php';
-    include '../static/functions/function.php';
+    require_once '../static/functions/connect.php';
+    require_once '../static/functions/function.php';
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
     if ($stmt = $conn -> prepare("SELECT * FROM `submission` WHERE id = ? LIMIT 1")) {
         $stmt->bind_param('i', $id);

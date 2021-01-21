@@ -1,6 +1,6 @@
 <?php
-    include '../static/functions/connect.php';
-    include '../static/functions/function.php';
+    require_once '../static/functions/connect.php';
+    require_once '../static/functions/function.php';
 
     $id = "";
     if (isLogin() && isAdmin($_SESSION['id'], $conn)) {

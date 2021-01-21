@@ -1,7 +1,10 @@
 <footer id="footer" class="footer">
     <div class="container-fluid">
         <hr>
-        <div class="text-center">Grader.ga - Made with <b style="color: salmon; ">Meow🐾</b> by <a href="https://www.facebook.com/p0ndja/" class="font-weight-bold">PondJaᵀᴴ</a> & <a href="https://www.facebook.com/Neptune.dreemurr" class="font-weight-bold">Nepumi</a></div>
+        <div class="text-center">
+            Grader.ga - Made with <b style="color: salmon; ">Meow🐾</b> by <a href="https://www.facebook.com/p0ndja/" class="font-weight-bold">PondJaᵀᴴ</a> & <a href="https://www.facebook.com/Neptune.dreemurr" class="font-weight-bold">Nepumi</a>
+            <br><small class="text-muted" style="opacity:0.3;"><?php $end_time = microtime(TRUE); $time_taken =($end_time - $start_time)*1000; $time_taken = round($time_taken,5); echo '<small class="text-muted">Page generated in ' . $time_taken . ' ms.</small>';?></small>
+        </div>
         <br>
     </div>
 </footer>

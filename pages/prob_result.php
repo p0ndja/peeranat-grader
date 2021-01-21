@@ -1,5 +1,5 @@
 <?php
-include('../static/functions/connect.php');
+require_once '../static/functions/connect.php';
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
 $needTime = isset($_GET['time']) ? true : false;
 if ($stmt = $conn -> prepare("SELECT `result`,`runningtime` FROM `submission` WHERE id = ? LIMIT 1")) {
