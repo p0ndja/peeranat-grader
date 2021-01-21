@@ -27,7 +27,7 @@
                             $html .= "<tr onclick='window.location=\"../problem/$id\"' ".$method.">
                                 <th scope='row'>$id</th>
                                 <td>$name <span class='badge badge-coekku'>$codename</span></td>
-                                <td>".rating($rate)."</td>
+                                <td data-order='".$rate."'>".rating($rate)."</td>
                             </tr>";
                         }
                     }
