@@ -9,6 +9,8 @@
     $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbdatabase); 
     mysqli_set_charset($conn, 'utf8');
 
+    $private_key = md5("THANK YOU OTOG.CF, OTOG.ORG, PROGRAMMING.IN.TH, KIYAGO, GAREDAMI");
+
     if(!$conn)  die('Could not connect: ' . mysqli_error($conn));
     
     @ini_set('upload_max_size','128M');

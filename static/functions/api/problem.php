@@ -1,28 +1,42 @@
 <?php
+    
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+
     require_once '../connect.php';
-    $html = "";
-    if ($stmt = $conn -> prepare("SELECT id,name,rating,codename,hidden FROM `problem` ORDER BY id")) {
+    require_once '../function.php';
+
+    $id = isset($_GET['id']) ? "WHERE id = " . (int) $_GET['id'] : "";
+    $arr = array();
+    if ($stmt = $conn -> prepare("SELECT * FROM `problem` $id ORDER BY id")) {
         //$stmt->bind_param('ii', $page, $limit);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
+
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $hide = $row['hidden'];
-                if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
-                    $method = isLogin() ? isPassed($_SESSION['id'], $id, $conn) : "";
-                    if ($method == 1) $method = "class='table-success'";
-                    else if ($method == -1) $method = "class='table-warning'";
-                    else $method = "";
-                    $html .= "<tr onclick='window.location=\"../problem/$id\"' ".$method.">
-                        <th scope='row'>$id</th>
-                        <td>$name <span class='badge badge-coekku'>$codename</span></td>
-                        <td>".rating($rate)."</td>
-                    </tr>";
-                }
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $rate = $row['rating']; $hide = $row['hidden']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time'];
+                $e_arr = array(
+                    "id" => $id,
+                    "name" => $name,
+                    "codename" => $codename,
+                    "author" => $writer,
+                    "score" => $score,
+                    "memory" => $memory,
+                    "time" => $time,
+                    "rating" => array(
+                        "value" => $rate,
+                        "display" => rating($rate)
+                    ),
+                    "hide" => $hide
+                );
+
+                array_push($arr, $e_arr);
             }
             $stmt->free_result();
             $stmt->close();  
         }
-        echo $html;
     }
+    echo json_encode($arr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
 ?>
