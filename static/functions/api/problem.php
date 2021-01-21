@@ -29,7 +29,7 @@
                         "display" => rating($rate)
                     ),
                     "hide" => $hide,
-                    "doc" => "../file/judge/prob/$id/$codename.pdf"
+                    "doc" => "../doc/$id-$codename.pdf"
                 );
 
                 array_push($arr, $e_arr);
