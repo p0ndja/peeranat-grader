@@ -25,7 +25,7 @@
     <p>By <?php echo $author; ?></p>
     <hr>
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-lg-8">
             <a href="../problem/" class="float-left"><i class="fas fa-arrow-left"></i> ย้อนกลับ</a>
             <a target="_blank" href="../doc/<?php echo $id; ?>-<?php echo $codename; ?>" class="float-right">เปิดในแท็บใหม่ <i
                     class="fas fa-location-arrow"></i></a>
@@ -33,7 +33,7 @@
                 src="../vendor/pdf.js/web/viewer.html?file=../../../../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
                 width="100%" height="650" class="z-depth-1 mb-3"></iframe>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-lg-4">
             <div id="adminZone" class="mb-3">
             <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?>
                 <a href="../file/judge/prob/<?php echo $id; ?>/" target="_blank" class="btn btn-sm btn-success">Testcase</a>
