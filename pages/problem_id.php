@@ -104,7 +104,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             $subID = $row['id'];
                                             $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                            $subScore = $row['score'] + "/" + $row['maxScore'];
+                                            $subScore = $row['score'] . "/" . $row['maxScore'];
                                             //$subRuntime = $row['runningtime']/1000;
                                             $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
                                             <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-owner='true' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
