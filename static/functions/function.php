@@ -120,12 +120,12 @@
     function lastResult($uID, $pID, $conn) {
         $arr = lastSubmission($uID,$pID,$conn);
         if (!$arr) return " "; //Case not any submission yet.
-        else return $arr['result'] . " (" . $arr['score'] . "/" . $arr['maxScore'] . ")";
+        else return $arr['result'] . " (" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")";
     }
 
     function lastSubmission($uID, $pID, $conn) {
         if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
-        if ($stmt = $conn -> prepare("SELECT `result`,`score`,`maxScore` FROM `submission` WHERE problem = ? AND user = ? ORDER BY id DESC limit 1")) {
+        if ($stmt = $conn -> prepare("SELECT `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
             $stmt->bind_param('ii', $pID, $uID);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -135,6 +135,7 @@
                     $arr["score"] = $row['score'];
                     $arr["maxScore"] = $row['maxScore'];
                     $arr["result"] = $row['result'];
+                    $arr["probScore"] = $row['probScore'];
                     return $arr;
                 }
                 $stmt->free_result();

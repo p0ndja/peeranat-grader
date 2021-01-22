@@ -1,23 +1,12 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coe">Submission</h1>
     <?php if (isLogin()) { ?>
-    <div class="switch switch-danger mb-1 disabled">
+    <div class="switch switch-danger mb-1">
         <label>
             <input type="checkbox" name="onlyme" id="onlyme">
             <span class="lever"></span>Only My Submission (BUG ;-;)
         </label>
     </div>
-    <script>
-        $("#onlyme").change(function() {
-            if ($(this).is(':checked')) {
-                $('tr:not(.me)').hide();
-            } else {
-                $('tr:not(.me)').show();
-            }
-            submission_table.draw();
-
-        });
-    </script>
     <?php } ?>
     <div class="table-responsive">
         <table class="table table-hover w-100 d-block d-md-table" id="submissionTable">
@@ -33,7 +22,7 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                    if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC")) {
+                    if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`lang` as lang, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` ORDER BY `submission`.`id` DESC LIMIT 5")) {
                         //$stmt->bind_param('ii', $page, $limit);
                         $stmt->execute();
                         $result = $stmt->get_result();
@@ -46,7 +35,7 @@
                                 $subProb = $row['problem'];
                                 $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                $subScore = $row['score'] . "/" . $row['maxScore'];
+                                $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
                                 //$subRuntime = $row['runningtime']/1000;
                                 $subUploadtime = $row['uploadtime']; 
                                 $i++; ?>
@@ -73,6 +62,13 @@
                 "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ]
             });
             $('.dataTables_length').addClass('bs-select');
+            $("#onlyme").change(function() {
+                if ($(this).is(':checked')) {
+                    submission_table.search("<?php echo getUserdata($_SESSION['id'],'username', $conn); ?>").draw();
+                } else {
+                    submission_table.search("").draw();
+                }
+            });
         });
     </script>
 </div>
