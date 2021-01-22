@@ -117,6 +117,12 @@
         if ($arr['score'] != 0 && $arr['score'] < $arr['maxScore']) return -1;
     }
 
+    function lastResult($uID, $pID, $conn) {
+        $arr = lastSubmission($uID,$pID,$conn);
+        if (!$arr) return " "; //Case not any submission yet.
+        else return $arr['result'] . " (" . $arr['score'] . "/" . $arr['maxScore'] . ")";
+    }
+
     function lastSubmission($uID, $pID, $conn) {
         if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
         if ($stmt = $conn -> prepare("SELECT `result`,`score`,`maxScore` FROM `submission` WHERE problem = ? AND user = ? ORDER BY id DESC limit 1")) {

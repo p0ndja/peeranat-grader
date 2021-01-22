@@ -5,9 +5,10 @@
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
                 <tr class="text-nowrap">
-                    <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
+                    <th scope="col" class="font-weight-bold text-coe text-right">ID</th>
                     <th scope="col" class="font-weight-bold text-coe">Task</th>
                     <th scope="col" class="font-weight-bold text-coe">Rate</th>
+                    <th scope="col" class="font-weight-bold text-coe">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">
@@ -21,14 +22,12 @@
                         while ($row = $result->fetch_assoc()) {
                             $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $hide = $row['hidden'];
                             if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
-                                $method = isLogin() ? isPassed($_SESSION['id'], $id, $conn) : "";
-                                if ($method == 1) $method = "class='table-success'";
-                                else if ($method == -1) $method = "class='table-warning'";
-                                else $method = "";
-                                $html .= "<tr onclick='window.location=\"../problem/$id\"' ".$method.">
-                                    <th scope='row'>$id</th>
+                                $lastResult = isLogin() ? lastResult($_SESSION['id'], $id, $conn) : "";
+                                $html .= "<tr onclick='window.location=\"../problem/$id\"'>
+                                    <th class='text-right' scope='row'>$id</th>
                                     <td>$name <span class='badge badge-coekku'>$codename</span></td>
                                     <td data-order='".$rate."'>".rating($rate)."</td>
+                                    <td><code>$lastResult</code></td>
                                 </tr>";
                             }
                         }
@@ -44,7 +43,11 @@
     <script>
         $(document).ready(function () {
             $('#problemTable').DataTable({
-                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ]
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ],
+                'columnDefs': [ {
+                    'targets': [1,3], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                }]
             });
             $('.dataTables_length').addClass('bs-select');
         });

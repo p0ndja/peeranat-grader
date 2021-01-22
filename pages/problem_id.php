@@ -95,7 +95,7 @@
                             <tbody class="text-nowrap">
                             <?php
                                 $html = "";
-                                if ($stmt = $conn -> prepare("SELECT `id`,`runningtime`,`uploadtime`,`result` FROM `submission` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
+                                if ($stmt = $conn -> prepare("SELECT `id`,`score`,`maxScore`,`uploadtime`,`result` FROM `submission` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
                                     $user = $_SESSION['id'];
                                     $stmt->bind_param('ii', $user, $id);
                                     $stmt->execute();
@@ -104,11 +104,12 @@
                                         while ($row = $result->fetch_assoc()) {
                                             $subID = $row['id'];
                                             $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                            $subRuntime = $row['runningtime']/1000;
+                                            $subScore = $row['score'] + "/" + $row['maxScore'];
+                                            //$subRuntime = $row['runningtime']/1000;
                                             $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
                                             <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-owner='true' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
                                                 <th scope='row'><?php echo $subUploadtime; ?></th>
-                                                <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult ($subRuntime" . "s)"; ?></code></td>
+                                                <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult ($subScore)"; ?></code></td>
                                             </tr>
                                         <?php }
                                         $stmt->free_result();

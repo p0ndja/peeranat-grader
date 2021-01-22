@@ -46,7 +46,8 @@
                                 $subProb = $row['problem'];
                                 $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                $subRuntime = $row['runningtime']/1000;
+                                $subScore = $row['score'] . "/" . $row['maxScore'];
+                                //$subRuntime = $row['runningtime']/1000;
                                 $subUploadtime = $row['uploadtime']; 
                                 $i++; ?>
                                 <tr style="cursor: pointer;" class='launchModal' <?php echo $me;?> id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
@@ -55,7 +56,7 @@
                                     <td><?php echo $subUser ?></td>
                                     <td><?php echo prob($subProb, $conn); ?></td>
                                     <td><?php echo $subLang; ?></td>
-                                    <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id='$subID'"; ?>><code><?php echo $subResult . ' (' . $subRuntime . 's)';?></code></td>
+                                    <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id='$subID'"; ?>><code><?php echo $subResult . " ($subScore)";?></code></td>
                                 </tr>
                             <?php }
                             $stmt->free_result();
