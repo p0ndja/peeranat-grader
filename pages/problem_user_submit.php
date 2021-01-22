@@ -36,7 +36,6 @@
                 }
             }
 
-            echo $probDoc;
         } else {
             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
             $_SESSION['swal_error_msg'] = "ไม่พบไฟล์";
