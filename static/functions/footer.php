@@ -53,8 +53,8 @@
     resizeObserver.observe(document.body);
 
     function attachFooter() {
-        //console.log($(document.body).height() + " | " + $(window).height());
-        if ($(document.body).height() < $(window).height()) {
+        console.log($(document.body).height() + " | " + $(window).height());
+        if ($(document.body).height()*1.11 < $(window).height()) {
             $('#footer').attr('style', 'position: fixed!important; bottom: 0px;');
         } else {
             $('#footer').removeAttr('style');

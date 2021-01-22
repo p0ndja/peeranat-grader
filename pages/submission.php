@@ -4,7 +4,7 @@
     <div class="switch switch-danger mb-1">
         <label>
             <input type="checkbox" name="onlyme" id="onlyme">
-            <span class="lever"></span>Only My Submission (BUG ;-;)
+            <span class="lever"></span>Only My Submission
         </label>
     </div>
     <?php } ?>
