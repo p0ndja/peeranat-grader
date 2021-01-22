@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    session_start();
+    session_start(); if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
     $start_time = microtime(TRUE);
     $dbhost = "196.53.250.111";
     $dbuser = "graderga";

@@ -25,6 +25,11 @@
         </ul>
         <div class="my-2 my-lg-0">
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item">
+                    <?php if(!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false; ?>
+                    <?php if ($_SESSION['dark_mode'] == true) { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="fas fa-sun"></i></a></a>
+                    <?php } else { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="far fa-moon"></i></a><?php } ?>
+                </li>
                 <?php if (isset($_SESSION['id'])) { ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
