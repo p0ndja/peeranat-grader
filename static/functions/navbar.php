@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-normal fixed-top navbar-transparent z-depth-0" id="nav" role="navigation">
     <a class="navbar-brand" href="../home/"><img src="../static/elements/logo/logo.png" width="32" alt="PharmMDKKU" align="center"></a>
-    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <button class="navbar-toggler navbar-<?php if (isDarkmode()) echo "dark"; else echo "light"; ?>" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,8 +26,7 @@
         <div class="my-2 my-lg-0">
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item">
-                    <?php if(!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false; ?>
-                    <?php if ($_SESSION['dark_mode'] == true) { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="fas fa-sun"></i></a></a>
+                    <?php if (isDarkmode()) { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="fas fa-sun"></i></a></a>
                     <?php } else { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="far fa-moon"></i></a><?php } ?>
                 </li>
                 <?php if (isset($_SESSION['id'])) { ?>

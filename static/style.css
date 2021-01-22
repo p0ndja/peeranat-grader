@@ -40,6 +40,16 @@
         background-color: #770f11 !important;
     }
 
+    .navbar {
+        background-color: white !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .navbar {
+            background-color: white !important;
+        }
+    }
+
     table.dataTable thead .sorting:after,
     table.dataTable thead .sorting:before,
     table.dataTable thead .sorting_asc:after,

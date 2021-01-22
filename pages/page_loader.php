@@ -11,7 +11,7 @@
 </head>
 <?php require_once '../static/functions/navbar.php'; ?>
 <body>
-    <?php   if ((isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'])) { ?>
+    <?php   if (isDarkmode()) { ?>
                 <script>document.body.setAttribute("data-theme", "dark")</script>
     <?php   } else { ?>
                 <script>document.body.removeAttribute("data-theme")</script>

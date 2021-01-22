@@ -69,11 +69,13 @@
 }
 
 [data-theme="dark"] a {
-    color: white;
+    color:#d42225;
+    transition: 0.3s;
 }
 
 [data-theme="dark"] a:hover {
-    color: #ededed;
+    color: #df797b;
+    transition: 0.3s;
 }
 
 [data-theme="dark"] .pagination > li > a
@@ -114,4 +116,14 @@
 [data-theme="dark"] .carousel h5,
 [data-theme="dark"] .carousel p {
     color: white;
+}
+
+[data-theme="dark"] .navbar {
+    background-color: #111 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    [data-theme="dark"] .navbar {
+        background-color: #111 !important;
+    }
 }

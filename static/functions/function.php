@@ -69,6 +69,14 @@
     }
     */
 
+    function isDarkmode() {
+        if (isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'] == true)
+            return true;
+        if (!isset($_SESSION['dark_mode']))
+            $_SESSION['dark_mode'] = false;
+        return false;
+    }
+
     function isValidUserID($id, $conn) {
         $query = "SELECT `id` FROM `user` WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
@@ -146,7 +154,7 @@
 
     function randomLoading() {
         $targetDir = "light";
-        if (isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'] == true) $targetDir = "dark";
+        if (isDarkmode()) $targetDir = "dark";
         $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
         return $files[rand(0,count($files)-1)];
     }
