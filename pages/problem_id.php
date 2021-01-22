@@ -95,7 +95,7 @@
                             <tbody class="text-nowrap">
                             <?php
                                 $html = "";
-                                if ($stmt = $conn -> prepare("SELECT `id`,`score`,`maxScore`,`uploadtime`,`result` FROM `submission` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
+                                if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id,`submission`.`score` as score,`submission`.`maxScore` as maxScore,`submission`.`uploadtime` as uploadtime,`submission`.`result` as result,`problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
                                     $user = $_SESSION['id'];
                                     $stmt->bind_param('ii', $user, $id);
                                     $stmt->execute();
@@ -104,7 +104,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             $subID = $row['id'];
                                             $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                            $subScore = $row['score'] . "/" . $row['maxScore'];
+                                            $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
                                             //$subRuntime = $row['runningtime']/1000;
                                             $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
                                             <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-owner='true' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
