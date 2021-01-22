@@ -33,7 +33,7 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                    if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC LIMIT 5")) {
+                    if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC")) {
                         //$stmt->bind_param('ii', $page, $limit);
                         $stmt->execute();
                         $result = $stmt->get_result();
