@@ -22,7 +22,7 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                    if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`lang` as lang, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` ORDER BY `submission`.`id` DESC LIMIT 5")) {
+                    if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`lang` as lang, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` ORDER BY `submission`.`id` DESC")) {
                         //$stmt->bind_param('ii', $page, $limit);
                         $stmt->execute();
                         $result = $stmt->get_result();
