@@ -27,13 +27,13 @@
                     <th scope="col" class="font-weight-bold text-coe">Timestamp</th>
                     <th scope="col" class="font-weight-bold text-coe">User</th>
                     <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Language</th>
+                    <th scope="col" class="font-weight-bold text-coe">Lang</th>
                     <th scope="col" class="font-weight-bold text-coe">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                    if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC")) {
+                    if ($stmt = $conn -> prepare("SELECT * FROM `submission` ORDER BY `id` DESC LIMIT 5")) {
                         //$stmt->bind_param('ii', $page, $limit);
                         $stmt->execute();
                         $result = $stmt->get_result();
@@ -42,7 +42,7 @@
                             while ($row = $result->fetch_assoc()) {
                                 $me = (isLogin() && ($_SESSION['id'] == $row['user'] || isAdmin($_SESSION['id'], $conn))) ? "data-owner='true'" : "data-owner='false'";
                                 $subID = $row['id'];
-                                $subUser = $row['user'];
+                                $subUser = user($row['user'], $conn);
                                 $subProb = $row['problem'];
                                 $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
@@ -52,7 +52,7 @@
                                 <tr style="cursor: pointer;" class='launchModal' <?php echo $me;?> id='sub<?php echo $subID;?>' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
                                     <th scope='row' data-order='<?php echo $i; ?>'><?php echo $subID; ?></th>
                                     <td data-order='<?php echo $i; ?>'><?php echo $subUploadtime; ?></td>
-                                    <td><?php echo getUserdata($subUser, 'username', $conn); ?></td>
+                                    <td><?php echo $subUser ?></td>
                                     <td><?php echo prob($subProb, $conn); ?></td>
                                     <td><?php echo $subLang; ?></td>
                                     <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id='$subID'"; ?>><code><?php echo $subResult . ' (' . $subRuntime . 's)';?></code></td>

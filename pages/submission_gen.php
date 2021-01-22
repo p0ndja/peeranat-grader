@@ -9,14 +9,14 @@
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
                 $subID = $row['id'];
-                $subUser = $row['user'];
+                $subUser = user($row['user'], $conn);
                 $subProb = $row['problem'];
                 $subLang = $row['lang'];
                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
                 $subRuntime = $row['runningtime']; //ms
                 $subMemory = $row['memory'] ? $row['memory'] . " MB": randomErrorMessage(); //MB
                 $subUploadtime = $row['uploadtime']; ?>
-                <p>User: <code><?php echo getUserdata($subUser, 'username', $conn); ?></code>
+                <p>User: <code><?php echo $subUser; ?></code>
                 <br>Problem: <?php echo prob($subProb, $conn); ?>
                 <br>Language: <code><?php echo $subLang; ?></code>
                 <br>Result: <code <?php if ($row['result'] == 'W') echo "data-sub-id='$id' data-wait=true"; ?>><?php echo $subResult; ?></code>

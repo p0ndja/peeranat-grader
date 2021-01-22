@@ -31,10 +31,6 @@
     background-color: #1c1c1c !important;
 }
 
-[data-theme="dark"] .text-smd {
-    color: #fc6504 !important;
-}
-
 
 [data-theme="dark"] .note-current-fontname {
     color: #1c1c1c !important;
@@ -74,6 +70,10 @@
 
 [data-theme="dark"] a {
     color: white;
+}
+
+[data-theme="dark"] a:hover {
+    color: #ededed;
 }
 
 [data-theme="dark"] .pagination > li > a

@@ -30,6 +30,10 @@
     }
     //getUserdata('604019', 'username', $conn);
 
+    function getUserID($input, $method, $conn) {
+        return getAnySQL('user', 'id', $method, $input, $conn);
+    }
+
     function saveUserdata($id, $data, $val, $conn) {
         if (saveAnySQL('user', $data, $val, 'id', $id, $conn)) return true;
         return false;
@@ -128,12 +132,23 @@
         
     }
 
+    function user($id, $conn) {
+        return getUserdata($id, 'displayname', $conn) . " (".getUserdata($id,'username', $conn).")";
+    }
+
     function prob($id, $conn) {
-        return "<a href='../problem/$id'>".getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span></a>";
+        return getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span>";
     }
 
     function countScore($result, $full = 100) {
         return number_format((float) count_chars(strtoupper($result))[80]*($full/strlen($result)), 2, '.', '');
+    }
+
+    function randomLoading() {
+        $targetDir = "light";
+        if (isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'] == true) $targetDir = "dark";
+        $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
+        return $files[rand(0,count($files)-1)];
     }
 
     

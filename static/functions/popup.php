@@ -1,7 +1,7 @@
 <script>
     $('.launchModal').on('click', function () {
         $('#modalTitle').html('Loading...');
-        $('#modalBody').html('<div class="d-flex justify-content-center"><img class="img-fluid" align="center" src="https://cdn.dribbble.com/users/1284666/screenshots/6321168/__3.gif"></div>');
+        $('#modalBody').html('<div class="d-flex justify-content-center"><img class="img-fluid" align="center" src="<?php echo randomLoading(); ?>"></div>');
         $('#modalBodyCode').html("<div></div>");
         var title = $(this).data('title');
         var subID = $(this).data('id');
