@@ -7,7 +7,7 @@
                     <h1 class="font-weight-bold text-coe display-4">Grader.ga</h1>
                     <h4 class="font-weight-normal">The Computer Engineering of <b class="text-nowrap">Khon Kaen University</b><br>Student-Made grader.</h4>
                     <a class="btn btn-coe" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
-                    <a class="btn btn-coe" href="">วิธีการใช้งาน Grader.ga</a>
+                    <a class="btn btn-coe" target="_blank" href="https://drive.google.com/file/d/19aNSPCPxMvg8BQVI9z_P9ELP4OmLSEtO/view?usp=drivesdk">วิธีการใช้งาน Grader.ga</a>
                 </div>
                 <div class="fadeIn animated">
                     <?php
