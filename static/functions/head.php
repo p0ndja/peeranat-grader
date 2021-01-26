@@ -48,10 +48,10 @@
     <link href="../vendor/dataTable/jquery.dataTables.min.css" rel="stylesheet">
     <script src="../vendor/dataTable/jquery.dataTables.min.js"></script>
 
-    <!-- Summernote -->
-    <link href="../vendor/summernote/summernote-bs4.min.css" rel="stylesheet">
-    <script src="../vendor/summernote/summernote-bs4.min.js"></script>
-    <script src="../vendor/summernote/summernote-file.js"></script>
+    <!-- Editor.MD -->
+    <link rel="stylesheet" href="../vendor/editor.md/css/editormd.css" />
+    <script src="../vendor/editor.md/editormd.min.js"></script>
+    <script src="../vendor/editor.md/languages/en.js"></script>
 
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">

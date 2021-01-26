@@ -1,6 +1,7 @@
 <?php 
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
+    require_once '../vendor/parsedown/Parsedown.php';
 ?>
 
 <!DOCTYPE html>
