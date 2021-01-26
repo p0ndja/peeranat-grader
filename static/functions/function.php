@@ -148,7 +148,9 @@
     }
 
     function user($id, $conn) {
-        return getUserdata($id, 'displayname', $conn) . " (".getUserdata($id,'username', $conn).")";
+        if (isLogin() && isAdmin($_SESSION['id'], $conn))
+            return getUserdata($id, 'displayname', $conn) . " (".getUserdata($id,'username', $conn).")";
+        return getUserdata($id, 'displayname', $conn);
     }
 
     function prob($id, $conn) {
