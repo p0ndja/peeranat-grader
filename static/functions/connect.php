@@ -2,7 +2,7 @@
     ob_start();
     session_start(); if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
     $start_time = microtime(TRUE);
-    $dbhost = "196.53.250.111";
+    $dbhost = "203.159.94.111";
     $dbuser = "graderga";
     $dbpass = "8db!#yYvK]8Lw6F|37wz:UwU";
     $dbdatabase = "graderga";
