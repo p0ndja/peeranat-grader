@@ -10,6 +10,7 @@
     $query_arg = array();
     $id = isset($_GET['id']) ? array_push($query_arg, "id=" . (int) $_GET['id']) : "";
     $onlyWait = isset($_GET['wait']) ? array_push($query_arg, "result='W'") : "";
+    $desc = empty($onlyWait) ? "DESC" : "ASC";
     $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 100;
     for($i = 0; $i < count($query_arg); $i++) {
         if ($i == 0) $query .= "WHERE " . $query_arg[$i];
@@ -17,7 +18,7 @@
     }
 
     $arr = array();
-    if ($stmt = $conn -> prepare("SELECT * FROM `submission` $query ORDER BY id DESC LIMIT $limit")) {
+    if ($stmt = $conn -> prepare("SELECT * FROM `submission` $query ORDER BY id $desc LIMIT $limit")) {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
