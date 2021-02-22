@@ -62,7 +62,7 @@
                         <div class="custom-file mb-2">
                             <input type="hidden" name="probID" value="<?php echo $id; ?>"/>
                             <input type="hidden" name="probCodename" value="<?php echo $codename; ?>"/>
-                            <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py" required>
+                            <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py, .txt" required>
                             <label class="custom-file-label" for="submission">Choose file</label>
                         </div>
                         <div class="form-row">
@@ -72,6 +72,7 @@
                                     <option value="Cpp">C++</option>
                                     <option value="Python">Python</option>
                                     <option value="Java" selected>Java</option>
+                                    <option value="TXT">Plain Text</option>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6">
