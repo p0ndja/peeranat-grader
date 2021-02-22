@@ -21,7 +21,7 @@
     <?php require_once '../static/functions/popup.php'; ?>
     <?php require_once '../static/functions/footer.php'; ?>
     <!--div id="watermark" class="text-right text-danger"><small>Happy birthday Grader.ga!</small><br>♪ (｡´＿●`)ﾉ┌iiii┐ヾ(´○＿`*) ♪</div-->
-    <div id="watermark" class="text-left"><span class="font-weight-bold">Opened Beta Version!</span><br><small><a href="//m.me/p0ndja" target="_blank">Report a bug & suggestion <i class="fas fa-bug"></i></a></small></div>
+    <div id="watermark" class="text-left">Donation Accept!<br><img src="https://promptpay.io/0908508007" width="128"><br><span class="font-weight-bold">Opened Beta Version!</span><br><small><a href="//m.me/p0ndja" target="_blank">Report a bug & suggestion <i class="fas fa-bug"></i></a></small></div>
 </body>
 
 </html>
