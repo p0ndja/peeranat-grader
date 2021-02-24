@@ -18,6 +18,7 @@ RewriteRule ^profile/$ pages/page_loader.php?target=profile.php
 RewriteRule ^profile/([0-9]+)$ pages/page_loader.php?target=profile.php&id=$1 [L]
 RewriteRule ^editorial/$ pages/page_loader.php?target=editorial.php
 RewriteRule ^editorial/([0-9]+)$ pages/page_loader.php?target=editorial.php&id=$1 [L]
+RewriteRule ^donation/$ pages/page_loader.php?target=donation.php [L]
 
 RewriteRule ^api/(.*)$ static/functions/api/$1.php
 

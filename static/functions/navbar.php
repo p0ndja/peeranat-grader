@@ -22,6 +22,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="../editorial/">Editorial</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../donation/">Donation</a>
+            </li>
         </ul>
         <div class="my-2 my-lg-0">
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
