@@ -1,17 +1,21 @@
-<div class="container" style="padding-top: 88px;">
-    <div class="container mb-3" id="container">
-        <div class="row">
+<div class="homepage">
+    <div class="container h-100 w-100">
+        <div class="h-100 w-100 row align-items-center">
             <div class="col-12 col-md-8">
-                <h1 class="font-weight-bold text-center">Donation</h1>
-                <div class="d-flex justify-content-center"><img src="https://promptpay.io/0908508007/270x270"
-                        class="z-depth-1" /></div><br>
-                <div class="d-flex justify-content-center"><b>Promptpay</b> : Palapon Soontornpas
-                    (<code>090-8508007</code>)</div><br>
+                <h1 class="font-weight-bold text-center text-coe">Donation</h1>
+                <div class="d-flex justify-content-center"><img src="../static/elements/promptpay.png" class="z-depth-1 mb-3" width="300" /></div>
+                <h5 class="text-center font-weight-bold">Palapon Soontornpas / พลภณ สุนทรภาส</h5>
+                <hr>
+                <p class="text-center">
+                    <b>Promptpay / TrueWallet</b> : <code>090-8508007</code><br>
+                    <b>SCB</b> : <code>551-442288-3</code><br>
+                    <b>KBank</b> : <code>084-3-24454-8</code> [ไม่ใช่เบอร์โทรศัพท์!]<br>
+                </p>
             </div>
             <div class="col-12 col-md-4">
-                <h4 class="font-weight-bold text-center">Donator (Last 10 records)</h4>
+                <h4 class="font-weight-bold text-center text-coe">Donator (Last 10 records)</h4>
                 <div class="table-responsive">
-                    <table class="table table-hover w-100 d-block d-md-table" id="submissionTable">
+                    <table class="table table-hover w-100" id="submissionTable">
                         <thead>
                             <tr class="text-nowrap me">
                                 <th scope="col" class="font-weight-bold text-coe">User</th>
