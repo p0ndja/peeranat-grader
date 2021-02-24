@@ -74,6 +74,21 @@
                                     <option value="Java" selected>Java</option>
                                     <option value="TXT">Plain Text</option>
                                 </select>
+                                <script>
+                                    $("#submission").on('change', function (e) {
+                                        var val = $("#submission").val().replace("C:\\fakepath\\","");
+                                        if (val.includes(".txt"))
+                                            $("#lang").val("TXT");
+                                        else if (val.includes(".java"))
+                                            $("#lang").val("Java");
+                                        else if (val.includes(".c"))
+                                            $("#lang").val("C");
+                                        else if (val.includes(".cpp"))
+                                            $("#lang").val("Cpp");
+                                        else if (val.includes(".py"))
+                                            $("#lang").val("Python");
+                                    });
+                                </script>
                             </div>
                             <div class="col-12 col-md-6">
                                 <button type="submit" value="prob" name="submit" class="btn btn-block btn-coe btn-md">Submit</button>
