@@ -29,11 +29,11 @@
                         $f = fopen("../donator.txt", "r");
                         $i = 0;
                         $total = 0;
-                        while(!feof($f) && !empty($f)) {
-                            $i++;
+                        while(!feof($f)) {
                             $l = explode(" ", fgets($f));
-                            $total += (double) $l[1];
-                            if ($i <= 10) //Display only last 10
+                            $i++;
+                            $total += isset($l[1]) ? (double) $l[1] : 0;
+                            if ($i <= 10 && isset($l[1])) //Display only last 10
                                 echo "<tr><th scope='row'>".$l[0]."</th><td>".$l[1]." ฿</td></tr>";
                         }
                         fclose($f);
