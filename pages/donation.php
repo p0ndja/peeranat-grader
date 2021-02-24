@@ -29,7 +29,7 @@
                         $f = fopen("../donator.txt", "r");
                         $i = 0;
                         $total = 0;
-                        while(!feof($f)) {
+                        while(!feof($f) && !empty($f)) {
                             $i++;
                             $l = explode(" ", fgets($f));
                             $total += (double) $l[1];
@@ -47,7 +47,7 @@
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-coekku" role="progressbar" style="width: <?php echo $val;?>%" aria-valuenow="<?php echo $val;?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small><?php echo $total; ?>/150 THB (<?php echo $val; ?>%)</small>
+                <small><?php echo $total; ?>/150 THB (<?php echo number_format((float) $val, 2, '.', ''); ?>%)</small>
             </div>
         </div>
     </div>
