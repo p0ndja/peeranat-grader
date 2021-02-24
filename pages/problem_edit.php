@@ -1,5 +1,5 @@
 <?php needAdmin($conn); 
-    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1;
+    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1; $accept = "";
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
@@ -8,7 +8,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probRate = $row['rating']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer'];
+                    $probName = $row['name']; $probCodename = $row['codename']; $probRate = $row['rating']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer']; $accept = $row['accept'];
                 }
                 $stmt->free_result();
                 $stmt->close();  
@@ -112,6 +112,36 @@
                                 <input type="text" id="memory" name="memory" class="form-control" value="<?php echo $probMemory; ?>" required />
                                 <label class="form-label" for="memory">Memory (Megabyte)</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold text-coe">Language</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="C" id="C" name="lang[]">
+                                <label class="form-check-label" for="C">C</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Cpp" id="C++" name="lang[]">
+                                <label class="form-check-label" for="C++">C++</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Java" id="Java" name="lang[]">
+                                <label class="form-check-label" for="Java">Java</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Python" id="Python" name="lang[]">
+                                <label class="form-check-label" for="Python">Python</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" name="lang[]">
+                                <label class="form-check-label" for="Plain Text">Plain Text</label>
+                            </div>
+                            <?php if (!isset($_GET['id'])) { //Create case, check all by default ?>
+                                <script>$('.lang input[type=checkbox]').prop('checked',true);</script>
+                            <?php } else {
+                                $accept;
+                            } ?>
                         </div>
                     </div>
                     <div class="card mb-3">
