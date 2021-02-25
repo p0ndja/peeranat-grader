@@ -68,9 +68,21 @@ table.dataTable thead .sorting_desc_disabled {
     background-image: url("../images/sort_desc_disabled.png");
 }
 
-table.dataTable tbody tr {
+table.dataTable tbody tr,
+table.dataTable tbody th,
+table.dataTable tbody td{
     color: white !important;
     background-color: #000 !important;
+}
+
+table.dataTable a {
+    color: #dddddd !important;
+    transition: 0.3s;
+}
+
+table.dataTable a:hover {
+    color: #ec9395 !important;
+    transition: 0.3s;
 }
 
 table.dataTable tbody tr:hover {
