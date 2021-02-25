@@ -13,7 +13,8 @@
                 </p>
             </div>
             <div class="col-12 col-md-4">
-                <h4 class="font-weight-bold text-center text-coe">Donator (Last 10 records)</h4>
+                <h4 class="font-weight-bold text-center text-coe">Donator</h4>
+                <p class="text-center"><small class="text-muted">ตอนนี้เป็น Manual Update นะงับ ยังเขียนไม่เสร็จ 555</small></p>
                 <div class="table-responsive">
                     <table class="table table-hover w-100" id="submissionTable">
                         <thead>
