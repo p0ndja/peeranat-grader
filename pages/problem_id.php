@@ -8,7 +8,6 @@
             while ($row = $result->fetch_assoc()) {
                 $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $hide = $row['hidden']; $author = $row['writer'];
                 if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
-                if (empty($author)) $author = "Anonymous";
                 if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
                     header("Location: ../problem/");
             }
@@ -22,7 +21,7 @@
 ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h2 class="font-weight-bold text-coe"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span> <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?></h2>
-    <p>By <?php echo $author; ?></p>
+    <small class="text-muted"><?php echo $author; ?></small>
     <hr>
     <div class="row">
         <div class="col-12 col-lg-8">

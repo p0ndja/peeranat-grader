@@ -27,10 +27,14 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     } else {
         $_SESSION['error'] = "พบข้อผิดพลาดในการเข้าถึงฐานข้อมูล";
     }
-    if (isset($_SESSION['error']))
+    if (isset($_SESSION['error'])) {
         header("Location: ../../../login/");
-    else
-        header("Location: ../../../");
+    } else {
+        if (isset($_POST['referent']) && !empty($_POST['referent']))
+            header("Location: " . $_POST['referent']);
+        else
+            header("Location: ../../../");
+    }
 
 } else if (isset($_POST['method']) && $_POST['method'] == 'registerPage') {
     $user = $_POST['register_username'];
