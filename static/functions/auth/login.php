@@ -17,11 +17,12 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['name'] = $row['displayname'];
                 
+                $_SESSION['swal_success'] = "เข้าสู่ระบบสำเร็จ";
+                $_SESSION['swal_success_msg'] = "ยินดีต้อนรับ " . $row['displayname'] . "!";
+                
                 $rainbow = json_decode($row['properties'])->rainbow;
                 if ($rainbow) $_SESSION['name'] = "<text class='rainbow'>" . $_SESSION['name'] . "</text>";
             }
-            $_SESSION['swal_success'] = "เข้าสู่ระบบสำเร็จ";
-            $_SESSION['swal_success_msg'] = "ยินดีต้อนรับ " . $_SESSION['name'] . "!";
         } else {
             $_SESSION['error'] = "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง";
         }
