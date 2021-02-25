@@ -34,9 +34,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
 
     if (isset($_SESSION['error'])) {
         header("Location: ../../../login/");
-        die("YEAY");
     } else {
-        die("YO");
         if (isset($_POST['referent']) && !empty($_POST['referent']))
             header("Location: " . $_POST['referent']);
         else
