@@ -13,6 +13,7 @@
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
             $probAuthor = $_POST['writer'];
+            $probAccept = json_encode($_POST['lang']); //Send in array, need to keep in json
 
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
@@ -30,8 +31,8 @@
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
             print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor));
             if ($isCreate) {
-                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, rating, writer) VALUES (?,?,?,?,?,?,?)")) {
-                    $stmt->bind_param('ssiiiis', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor);
+                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, rating, writer, properties) VALUES (?,?,?,?,?,?,?,?)")) {
+                    $stmt->bind_param('ssiiiiss', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $probAccept);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
@@ -47,8 +48,8 @@
                     echo "Can't establish database";
                 }
             } else {
-                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, writer=? WHERE id = ?")) {
-                    $stmt->bind_param('ssiiiisi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $id);
+                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, writer=?, properties=? WHERE id = ?")) {
+                    $stmt->bind_param('ssiiiissi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $probAccept, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";

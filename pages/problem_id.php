@@ -1,15 +1,32 @@
 <?php
     $html = ""; $id = $_GET['id'];
-    if ($stmt = $conn -> prepare("SELECT id,name,score,memory,time,rating,codename,hidden,writer FROM `problem` WHERE id = ?")) {
+    if ($stmt = $conn -> prepare("SELECT id,name,score,memory,time,rating,codename,hidden,writer,properties FROM `problem` WHERE id = ?")) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $hide = $row['hidden']; $author = $row['writer'];
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $hide = $row['hidden']; $author = $row['writer']; 
                 if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
                 if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
                     header("Location: ../problem/");
+
+                $prop = json_decode($row['properties']);
+                $accept = array();
+                foreach ($prop as $p) {
+                    if ($p == "C") {
+                        array_push($accept, ".c", ".i");
+                    } else if ($p == "Cpp") {
+                        array_push($accept, ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
+                    } else if ($p == "Python") {
+                        array_push($accept, ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
+                    } else if ($p == "Java") {
+                        array_push($accept, ".java", ".jav"); 
+                    } else if ($p == "TXT") {
+                        array_push($accept, ".txt");
+                    }
+                }
+                $accept_str = implode(",", $accept);
             }
             $stmt->free_result();
             $stmt->close();  
@@ -61,36 +78,60 @@
                         <div class="custom-file mb-2">
                             <input type="hidden" name="probID" value="<?php echo $id; ?>"/>
                             <input type="hidden" name="probCodename" value="<?php echo $codename; ?>"/>
-                            <input type="file" class="custom-file-input" id="submission" name="submission" accept=".c, .cpp, .java, .py, .txt" required>
+                            <input type="file" class="custom-file-input" id="submission" name="submission" accept="<?php echo $accept_str; ?>" required>
                             <label class="custom-file-label" for="submission">Choose file</label>
                         </div>
                         <div class="form-row">
                             <div class="col-12 col-md-6">
                                 <select class="form-control mb-2" id="lang" name="lang" required>
-                                    <option value="C">C</option>
-                                    <option value="Cpp">C++</option>
-                                    <option value="Python">Python</option>
-                                    <option value="Java" selected>Java</option>
-                                    <option value="TXT">Plain Text</option>
+                                    <?php if (!empty($prop)) {
+                                        foreach($prop as $p) { ?>
+                                            <script>$("<option>").val("<?php echo $p; ?>").text("<?php echo $p; ?>").appendTo("#lang");</script>
+                                    <?php }
+                                    } else { ?>
+                                        <option value="C">C</option>
+                                        <option value="Cpp">C++</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Java" selected>Java</option>
+                                    <?php } ?>
                                 </select>
                                 <script>
+                                    var C_file = [".c",".i"];
+                                    var Cpp_file = [".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii"];
+                                    var Java_file = [".java",".jav"];
+                                    var Python_file = [".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy"];
+                                    var Text_file = [".txt"];
                                     $("#submission").on('change', function (e) {
-                                        var val = $("#submission").val().replace("C:\\fakepath\\","");
-                                        if (val.includes(".txt"))
-                                            $("#lang").val("TXT");
-                                        else if (val.includes(".java"))
-                                            $("#lang").val("Java");
-                                        else if (val.includes(".c"))
-                                            $("#lang").val("C");
-                                        else if (val.includes(".cpp"))
-                                            $("#lang").val("Cpp");
-                                        else if (val.includes(".py"))
-                                            $("#lang").val("Python");
+                                        var accept = <?php echo json_encode($accept); ?>;
+                                        var filename = $("#submission").val().replace("C:\\fakepath\\","").split(".");                                        
+                                        var ext = "." + filename[filename.length - 1];
+
+                                        if (accept.includes(ext)) {
+                                            if (C_file.includes(ext))
+                                                $("#lang").val("C");
+                                            else if (Cpp_file.includes(ext))
+                                                $("#lang").val("Cpp");
+                                            else if (Java_file.includes(ext))
+                                                $("#lang").val("Java");
+                                            else if (Python_file.includes(ext))
+                                                $("#lang").val("Python");
+                                            else if (Text_file.includes(ext))
+                                                $("#lang").val("TXT");
+                                            $("#submitbtn").removeAttr("disabled");
+                                        } else {
+                                            $("#submission").val("");
+                                            $("#submitbtn").prop("disabled","disabled");
+                                            swal({
+                                                title: "พบข้อผิดพลาด",
+                                                text: "กรุณาเลือกเฉพาะไฟล์ที่รองรับเท่านั้น!",
+                                                icon: "warning"
+                                            });
+                                        }
                                     });
                                 </script>
                             </div>
                             <div class="col-12 col-md-6">
-                                <button type="submit" value="prob" name="submit" class="btn btn-block btn-coe btn-md">Submit</button>
+                                <button type="submit" id="submitbtn" value="prob" name="submit" class="btn btn-block btn-coe btn-md" disabled>Submit</button>
                             </div>
                         </div>
                     </form>

@@ -167,34 +167,6 @@
         $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
         return $files[rand(0,count($files)-1)];
     }
-
-    function arrToTxt($arr) {
-        $s = "";
-        if (is_array($arr)) {
-            foreach($arr as $r) {
-                if (is_array($r)) $r = arrToTxt($r);
-                $s .= "[" . $r . "]";
-            }
-        }
-        return $s;
-    }
-
-    //Not work....
-    function txtToArr($txt) {
-        $txt = explode("[", $txt);
-        $arr = array();
-        $temp_arr; $start = 0;
-        for($i = 0; $i < count($txt); $i++) {
-            if (empty($txt[$i])) {
-                $temp_arr = array(); //Clear Array
-            } else if (strpos($txt[$i],"]]") === true) {
-                array_push($arr, $temp_arr);
-            } else {
-                array_push($temp_arr, str_replace("]","",$txt[$i]));
-            }
-        }
-        return $arr;
-    }
 ?>
 <?php
     function getClientIP() {

@@ -15,7 +15,7 @@
         if ($result->num_rows > 0) {
 
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $rate = $row['rating']; $hide = $row['hidden']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time'];
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $rate = $row['rating']; $hide = $row['hidden']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time']; $prop = json_decode($row['properties']);
                 $e_arr = array(
                     "id" => $id,
                     "name" => $name,
@@ -29,7 +29,8 @@
                         "display" => rating($rate)
                     ),
                     "hide" => $hide,
-                    "doc" => "../doc/$id-$codename.pdf"
+                    "doc" => "../doc/$id-$codename.pdf",
+                    "properties" => $prop
                 );
 
                 array_push($arr, $e_arr);
