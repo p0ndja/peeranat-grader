@@ -23,7 +23,7 @@
                             $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $hide = $row['hidden'];
                             if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
                                 $lastResult = isLogin() ? lastResult($_SESSION['id'], $id, $conn) : "";
-                                $html .= "<tr onclick='window.location=\"../problem/$id\"'>
+                                $html .= "<tr onclick='window.open(\"../problem/$id\")'>
                                     <th class='text-right' scope='row'>$id</th>
                                     <td>$name <span class='badge badge-coekku'>$codename</span></td>
                                     <td data-order='".$rate."'>".rating($rate)."</td>

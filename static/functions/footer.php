@@ -42,7 +42,7 @@
                 }
             }));
             checkResult();
-        }, 1250)
+        }, 1100)
     }
 
     // create an Observer instance
