@@ -31,10 +31,13 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     } else {
         $_SESSION['error'] = "พบข้อผิดพลาดในการเข้าถึงฐานข้อมูล";
     }
+
     if (isset($_SESSION['error'])) {
         header("Location: ../../../login/");
+        die("YEAY");
     } else {
-        if (isset($_POST['referent']) && !empty($_POST['referent']) && !str_contains($_POST['referent'], "/login/"))
+        die("YO");
+        if (isset($_POST['referent']) && !empty($_POST['referent']))
             header("Location: " . $_POST['referent']);
         else
             header("Location: ../../../");

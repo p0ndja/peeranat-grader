@@ -1,3 +1,4 @@
+<?php if (isLogin()) header("Location: ../"); ?>
 <div class="container" id="container" style="padding-top: 88px">
     <div class="center">
     <h1 class="display-5 font-weight-bold text-center text-coe">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
