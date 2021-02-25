@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="md-form">
-                            <input type="text" id="writer" name="writer" class="form-control" value="<?php echo $probAuthor; ?>"/>
+                            <input type="text" id="writer" name="writer" class="form-control" value="<?php if (!empty($probAuthor)) echo $probAuthor; ?>"/>
                             <label class="form-label" for="writer">Author</label>
                         </div>
                     </div>

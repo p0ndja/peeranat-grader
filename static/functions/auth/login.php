@@ -30,7 +30,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     if (isset($_SESSION['error'])) {
         header("Location: ../../../login/");
     } else {
-        if (isset($_POST['referent']) && !empty($_POST['referent']))
+        if (isset($_POST['referent']) && !empty($_POST['referent']) && !str_contains($_POST['referent'], "/login/"))
             header("Location: " . $_POST['referent']);
         else
             header("Location: ../../../");
