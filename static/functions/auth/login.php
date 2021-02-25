@@ -7,7 +7,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     $pass = md5($_POST['login_password']);
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
-    if ($stmt = $conn -> prepare('SELECT id,displayname FROM `user` WHERE username = ? AND password = ? LIMIT 1')) {
+    if ($stmt = $conn -> prepare('SELECT id,displayname,properties FROM `user` WHERE username = ? AND password = ? LIMIT 1')) {
         $stmt->bind_param('ss', $user, $pass);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -16,6 +16,9 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['name'] = $row['displayname'];
+                
+                $rainbow = json_decode($row['properties'])->rainbow;
+                if ($rainbow) $_SESSION['name'] = "<text class='rainbow'>" . $_SESSION['name'] . "</text>";
             }
             $_SESSION['swal_success'] = "เข้าสู่ระบบสำเร็จ";
             $_SESSION['swal_success_msg'] = "ยินดีต้อนรับ " . $_SESSION['name'] . "!";

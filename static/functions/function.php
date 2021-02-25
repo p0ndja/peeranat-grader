@@ -148,9 +148,13 @@
     }
 
     function user($id, $conn) {
+        $rainbow = !empty(getUserdata($id,'properties',$conn)) ? json_decode(getUserdata($id,'properties',$conn))->rainbow : false;
+        $name = getUserdata($id, 'displayname', $conn);
         if (isLogin() && isAdmin($_SESSION['id'], $conn))
-            return getUserdata($id, 'displayname', $conn) . " (".getUserdata($id,'username', $conn).")";
-        return getUserdata($id, 'displayname', $conn);
+            $name .= " (".getUserdata($id,'username', $conn).")";
+        if ($rainbow)
+            $name = '<text class="rainbow">'. $name . '</text>';
+        return $name;
     }
 
     function prob($id, $conn) {
