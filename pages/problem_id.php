@@ -11,21 +11,27 @@
                 if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
                     header("Location: ../problem/");
 
+            
                 $prop = json_decode($row['properties']);
-                $accept = array();
-                foreach ($prop as $p) {
-                    if ($p == "C") {
-                        array_push($accept, ".c", ".i");
-                    } else if ($p == "Cpp") {
-                        array_push($accept, ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
-                    } else if ($p == "Python") {
-                        array_push($accept, ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
-                    } else if ($p == "Java") {
-                        array_push($accept, ".java", ".jav"); 
-                    } else if ($p == "TXT") {
-                        array_push($accept, ".txt");
+                if ($prop != null) {
+                    $accept = array();
+                    foreach ($prop as $p) {
+                        if ($p == "C") {
+                            array_push($accept, ".c", ".i");
+                        } else if ($p == "Cpp") {
+                            array_push($accept, ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
+                        } else if ($p == "Python") {
+                            array_push($accept, ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
+                        } else if ($p == "Java") {
+                            array_push($accept, ".java", ".jav"); 
+                        } else if ($p == "TXT") {
+                            array_push($accept, ".txt");
+                        }
                     }
+                } else {
+                    $accept = array(".c", ".i", ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii", ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy", ".java", ".jav", ".txt");
                 }
+            
                 $accept_str = implode(",", $accept);
             }
             $stmt->free_result();
