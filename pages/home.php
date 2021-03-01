@@ -1,5 +1,5 @@
-<div class="homepage">
-    <div class="container-fluid h-100 w-100" style="padding-top: 88px;">
+<div class="homepage" style="padding-top: 64px;">
+    <div class="container-fluid h-100 w-100">
         <div class="h-100 w-100 row align-items-center">
             <div class="d-none d-md-block col-md-1"></div>
             <div class="col-12 col-md-5">
@@ -43,7 +43,7 @@
                             $stmt->close();  
                         } ?>
                 </div>
-                <div class="slideInRight animated">
+                <div class="fadeIn animated">
                     <?php
                         $files = glob("../static/elements/index/*.*", GLOB_BRACE);
                         $targetSrc = $files[rand(0,count($files)-1)];
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
-                <div class="slideInRight animated">
+                <div class="fadeIn animated">
                     <img src="<?php echo $targetSrc; ?>" class="img-fluid w-100">
                 </div>
             </div>

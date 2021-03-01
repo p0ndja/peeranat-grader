@@ -73,8 +73,18 @@
     transition: 0.3s;
 }
 
+[data-theme="dark"] tr a {
+    color:#d42225 !important;
+    transition: 0.3s;
+}
+
 [data-theme="dark"] a:hover {
     color: #df797b;
+    transition: 0.3s;
+}
+
+[data-theme="dark"] tr a:hover {
+    color: #df797b !important;
     transition: 0.3s;
 }
 
