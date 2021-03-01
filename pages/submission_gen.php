@@ -21,7 +21,7 @@
                 <br>Language: <code><?php echo $subLang; ?></code>
                 <br>Result: <code <?php if ($row['result'] == 'W') echo "data-sub-id='$id' data-wait=true"; ?>><?php echo $subResult; ?></code>
                 <br>Running Time: <code><?php echo $subRuntime; ?> ms</code>
-                <br>Memory: <code><?php echo $subMemory; ?></code>
+                <!-- <br>Memory: <code><?php //echo $subMemory; ?></code> -->
                 <br>Submit Time: <?php echo $subUploadtime; ?>
                 </p>
             <?php }
