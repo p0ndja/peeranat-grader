@@ -7,7 +7,7 @@
         $problem_hide = (int) $_GET['hide'] ? 0 : 1;
         $properties = json_encode(array("hide"=>$problem_hide,"last_hide_updated"=>time()));
         if ($stmt = $conn -> prepare("UPDATE `problem` SET properties=? WHERE id=?")) {
-            $stmt->bind_param('ii', $properties,$problem_id);
+            $stmt->bind_param('si', $properties,$problem_id);
             if (!$stmt->execute()) {
                 $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                 $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";

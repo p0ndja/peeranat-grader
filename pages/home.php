@@ -9,7 +9,7 @@
                     <a class="btn btn-coe" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
                     <a class="btn btn-coe" target="_blank" href="https://drive.google.com/file/d/19aNSPCPxMvg8BQVI9z_P9ELP4OmLSEtO/view?usp=drivesdk">วิธีการใช้งาน Grader.ga</a>
                     <?php
-                    if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`rating` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = 0 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') != 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 5")) {
+                    if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`properties` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = 0 AND UNIX_TIMESTAMP() - JSON_EXTRACT(`properties`,'$.last_hide_updated') <= 604800 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') > 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 7")) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         if ($result->num_rows > 0) { $html = "";?>
@@ -25,7 +25,11 @@
                                         </tr>
                                     </thead>
                             <?php while ($row = $result->fetch_assoc()) {
-                                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating'];
+                                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; 
+                                    
+                                    $prop = json_decode($row['properties'],true);
+                                    $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
+                                
                                     $html .= "<tr onclick='window.open(\"../problem/$id\")'>
                                         <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                         <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a></td>

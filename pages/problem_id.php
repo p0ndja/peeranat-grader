@@ -1,31 +1,44 @@
 <?php
     $html = ""; $id = $_GET['id'];
-    if ($stmt = $conn -> prepare("SELECT id,name,score,memory,time,rating,codename,hidden,writer,properties FROM `problem` WHERE id = ?")) {
+    if ($stmt = $conn -> prepare("SELECT id,name,score,memory,time,codename,writer,properties FROM `problem` WHERE id = ?")) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $hide = $row['hidden']; $author = $row['writer']; 
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $author = $row['writer']; 
                 if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
-                if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
-                    header("Location: ../problem/");
-
             
-                $prop = json_decode($row['properties']);
-                if ($prop != null) {
-                    $accept = array();
-                    foreach ($prop as $p) {
-                        if ($p == "C") {
-                            array_push($accept, ".c", ".i");
-                        } else if ($p == "Cpp") {
-                            array_push($accept, ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
-                        } else if ($p == "Python") {
-                            array_push($accept, ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
-                        } else if ($p == "Java") {
-                            array_push($accept, ".java", ".jav"); 
-                        } else if ($p == "TXT") {
-                            array_push($accept, ".txt");
+                $prop = json_decode($row['properties'],true);
+                $acceptType = array_key_exists("accept", $prop) ? $prop["accept"] : null;
+                $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
+                $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
+
+                if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
+                header("Location: ../problem/");
+                
+                $accept = array();
+                if ($acceptType) {
+                    foreach ($acceptType as $p) {
+                        switch($p) {
+                            case "C":
+                                array_push($accept, ".c", ".i");
+                                break;
+                            case "Cpp":
+                                array_push($accept, ".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
+                                break;
+                            case "Python":
+                                array_push($accept, ".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
+                                break;
+                            case "Java":
+                                array_push($accept, ".java", ".jav"); 
+                                break;
+                            case "TXT":
+                                array_push($accept, ".txt");
+                                break;
+                            default:
+                                array_push($accept, "ERROR");
+                                break;
                         }
                     }
                 } else {
@@ -90,8 +103,8 @@
                         <div class="form-row">
                             <div class="col-12 col-md-6">
                                 <select class="form-control mb-2" id="lang" name="lang" required>
-                                    <?php if (!empty($prop)) {
-                                        foreach($prop as $p) { ?>
+                                    <?php if (!empty($acceptType)) {
+                                        foreach($acceptType as $p) { ?>
                                             <script>$("<option>").val("<?php echo $p; ?>").text("<?php echo $p; ?>").appendTo("#lang");</script>
                                     <?php }
                                     } else { ?>

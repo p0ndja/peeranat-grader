@@ -9,12 +9,17 @@
             $probName = $_POST['name'];
             $probCodename = $_POST['codename'];
             $probScore = $_POST['score'];
-            $probRate = $_POST['rating'];
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
             $probAuthor = $_POST['writer'];
-            $probAccept = json_encode($_POST['lang']); //Send in array, need to keep in json
-
+            
+            $properties = json_encode(array(
+                "hide" => (bool) $_POST['hide'],
+                "last_hide_updated" => (int) $_POST['last_hide_updated'],
+                "rating" => (int) $_POST['rating'],
+                "accept" => $_POST['lang']
+            ));
+            
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
@@ -29,10 +34,10 @@
             }
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
-            print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor));
+            print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $properties, $probAuthor));
             if ($isCreate) {
-                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, rating, writer, properties) VALUES (?,?,?,?,?,?,?,?)")) {
-                    $stmt->bind_param('ssiiiiss', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $probAccept);
+                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, writer, properties) VALUES (?,?,?,?,?,?,?,?)")) {
+                    $stmt->bind_param('ssiiiss', $probName, $probCodename, $probScore, $probMemory, $probTime, $probAuthor, $properties);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
@@ -48,12 +53,12 @@
                     echo "Can't establish database";
                 }
             } else {
-                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, rating=?, writer=?, properties=? WHERE id = ?")) {
-                    $stmt->bind_param('ssiiiissi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probRate, $probAuthor, $probAccept, $id);
+                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, writer=?, properties=? WHERE id = ?")) {
+                    $stmt->bind_param('ssiiissi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probAuthor, $properties, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
                         $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
-                        echo $conn->error;
+                        die($conn->error);
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
                         $_SESSION['swal_success_msg'] = "แก้ไขโจทย์ $probCodename แล้ว!";

@@ -14,13 +14,18 @@
             <tbody class="text-nowrap">
                 <?php
                 $html = "";
-                if ($stmt = $conn -> prepare("SELECT id,name,rating,codename,hidden FROM `problem` ORDER BY id")) {
+                if ($stmt = $conn -> prepare("SELECT id,name,properties,codename FROM `problem` ORDER BY id")) {
                     //$stmt->bind_param('ii', $page, $limit);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating']; $hide = $row['hidden'];
+                            $id = $row['id']; $name = $row['name']; $codename = $row['codename'];
+                            
+                            $prop = json_decode($row['properties'],true);
+                            $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
+                            $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
+
                             if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
                                 $lastResult = isLogin() ? lastResult($_SESSION['id'], $id, $conn) : "";
                                 $html .= "<tr onclick='window.open(\"../problem/$id\")'>

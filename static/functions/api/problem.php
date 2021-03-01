@@ -15,7 +15,12 @@
         if ($result->num_rows > 0) {
 
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $rate = $row['rating']; $hide = $row['hidden']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time']; $prop = json_decode($row['properties']);
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time'];
+                $prop = json_decode($row['properties'],true);
+                $acceptType = array_key_exists("accept", $prop) ? $prop["accept"] : array("Python","Java","C","Cpp");
+                $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
+                $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
+                
                 $e_arr = array(
                     "id" => $id,
                     "name" => $name,
@@ -24,13 +29,14 @@
                     "score" => $score,
                     "memory" => $memory,
                     "time" => $time,
+                    "properties" => array(
+                    "accept" => $acceptType,
+                    "hide" => $hide,
                     "rating" => array(
                         "value" => $rate,
                         "display" => rating($rate)
-                    ),
-                    "hide" => $hide,
+                    )),
                     "doc" => "../doc/$id-$codename.pdf",
-                    "properties" => $prop
                 );
 
                 array_push($arr, $e_arr);

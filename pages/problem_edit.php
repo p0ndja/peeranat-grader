@@ -1,5 +1,5 @@
 <?php needAdmin($conn); 
-    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1; $accept = "";
+    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
@@ -8,7 +8,14 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probRate = $row['rating']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer']; $prop = json_decode($row['properties']);
+                    $probName = $row['name']; $probCodename = $row['codename']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer'];
+                    
+                    $prop = json_decode($row['properties'], true);
+
+                    $accept = array_key_exists("accept", $prop) ? $prop["accept"] : null;
+                    $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
+                    $last_hide_updated = array_key_exists("last_hide_updated", $prop) ? $prop["last_hide_updated"] : time();
+                    $probRate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
                 }
                 $stmt->free_result();
                 $stmt->close();  
@@ -137,11 +144,11 @@
                                 <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" name="lang[]">
                                 <label class="form-check-label" for="Plain Text">Plain Text</label>
                             </div>
-                            <?php if (!isset($_GET['id']) || empty($prop)) { //Create case, check all by default ?>
+                            <?php if (!isset($_GET['id']) || empty($accept)) { //Create case, check all by default ?>
                                 <script>$('input[type=checkbox][value!=TXT]').prop('checked',true);</script>
                             <?php } else { 
-                                foreach($prop as $p) { ?>
-                                <script>$('input[type=checkbox][value=<?php echo $p; ?>]').prop('checked',true);</script>
+                                foreach($accept as $a) { ?>
+                                <script>$('input[type=checkbox][value=<?php echo $a; ?>]').prop('checked',true);</script>
                             <?php }
                             } ?>
                         </div>
@@ -165,6 +172,10 @@
                             } ?>
                             <input type="file" class="mb-2" accept=".zip" name="testcase" id="testcase"/>
                             <input type="hidden" name="testcaseFile" id="testcaseFile" value="" />
+
+                            <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
+                            <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
+                            
                             <small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>
                         </div>
                     </div>
