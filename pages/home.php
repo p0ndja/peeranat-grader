@@ -1,5 +1,5 @@
 <div class="homepage">
-    <div class="container-fluid h-100 w-100">
+    <div class="container-fluid h-100 w-100" style="padding-top: 88px;">
         <div class="h-100 w-100 row align-items-center">
             <div class="d-none d-md-block col-md-1"></div>
             <div class="col-12 col-md-5">
@@ -8,8 +8,38 @@
                     <h4 class="font-weight-normal">The Computer Engineering of <b class="text-nowrap">Khon Kaen University</b><br>Student-Made grader.</h4>
                     <a class="btn btn-coe" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
                     <a class="btn btn-coe" target="_blank" href="https://drive.google.com/file/d/19aNSPCPxMvg8BQVI9z_P9ELP4OmLSEtO/view?usp=drivesdk">วิธีการใช้งาน Grader.ga</a>
+                    <?php
+                    if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`rating` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = 0 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') != 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 5")) {
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        if ($result->num_rows > 0) { $html = "";?>
+                            <div class="bounceInLeft delay-1s animated">
+                            <h5 class="rainbow mt-3">โจทย์มาใหม่!!</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm d-block d-md-table" id="problemTable">
+                                    <thead>
+                                        <tr class="text-nowrap">
+                                            <th scope="col" class="font-weight-bold text-coe text-right">ID</th>
+                                            <th scope="col" class="font-weight-bold text-coe">Task</th>
+                                            <th scope="col" class="font-weight-bold text-coe">Rate</th>
+                                        </tr>
+                                    </thead>
+                            <?php while ($row = $result->fetch_assoc()) {
+                                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $rate = $row['rating'];
+                                    $html .= "<tr onclick='window.open(\"../problem/$id\")'>
+                                        <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
+                                        <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a></td>
+                                        <td data-order='".$rate."'>".rating($rate)."</td>
+                                    </tr>";
+                                }
+                                echo $html; ?>
+                            </table></div></div>
+                            <?php }
+                            $stmt->free_result();
+                            $stmt->close();  
+                        } ?>
                 </div>
-                <div class="fadeIn animated">
+                <div class="slideInRight animated">
                     <?php
                         $files = glob("../static/elements/index/*.*", GLOB_BRACE);
                         $targetSrc = $files[rand(0,count($files)-1)];
@@ -18,7 +48,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
-                <div class="fadeIn animated">
+                <div class="slideInRight animated">
                     <img src="<?php echo $targetSrc; ?>" class="img-fluid w-100">
                 </div>
             </div>

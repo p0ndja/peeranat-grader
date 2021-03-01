@@ -86,8 +86,15 @@
     bottom: .5em;
     }
 
+    @media only all and (min-width: 768px) {
+        .homepage {
+            height: 100vh;
+            width: 100vw;
+        }
+    }
+
     .homepage {
-        height: 100vh;
+        width: 100vw;
     }
 
     .table tbody>tr>td.vert-align_td,
@@ -397,7 +404,7 @@
     .blink2 {
         text-decoration: blink;
         -webkit-animation-name: blinker;
-        -webkit-animation-duration: 0.2s;
+        -webkit-animation-duration: 0.1s;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-direction: alternate;
