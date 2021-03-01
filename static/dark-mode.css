@@ -107,6 +107,13 @@
 [data-theme="dark"] table,
 [data-theme="dark"] blockquote {
     color: #dddddd !important;
+    transition: 0.3;
+}
+
+[data-theme="dark"] .table-hover tr:hover{
+    color: white;
+    background-color: #333;
+    transition: 0.3;
 }
 
 [data-theme="dark"] .carousel h1,

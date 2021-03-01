@@ -45,6 +45,12 @@
         }, 1100)
     }
 
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
+    });
+
     // create an Observer instance
     const resizeObserver = new ResizeObserver(entries => attachFooter());
 
