@@ -88,6 +88,24 @@
     transition: 0.3s;
 }
 
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #292929 !important;
+    border-radius: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 8px;
+    background-color: #292929 !important;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #9a1518;
+}
+
 [data-theme="dark"] .pagination > li > a
 {
     color: white !important;
