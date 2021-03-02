@@ -7,7 +7,7 @@
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $contest = true;
-                $cont_title = $row['title'];
+                $cont_title = $row['name'];
                 $cont_prob = json_decode($row['problem']);
                 $probList = "(" . implode(",",$cont_prob) . ")";
                 $cont_start = $row['startTime'];
@@ -27,7 +27,7 @@
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
                     $incoming = true;
-                    $inc_cont_title = $row['title'];
+                    $inc_cont_title = $row['name'];
                     $inc_cont_prob = $row['problem'];
                     $inc_cont_start = $row['startTime'];
                     $inc_cont_end = $row['endTime'];  
