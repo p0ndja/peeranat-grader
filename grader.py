@@ -1,7 +1,7 @@
 import mysql.connector
 import time
 from os import path
-#from Garedami.Src import Judge
+from Garedami.Src import Judge
 import requests
 
 
@@ -13,14 +13,14 @@ dbconnector = mysql.connector.connect(
 )
 
 def getTimeAndMem(idTask):
-    response = requests.get(f"https://api.11th.studio/graderga/problem?id={idTask}")
+    response = requests.get(f"http://api.11th.studio/graderga/problem?id={idTask}")
     if response.status_code != 200:
         return -69,-420
     data = response.json()[0]
     return data["time"],data["memory"]
 
 def getWaitSubmission():
-    response = requests.get("https://api.11th.studio/graderga/submission?wait&key=34f0ed90a60bc669bde9ae3bf44a16a3")
+    response = requests.get("http://api.11th.studio/graderga/submission?wait&key=34f0ed90a60bc669bde9ae3bf44a16a3")
     if response.status_code != 200:
         return []
     return response.json()
