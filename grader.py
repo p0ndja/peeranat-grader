@@ -1,39 +1,53 @@
 import mysql.connector
 import time
 from os import path
-from Garedami.Src import Judge
+#from Garedami.Src import Judge
 import requests
 
 
 dbconnector = mysql.connector.connect(
-    host='localhost',
+    host='203.159.94.111',
     user='graderga',
     password='8db!#yYvK]8Lw6F|37wz:UwU',
     database='graderga'
 )
 
 def getTimeAndMem(idTask):
-    response = requests.get(f"http://grader.ga/api/problem?id={idTask}")
+    response = requests.get(f"https://api.11th.studio/graderga/problem?id={idTask}")
     if response.status_code != 200:
         return -69,-420
     data = response.json()[0]
     return data["time"],data["memory"]
 
+def getWaitSubmission():
+    response = requests.get("https://api.11th.studio/graderga/submission?wait&key=34f0ed90a60bc669bde9ae3bf44a16a3")
+    if response.status_code != 200:
+        return []
+    return response.json()
+
+
+
 
 if __name__ == '__main__':
+    
+    mycursor = dbconnector.cursor(buffered=True)
+    webLocation = "/" + path.join("var","www","grader.ga")
+
     print("Grader.py started")
+
     while(1):
-        mycursor = dbconnector.cursor(buffered=True)
-        mycursor.execute("SELECT `id`,`user`,`problem`,`lang`,`script` FROM `submission` WHERE result = 'W'") #Get specific data from submission SQL where result is W (Wait)
-        myresult = mycursor.fetchone() #fetchone() -> fetch 1 data matched, fetchall() -> fetch all data matched
-        if (myresult != None): #While there's any match
-            webLocation = "/" + path.join("var","www","grader.ga")
+        queue = getWaitSubmission()
+        if (len(queue)):
+            print("Founded Waiting Queue : ",len(queue))
+            print(queue)
+        for myresult in queue:
+            print(myresult['id'])
             #Get data from query
-            subID = myresult[0] #id is the 1st.
-            userID = myresult[1] #user is the 2nd.
-            probID = str(myresult[2]) #problem is the 3rd.
-            lang = myresult[3] #lang is the 4th.
-            userCodeLocation = myresult[4].replace("..",webLocation) #script location is the 5th.
+            subID = myresult['id'] #id is the 1st.
+            userID = myresult['user'] #user is the 2nd.
+            probID = str(myresult['problem']) #problem is the 3rd.
+            lang = myresult['lang'] #lang is the 4th.
+            userCodeLocation = myresult['script'].replace("..",webLocation) #script location is the 5th.
             #userCodeLocation in format "../file/judge/upload/<User ID>/<Codename>-<EPOCH>.<lang>", real location need change "../" to webLocation
             #Full path: /var/www/grader.ga/file/judge/upload/<User ID>/<Codename>-<EPOCH>.<lang>
 
@@ -54,7 +68,6 @@ if __name__ == '__main__':
                 judgeResult = ("WebError",0,100,0,0,"Web API Down")
             else:
                 judgeResult = Judge.judge(probID,lang,probTestcaseLocation,srcCode)
-
             #Result from judge
             result = judgeResult[0]
             score = int(judgeResult[1])
@@ -71,6 +84,7 @@ if __name__ == '__main__':
 
             #Make sure that query is done.
             dbconnector.commit()
+            time.sleep(1)
         dbconnector.commit()
-        #Time sleep interval for 2 second.
+        #Time sleep interval for 1 second.
         time.sleep(1)
