@@ -12,8 +12,8 @@ RewriteRule ^submission/$ pages/page_loader.php?target=submission.php
 RewriteRule ^submission/([0-9]+)$ pages/page_loader.php?target=submission.php&id=$1 [L]
 RewriteRule ^contest/$ pages/page_loader.php?target=contest.php
 RewriteRule ^contest/([0-9]+)$ pages/page_loader.php?target=contest.php&id=$1 [L]
-RewriteRule ^scoreboard/$ pages/page_loader.php?target=contest_history.php
-RewriteRule ^scoreboard/([0-9]+)$ pages/page_loader.php?target=contest_history.php&id=$1 [L]
+RewriteRule ^scoreboard/$ pages/page_loader.php?target=contest_scoreboard.php
+RewriteRule ^scoreboard/([0-9]+)$ pages/page_loader.php?target=contest_scoreboard.php&id=$1 [L]
 RewriteRule ^profile/$ pages/page_loader.php?target=profile.php
 RewriteRule ^profile/([0-9]+)$ pages/page_loader.php?target=profile.php&id=$1 [L]
 RewriteRule ^editorial/$ pages/page_loader.php?target=editorial.php
