@@ -36,7 +36,7 @@
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
             print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $properties, $probAuthor));
             if ($isCreate) {
-                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, writer, properties) VALUES (?,?,?,?,?,?,?,?)")) {
+                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, writer, properties) VALUES (?,?,?,?,?,?,?)")) {
                     $stmt->bind_param('ssiiiss', $probName, $probCodename, $probScore, $probMemory, $probTime, $probAuthor, $properties);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
