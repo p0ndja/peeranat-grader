@@ -1,3 +1,4 @@
+<?php if (in_array((int) date("dm"), array(2212,1103,810))) { ?><div id="emojiRain"></div><?php } ?>
 <div class="homepage" style="padding-top: 64px;">
     <div class="container-fluid h-100 w-100">
         <div class="h-100 w-100 row align-items-center">

@@ -525,3 +525,11 @@
             font-size: 18px;
         }
     }
+
+    #emojiRain {
+        margin: 0 auto;
+        width: 20px;
+        overflow: visible;
+        position: relative;
+        opacity: 30%;
+    }
