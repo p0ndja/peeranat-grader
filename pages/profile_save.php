@@ -18,8 +18,8 @@
 
         if (!empty($pass)) {
             $pass = md5($pass);
-            $stmt = $conn->prepare("UPDATE `user` SET email=?, profile=?, password=? WHERE id = ?");
-            $stmt->bind_param('sssi', $email, $profile_url, $pass, $id);
+            $stmt = $conn->prepare("UPDATE `user` SET displayname=?, email=?, profile=?, password=? WHERE id = ?");
+            $stmt->bind_param('ssssi', $name, $email, $profile_url, $pass, $id);
         } else {
             $stmt = $conn->prepare("UPDATE `user` SET displayname=?, email=?, profile=? WHERE id = ?");
             $stmt->bind_param('sssi', $name, $email, $profile_url, $id);
