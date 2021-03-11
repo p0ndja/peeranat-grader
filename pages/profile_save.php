@@ -35,6 +35,6 @@
             echo "Can't establish database";
         }
         
-        header("Location: ../profile/");
     }
+    header("Location: ../profile/");
 ?>
