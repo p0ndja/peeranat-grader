@@ -9,7 +9,6 @@
                     <i class="fas fa-users prefix"></i>
                     <input type="email" name="reset" id="reset"
                         class="form-control form-control-sm validate" required placeholder="กรุณาใส่ E-Mail ใช้ในการสมัครเพื่อรีเซ็ตรหัสผ่าน">
-                        <script>$(document).ready(function () { $("#reset").val(""); });</script>
                     <label for="reset">รีเซ็ตรหัสผ่าน</label>
                 </div>
                 <?php if (isset($_SESSION['error'])) {echo '<div class="alert alert-danger" role="alert">'. $_SESSION['error'] .'</div>'; $_SESSION['error'] = null;} ?>
