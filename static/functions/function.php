@@ -15,6 +15,19 @@
         return false;
     }
 
+    function countCategory($category, $conn) {
+        if ($stmt = $conn-> prepare("SELECT count(id) AS cat FROM `editorial` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND JSON_EXTRACT(`properties`,'$.category') = ? ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated')")) {
+        $stmt->bind_param('s', $category);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row["cat"];
+                }
+            }
+        }
+    }
+
     function getAnySQL($sql, $val, $key, $key_val, $conn) {
         if ($sql == null || $val == null || $key == null || $key_val == null || $conn == null) return false;
         return mysqli_fetch_array(mysqli_query($conn, "SELECT `$val` from `$sql` WHERE $key = '$key_val'"), MYSQLI_ASSOC)[$val];

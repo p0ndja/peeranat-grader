@@ -76,6 +76,5 @@
         }, 500);
     });
 </script>
-<script src="../vendor/emojirain.js"></script>
 <?php $_SESSION['isDarkProfile'] = 0; ?>
 <?php mysqli_close($conn); ?>

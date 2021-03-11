@@ -86,6 +86,8 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
 if (isset($_GET['user']) && isset($_GET['pass'])) {
     $user = $_GET['user'];
     $pass = md5($_GET['pass']);
+    if (isset($_GET['method']) && $_GET['method'] == "reset")
+        $pass = $_GET['pass'];
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
     if ($stmt = $conn -> prepare('SELECT id,displayname FROM `user` WHERE username = ? AND password = ? LIMIT 1')) {
@@ -99,6 +101,11 @@ if (isset($_GET['user']) && isset($_GET['pass'])) {
                 $_SESSION['name'] = $row['displayname'];
             }
             echo "ACCEPT";
+            if (isset($_GET['method'])) {
+                if ($_GET['method'] == "reset") {
+                    header("Location: ../../../resetpassword/");
+                }
+            }
         } else {
             echo "WRONG PASSWORD";    
         }
