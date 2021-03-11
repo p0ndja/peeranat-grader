@@ -42,7 +42,7 @@
         ?>
     <?php if ($contest) { ?>
     <div align="center">
-        <h3 class="font-weight-bold text-coe"><?php echo $cont_title; ?></h3>
+        <h3 class="font-weight-bold text-coekku"><?php echo $cont_title; ?></h3>
         <h1 class="display-1 font-weight-bold" id="countdown">Loading..</h1>
         <p><?php echo $cont_start . ' GMT+7 to ' . $cont_end . ' GMT+7'; ?></p>
     </div>
@@ -50,10 +50,10 @@
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
                 <tr class="text-nowrap">
-                    <th scope="col" class="font-weight-bold text-coe text-right">ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Task</th>
-                    <th scope="col" class="font-weight-bold text-coe">Rate</th>
-                    <th scope="col" class="font-weight-bold text-coe">Result</th>
+                    <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Task</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Rate</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">
@@ -107,17 +107,17 @@
     <?php } else if ($incoming) { ?>
     <div class="center" align="center">
         <h4>มีการแข่งขันที่กำลังจะเริ่มขึ้น...</h4>
-        <h3 class="font-weight-bold text-coe"><?php echo $inc_cont_title; ?></h3>
+        <h3 class="font-weight-bold text-coekku"><?php echo $inc_cont_title; ?></h3>
         <h1 class="display-1 font-weight-bold" id="countdown">Loading..</h1>
         <p><?php echo $inc_cont_start . ' GMT+7 to ' . $inc_cont_end . ' GMT+7'; ?></p>
-        <a href="../scoreboard/" class="btn btn-coe">ดูประวัติการแข่งขัน</a>
+        <a href="../scoreboard/" class="btn btn-coekku">ดูประวัติการแข่งขัน</a>
     </div>
     <?php } else { ?>
     <div class="center" align="center">
-        <h1 class="font-weight-bold text-coe">Contest</h1>
+        <h1 class="font-weight-bold text-coekku">Contest</h1>
         <h4>ไม่มีการแข่งขันที่กำลังจะเกิดขึ้น</h4>
         <p>อย่าลืมฝึกทำโจทย์ด้วยแหละ !</p>
-        <a href="../scoreboard/" class="btn btn-coe">ดูประวัติการแข่งขัน</a>
+        <a href="../scoreboard/" class="btn btn-coekku">ดูประวัติการแข่งขัน</a>
     </div>
     <?php } ?>
 </div>

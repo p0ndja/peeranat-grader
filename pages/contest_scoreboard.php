@@ -1,5 +1,5 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h1 class="font-weight-bold text-coe text-center">Scoreboard</h1>
+    <h1 class="font-weight-bold text-coekku text-center">Scoreboard</h1>
     <?php 
         if (!isset($_GET['id'])) header("Location: ../scoreboard/1");
         $select = "";
@@ -38,10 +38,10 @@
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
                 <tr class="text-nowrap">
-                    <th scope="col" class="font-weight-bold text-coe text-right">ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Task</th>
-                    <th scope="col" class="font-weight-bold text-coe">Rate</th>
-                    <th scope="col" class="font-weight-bold text-coe">Result</th>
+                    <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Task</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Rate</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">
@@ -89,7 +89,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="card-text">
-                        <h4 class="font-weight-bold text-coe">Task</h4>
+                        <h4 class="font-weight-bold text-coekku">Task</h4>
                         <ul>
                             <li>ตัวเลขที่สวยงาม</li>
                             <li>โรงแรมในฝัน</li>
@@ -102,12 +102,12 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="card-text">
-                        <h4 class="font-weight-bold text-coe">Score</h4>
+                        <h4 class="font-weight-bold text-coekku">Score</h4>
                         <table class="table table-responsive table-sm w-100 d-block d-md-table">
                             <thead>
                                 <tr class="text-nowrap">
-                                    <th scope="col" class="font-weight-bold text-coe">User</th>
-                                    <th scope="col" class="font-weight-bold text-coe">Score</th>
+                                    <th scope="col" class="font-weight-bold text-coekku">User</th>
+                                    <th scope="col" class="font-weight-bold text-coekku">Score</th>
                                 </tr>
                             </thead>
                             <tbody class="text-nowrap">

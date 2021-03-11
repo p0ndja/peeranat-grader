@@ -37,7 +37,7 @@
     }
 
 
-    .text-coe {
+    .text-coekku {
         color: #9A1518 !important;
         transition: 0.3s;
     }
@@ -56,13 +56,13 @@
         transition: 0.3s;
     }
 
-    .btn-coe {
+    .btn-coekku {
         color: white !important;
         background-color: #9a1518 !important;
         transition: 0.3s;
     }
 
-    .btn-coe:hover {
+    .btn-coekku:hover {
         color: white !important;
         background-color: #770f11 !important;
     }

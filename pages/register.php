@@ -1,7 +1,7 @@
 <?php if (isLogin()) header("Location: ../"); ?>
 <div class="container" id="container" style="padding-top: 88px">
     <div class="center">
-    <h1 class="display-5 font-weight-bold text-center text-coe text-uppercase">Register <i class="fas fa-edit"></i></h1>
+    <h1 class="display-5 font-weight-bold text-center text-coekku text-uppercase">Register <i class="fas fa-edit"></i></h1>
     <form method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
         <div class="card z-depth-1">
             <!--Body-->
@@ -31,7 +31,7 @@
                         class="form-control form-control-sm validate" required>
                     <label for="register_name">Display name</label>
                 </div>
-                <button type="submit" class="btn btn-block btn-coe mb-3">Register</button>
+                <button type="submit" class="btn btn-block btn-coekku mb-3">Register</button>
                 <input type="hidden" name="method" value="registerPage">
                 <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../login/" class="text-pharm">ต้องการเข้าสู่ระบบ!</a>
             </div>

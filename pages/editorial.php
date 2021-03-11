@@ -3,7 +3,7 @@
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">
         <h1 class="display-4 font-weight-bold text-center text-coekku">Editorial</h1>
-        <?php if (isLogin()) { ?><a href="../editorial/create" class="btn btn-coe btn-sm">+ Add new editorial</a><?php } ?>
+        <?php if (isLogin()) { ?><a href="../editorial/create" class="btn btn-coekku btn-sm">+ Add new editorial</a><?php } ?>
         <div class="row">
             <div class="col-12">
                 <form action="../pages/editorial_search.php" method="GET" class="form-inline">
@@ -15,7 +15,7 @@
                             name="search" value="<?php if (isset($_GET['search'])) echo $_GET['search']; ?>">
                     </div>
                 </div>
-                <button type="submit" value="search_submit" class="btn btn-coe btn-sm">Search</button>
+                <button type="submit" value="search_submit" class="btn btn-coekku btn-sm">Search</button>
                 </form>
             </div>
         </div>
