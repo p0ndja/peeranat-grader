@@ -11,6 +11,7 @@
     }
 
     function isAdmin($id, $conn) {
+        if (isset($_SESSION['admin']) && $_SESSION['admin']) return true;
         if (getUserdata($id, 'isAdmin', $conn)) return true;
         return false;
     }
