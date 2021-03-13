@@ -41,7 +41,7 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom($email_from, 'Computer_MVSK');
+    $mail->setFrom($email_from, 'Grader.ga');
     $mail->addAddress($email_to, $fullname);     // Add the recipient
 
     //Content
