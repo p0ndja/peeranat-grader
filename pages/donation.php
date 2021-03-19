@@ -30,7 +30,7 @@
                         </thead>
                         <tbody class="text-nowrap">
                             <?php
-                                $json = json_decode(file_get_contents("https://api.11th.studio/p0ndja/donation_grader"), true);
+                                $json = json_decode(file_get_contents("http://api.11th.studio/p0ndja/donation_grader"), true);
                                 $amount = 0;
                                 foreach ($json as $j) {
                                     $time = strtotime($j['timestamp']); $month = date('m', $time);
