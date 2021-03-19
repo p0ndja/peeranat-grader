@@ -23,7 +23,9 @@
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
-                $name_file = $probCodename . ".pdf";
+                $file = glob($locate . $probCodename . "*.pdf");
+                foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
+                $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
                 $locate ="../file/judge/prob/$id/";
                 if (!file_exists($locate))
