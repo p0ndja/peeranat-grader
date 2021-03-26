@@ -199,16 +199,6 @@
         
     }
 
-    function user($id, $conn) {
-        $rainbow = !empty(getUserdata($id,'properties',$conn)) ? json_decode(getUserdata($id,'properties',$conn))->rainbow : false;
-        $name = getUserdata($id, 'displayname', $conn);
-        if (isAdmin())
-            $name .= " (".getUserdata($id,'username', $conn).")";
-        if ($rainbow)
-            $name = '<text class="rainbow">'. $name . '</text>';
-        return $name;
-    }
-
     function prob($id, $conn) {
         return getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span>";
     }

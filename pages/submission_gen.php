@@ -9,7 +9,7 @@
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
                 $subID = $row['id'];
-                $subUser = user($row['user'], $conn);
+                $subUser = (new User($row['user']))->getDisplayname();
                 $subProb = $row['problem'];
                 $subLang = $row['lang'];
                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
