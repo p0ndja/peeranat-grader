@@ -21,8 +21,6 @@
         die('Cannot established connection with database: ' . mysqli_connect_error());
 
     $private_key = md5("THANK YOU OTOG.CF, OTOG.ORG, PROGRAMMING.IN.TH, KIYAGO, GAREDAMI");
-
-    require_once 'function.php';
     
     @ini_set('upload_max_size','128M');
     @ini_set('post_max_size','128M');
