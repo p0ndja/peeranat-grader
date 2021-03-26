@@ -5,13 +5,8 @@
 
     $start_time = microtime(TRUE);
     if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
-    
-    $db = array(
-        "hostname" => "203.159.94.111",
-        "username" => "graderga",
-        "password" => "8db!#yYvK]8Lw6F|37wz:UwU",
-        "table" => "graderga"
-    );
+
+    require_once 'config.php';
  
     global $conn;
     $conn = new mysqli($db["hostname"], $db["username"], $db["password"], $db["table"]);
@@ -21,6 +16,8 @@
         die('Cannot established connection with database: ' . mysqli_connect_error());
 
     $private_key = md5("THANK YOU OTOG.CF, OTOG.ORG, PROGRAMMING.IN.TH, KIYAGO, GAREDAMI");
+
+    require_once 'function.php';
     
     @ini_set('upload_max_size','128M');
     @ini_set('post_max_size','128M');

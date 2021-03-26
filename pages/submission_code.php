@@ -1,8 +1,16 @@
 <?php
-    require_once '../static/functions/connect.php';
+    require_once '../static/functions/config.php';
+ 
+    global $conn;
+    $conn = new mysqli($db["hostname"], $db["username"], $db["password"], $db["table"]);
+    mysqli_set_charset($conn, 'utf8mb4');
+
+    if(!$conn)
+        die('Cannot established connection with database: ' . mysqli_connect_error());
+
     $subID = (int) $_GET['target'];
     $r = "FILE NOT FOUND";
-    if ($stmt = $conn -> prepare("SELECT `result`,`comment`,`script` FROM `submission` WHERE id = ? LIMIT 1")) {
+    if ($stmt = $conn -> prepare("SELECT `comment`,`script` FROM `submission` WHERE id = ? LIMIT 1")) {
         $stmt->bind_param('i', $subID);
         $stmt->execute();
         $result = $stmt->get_result();
