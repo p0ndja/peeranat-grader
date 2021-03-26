@@ -3,7 +3,7 @@
     require_once '../static/functions/function.php';
 
     if (isLogin()) {
-        $userID = $_SESSION['id'];
+        $userID = $_SESSION['user']->getID();
         $probID = $_POST['probID'];
         $probCodename = $_POST['probCodename'];
         $userCodeLang = $_POST['lang'];

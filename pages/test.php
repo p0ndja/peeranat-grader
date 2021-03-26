@@ -1,12 +1,7 @@
-<?php
-    require_once '../static/functions/function.php';
-    $l = $_GET['lang']; 
-    array_push($l, array("test","test2"));
-    print_r($l);
-    $s = arrToTxt($l);
-    print_r($s);
+<?php declare(strict_types=1);
+    function test(String $test, $i) {
+        echo $test . " -> " . $i;
+    }
 
-    $arr = txtToArr($s);
-
-    print_r($arr);
+    test("test",5);
 ?>

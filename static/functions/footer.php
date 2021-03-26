@@ -75,5 +75,4 @@
         }, 500);
     });
 </script>
-<?php $_SESSION['isDarkProfile'] = 0; ?>
 <?php mysqli_close($conn); ?>

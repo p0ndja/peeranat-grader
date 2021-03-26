@@ -3,12 +3,12 @@
     if (isset($_GET['id'])) {
         $profile_id = (int) $_GET['id'];
     } else if (isLogin()) {
-        $profile_id = (int) $_SESSION['id'];
+        $profile_id = (int) $_SESSION['user']->getID();
     } else {
         header("Location: ../home/");
     }
 
-    $pic = ""; 
+    $pic = "";
     if ($stmt = $conn -> prepare("SELECT * FROM `user` WHERE id = ?")) {
         $stmt->bind_param('i', $profile_id);
         $stmt->execute();

@@ -4,7 +4,7 @@
 
     $user = ""; $name = "";
     if (isLogin()) {
-        $id = $_SESSION['id'];
+        $id = $_SESSION['user']->getID();
         $user = getUserdata($id, 'username', $conn);
         $name = getUserdata($id, 'displayname', $conn);;
     }

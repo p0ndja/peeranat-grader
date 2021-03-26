@@ -1,19 +1,62 @@
 <?php declare(strict_types=1);
 
-    require_once('connect.php');
+    require_once 'connect.php';
+    require_once 'init.php';
 
-    function latestIncrement($dbdatabase, $db, $conn) {
+    function latestIncrement($dbdatabase, $db) {
+        global $conn;
         return mysqli_fetch_array(mysqli_query($conn,"SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$dbdatabase' AND TABLE_NAME = '$db'"), MYSQLI_ASSOC)["AUTO_INCREMENT"];
     }
-    function isLogin() {
-        if (isset($_SESSION['id'])) return true;
-        return false;
+    
+    function make_directory($path) {
+        $path = explode("/", $path);
+        $stackPath = "";
+        for ($i = 0; $i < count($path); $i++) {
+            $stackPath .= $path[$i] . "/";
+            if (file_exists($stackPath . $path[$i] . "/"))
+                continue;
+            mkdir($stackPath . $path[$i] . "/");
+        }
+        return file_exists($stackPath);
     }
 
-    function isAdmin($id, $conn) {
-        if (isset($_SESSION['admin']) && $_SESSION['admin']) return true;
-        if (getUserdata($id, 'isAdmin', $conn)) return true;
-        return false;
+    function login(String $username, String $password) {
+        global $conn;
+        if ($stmt = $conn->prepare("SELECT `id` FROM `user` WHERE username = ? AND password = ? LIMIT 1")) {
+            $stmt->bind_param('ss', $username, $password);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    return new User((int) $row['id']);
+                }
+            }
+        }
+        return null;
+    }
+
+    function isLogin() {
+        return isset($_SESSION['user']);
+    }
+
+    function isAdmin() {
+        if (!isLogin()) return false;
+        return $_SESSION['user']->isAdmin();
+    }
+
+    function getUserData(int $id) {
+        global $conn;
+        if ($stmt = $conn->prepare('SELECT * FROM `user` WHERE id = ?')) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row;
+                }
+            }
+        }
+        return null;
     }
 
     function countCategory($category, $conn) {
@@ -38,11 +81,6 @@
         if ($sql == null || $key == null || $key_val == null || $conn == null) return false;
         return mysqli_query($conn, "UPDATE `$sql` SET `$col` = $val WHERE `$key` = '$key_val'");
     }
-
-    function getUserdata($id, $data, $conn) {
-        return getAnySQL('user', $data, 'id', $id, $conn);
-    }
-    //getUserdata('604019', 'username', $conn);
 
     function getUserID($input, $method, $conn) {
         return getAnySQL('user', 'id', $method, $input, $conn);
@@ -164,7 +202,7 @@
     function user($id, $conn) {
         $rainbow = !empty(getUserdata($id,'properties',$conn)) ? json_decode(getUserdata($id,'properties',$conn))->rainbow : false;
         $name = getUserdata($id, 'displayname', $conn);
-        if (isLogin() && isAdmin($_SESSION['id'], $conn))
+        if (isAdmin())
             $name .= " (".getUserdata($id,'username', $conn).")";
         if ($rainbow)
             $name = '<text class="rainbow">'. $name . '</text>';
@@ -188,7 +226,7 @@
 
     function getProfileIMG($conn) {
         if (!isLogin()) return "../static/elements/user.png";
-        $uid = $_SESSION['id'];
+        $uid = $_SESSION['user']->getID();
         if ($stmt = $conn -> prepare("SELECT `profile` FROM `user` WHERE id = ?")) {
             $stmt->bind_param('i', $uid);
             $stmt->execute();
@@ -304,7 +342,7 @@
 <?php
     function needAdmin($conn) {
     if (!isLogin()) { needLogin(); die(); return false; }
-    if (!isAdmin($_SESSION['id'], $conn)) { ?>
+    if (!isAdmin($_SESSION['user']->getID(), $conn)) { ?>
 <script>
     swal({
         title: "ACCESS DENIED",
@@ -393,7 +431,7 @@
         return substr_compare($haystack, $needle, -strlen($needle)) === 0;
     }
     
-    if (isLogin() && !isValidUserID($_SESSION['id'], $conn)) {
+    if (isLogin() && !isValidUserID($_SESSION['user']->getID(), $conn)) {
         session_destroy();
         header("Location: ../home/");
     }

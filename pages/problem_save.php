@@ -3,7 +3,7 @@
     require_once '../static/functions/function.php';
 
     $id = "";
-    if (isLogin() && isAdmin($_SESSION['id'], $conn)) {
+    if (isAdmin()) {
         if (isset($_POST['problem'])) {
             $isCreate = $_POST['problem'] == "create" ? 1 : 0; //Create(true) or Edit(false)
             $probName = $_POST['name'];

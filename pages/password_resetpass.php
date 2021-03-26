@@ -5,7 +5,7 @@
     if (isset($_POST['setNewPassword']) && isLogin()) {
         $password = $_POST['setNewPassword'];
         $md5_pass = md5($password);
-        $id = $_SESSION['id'];
+        $id = $_SESSION['user']->getID();
 
         $query = "UPDATE `user` SET password = '$md5_pass' WHERE id = '$id'";
         $result = mysqli_query($conn, $query);

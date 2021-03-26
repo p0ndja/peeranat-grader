@@ -1,3 +1,4 @@
+<?php require_once 'connect.php'; ?>
 <nav class="navbar navbar-expand-lg navbar-normal fixed-top navbar-transparent z-depth-0" id="nav" role="navigation">
     <a class="navbar-brand" href="../home/"><img src="../static/elements/logo/logo.png" width="32" alt="PharmMDKKU" align="center"></a>
     <button class="navbar-toggler navbar-<?php if (isDarkmode()) echo "dark"; else echo "light"; ?>" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -32,9 +33,9 @@
                     <?php if (isDarkmode()) { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="fas fa-sun"></i></a></a>
                     <?php } else { ?><a href="../static/functions/darkmode.php" class="nav-link"><i class="far fa-moon"></i></a><?php } ?>
                 </li>
-                <?php if (isset($_SESSION['id'])) { ?>
+                <?php if (isLogin()) { ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo getProfileIMG($conn); ?>" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?> <?php if (isAdmin($_SESSION['id'], $conn)) echo "<span class='badge badge-coekku'>Admin</span>"; ?></a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $_SESSION['user']->getProfile(); ?>" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['user']->getDisplayname(); ?></a>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <div class="dropdown-divider"></div>

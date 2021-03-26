@@ -44,9 +44,9 @@
                         if ($result->num_rows > 0) {
                             $i = 0;
                             while ($row = $result->fetch_assoc()) {
-                                $me = (isLogin() && ($_SESSION['id'] == $row['user'] || isAdmin($_SESSION['id'], $conn))) ? "data-owner='true'" : "data-owner='false'";
+                                $me = (isLogin() && ($_SESSION['user']->getID() == $row['user'] || isAdmin())) ? "data-owner='true'" : "data-owner='false'";
                                 $subID = $row['id'];
-                                $subUser = usergen($row['userDisplayname'], $row['userProperties']);
+                                $subUser =  usergen($row['userDisplayname'], $row['userProperties']);
                                 $subProb = probgen($row['probName'], $row['probCodename']);
                                 $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
@@ -79,7 +79,7 @@
             $('.dataTables_length').addClass('bs-select');
             $("#onlyme").change(function() {
                 if ($(this).is(':checked')) {
-                    submission_table.search("<?php if (isset($_SESSION['id'])) echo getUserdata($_SESSION['id'],'displayname', $conn); else echo ""; ?>").draw();
+                    submission_table.search("<?php if (isset($_SESSION['user']->getID())) echo getUserdata($_SESSION['user']->getID(),'displayname', $conn); else echo ""; ?>").draw();
                 } else {
                     submission_table.search("").draw();
                 }

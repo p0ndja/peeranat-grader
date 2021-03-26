@@ -14,7 +14,7 @@
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                 $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                if ($hide && (!isLogin() || !isAdmin($_SESSION['id'], $conn)))
+                if ($hide && (!isLogin() || !isAdmin($_SESSION['user']->getID(), $conn)))
                 header("Location: ../problem/");
                 
                 $accept = array();
@@ -56,7 +56,7 @@
     }
 ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span> <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?></h2>
+    <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span> <?php if (isAdmin()) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?></h2>
     <small class="text-muted"><?php echo $author; ?></small>
     <hr>
     <div class="row">
@@ -70,7 +70,7 @@
         </div>
         <div class="col-12 col-lg-4">
             <div id="adminZone" class="mb-3">
-            <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?>
+            <?php if (isAdmin()) { ?>
                 <a href="../file/judge/prob/<?php echo $id; ?>/" target="_blank" class="btn btn-sm btn-success">Testcase</a>
                 <a href="../problem/edit-<?php echo $id; ?>" class="btn btn-sm btn-primary">Edit</a>
                 <a class="btn btn-sm btn-warning" onclick='swal({title: "ต้องการจะ Rejudge ข้อ <?php echo $id; ?> หรือไม่ ?",text: "การ Rejudge อาจส่งผลต่อ Database และประสิทธิภาพโดยรวม\nความเสียหายใด ๆ ที่เกิดขึ้น ผู้ Rejudge เป็นผู้รับผิดชอบเพียงผู้เดียว\n\n**โปรดใช้สติและมั่นใจก่อนกดปุ่ม Rejudge**",icon: "warning",buttons: true,dangerMode: true}).then((willDelete) => { if (willDelete) { window.location = "../pages/rejudge.php?problem_id=<?php echo $id; ?>";}});'>Rejudge</a>
@@ -171,7 +171,7 @@
                             <?php
                                 $html = "";
                                 if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id,`submission`.`score` as score,`submission`.`maxScore` as maxScore,`submission`.`uploadtime` as uploadtime,`submission`.`result` as result,`problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
-                                    $user = $_SESSION['id'];
+                                    $user = $_SESSION['user']->getID();
                                     $stmt->bind_param('ii', $user, $id);
                                     $stmt->execute();
                                     $result = $stmt->get_result();

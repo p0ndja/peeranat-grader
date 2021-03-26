@@ -1,6 +1,6 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coekku">Problem</h1>
-    <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
+    <?php if (isAdmin()) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
     <div class="table-responsive">
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
@@ -29,8 +29,8 @@
                             $hideMessage = "";
                             if ($hide) $hideMessage = "<span class='badge badge-danger'>ซ่อน</span>";
 
-                            if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
-                                $lastResult = isLogin() ? lastResult($_SESSION['id'], $id, $conn) : "";
+                            if (!$hide || isAdmin()) {
+                                $lastResult = isLogin() ? lastResult($_SESSION['user']->getID(), $id, $conn) : "";
                                 $html .= "<tr onclick='window.open(\"../problem/$id\")'>
                                     <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                     <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a> $hideMessage</td>

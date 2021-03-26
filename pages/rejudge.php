@@ -2,7 +2,7 @@
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
     $problem_id = "";
-    if (isLogin() && isAdmin($_SESSION['id'], $conn) && isset($_GET['problem_id'])) {
+    if (isAdmin() && isset($_GET['problem_id'])) {
         $problem_id = (int) $_GET['problem_id'];
         if ($stmt = $conn -> prepare("UPDATE `submission` SET result='W' WHERE problem = ?")) {
             $stmt->bind_param('i', $problem_id);
