@@ -50,7 +50,7 @@
                                 $subProb = probgen($row['probName'], $row['probCodename']);
                                 $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
+                                $subScore = $row['maxScore'] != 0 ? ($row['score']/$row['maxScore'])*$row['probScore'] : "UNDEFINED";
                                 //$subRuntime = $row['runningtime']/1000;
                                 $subUploadtime = $row['uploadtime']; 
                                 $i++; ?>
