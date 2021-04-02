@@ -90,96 +90,115 @@
                         width="100%" height="600" class="z-depth-1" id="pdfViewer" name="pdfViewer"></iframe>
                 </div>
                 <div class="col-12 col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Config</h5>
-                            <div class="md-form">
-                            <label for="rating">Rating</label>
-                                <select class="mdb-select md-form colorful-select dropdown-primary" id="rating" name="rating" required>
-                                    <option value="0">Peaceful</option>
-                                    <option value="1">Easy</option>
-                                    <option value="2">Normal</option>
-                                    <option value="3">Hard</option>
-                                    <option value="4">Insane</option>
-                                    <option value="5">MERCILESS</option>
-                                </select>
-                                <script>
-                                    $('#rating option[value=<?php echo $probRate; ?>]').attr('selected', 'selected');
-                                </script>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="score" name="score" class="form-control" value="<?php echo $probScore; ?>" required  />
-                                <label class="form-label" for="score">Score</label>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="time" name="time" class="form-control" value="<?php echo $probTime; ?>" required  />
-                                <label class="form-label" for="time">Time (Millisecond)</label>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="memory" name="memory" class="form-control" value="<?php echo $probMemory; ?>" required />
-                                <label class="form-label" for="memory">Memory (Megabyte)</label>
+                    <div id="problemDetails">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku">Config</h5>
+                                <div class="md-form">
+                                <label for="rating">Rating</label>
+                                    <select class="mdb-select md-form colorful-select dropdown-primary" id="rating" name="rating" required>
+                                        <option value="0">Peaceful</option>
+                                        <option value="1">Easy</option>
+                                        <option value="2">Normal</option>
+                                        <option value="3">Hard</option>
+                                        <option value="4">Insane</option>
+                                        <option value="5">MERCILESS</option>
+                                    </select>
+                                    <script>
+                                        $('#rating option[value=<?php echo $probRate; ?>]').attr('selected', 'selected');
+                                    </script>
+                                </div>
+                                <div class="md-form">
+                                    <input type="text" id="score" name="score" class="form-control" value="<?php echo $probScore; ?>" required  />
+                                    <label class="form-label" for="score">Score</label>
+                                </div>
+                                <div class="md-form">
+                                    <input type="text" id="time" name="time" class="form-control" value="<?php echo $probTime; ?>" required  />
+                                    <label class="form-label" for="time">Time (Millisecond)</label>
+                                </div>
+                                <div class="md-form">
+                                    <input type="text" id="memory" name="memory" class="form-control" value="<?php echo $probMemory; ?>" required />
+                                    <label class="form-label" for="memory">Memory (Megabyte)</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Language</h5>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="C" id="C" name="lang[]">
-                                <label class="form-check-label" for="C">C</label>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku">Language</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="C" id="C" name="lang[]">
+                                    <label class="form-check-label" for="C">C</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Cpp" id="C++" name="lang[]">
+                                    <label class="form-check-label" for="C++">C++</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Java" id="Java" name="lang[]">
+                                    <label class="form-check-label" for="Java">Java</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Python" id="Python" name="lang[]">
+                                    <label class="form-check-label" for="Python">Python</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" name="lang[]">
+                                    <label class="form-check-label" for="Plain Text">Plain Text</label>
+                                </div>
+                                <?php if (!isset($_GET['id']) || empty($accept)) { //Create case, check all by default ?>
+                                    <script>$('input[type=checkbox][value!=TXT]').prop('checked',true);</script>
+                                <?php } else { 
+                                    foreach($accept as $a) { ?>
+                                    <script>$('input[type=checkbox][value=<?php echo $a; ?>]').prop('checked',true);</script>
+                                <?php }
+                                } ?>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Cpp" id="C++" name="lang[]">
-                                <label class="form-check-label" for="C++">C++</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Java" id="Java" name="lang[]">
-                                <label class="form-check-label" for="Java">Java</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Python" id="Python" name="lang[]">
-                                <label class="form-check-label" for="Python">Python</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" name="lang[]">
-                                <label class="form-check-label" for="Plain Text">Plain Text</label>
-                            </div>
-                            <?php if (!isset($_GET['id']) || empty($accept)) { //Create case, check all by default ?>
-                                <script>$('input[type=checkbox][value!=TXT]').prop('checked',true);</script>
-                            <?php } else { 
-                                foreach($accept as $a) { ?>
-                                <script>$('input[type=checkbox][value=<?php echo $a; ?>]').prop('checked',true);</script>
-                            <?php }
-                            } ?>
                         </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small></h5>
-                            <?php if (isset($_GET['id'])) {
-                                $id = (int) $_GET['id'];
-                                $path = "../file/testcase/$id/";                                
-                                $count = 0;
-                                $files = glob($path . "*.{in,sol}", GLOB_BRACE);
-                                if ($files) {
-                                    echo "<ul>";
-                                    foreach($files as $f) {
-                                        $filename = str_replace($path, "", $f);
-                                        echo "<li><a href='$f'>".$filename."</a></li>";
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku" id="testcaseTitle">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small></h5>
+                                <?php
+                                if (isset($_GET['id'])) {
+                                    $count = 0; 
+                                    $id = (int) $_GET['id'];
+                                    $path = "../file/judge/prob/$id/";
+                                    $files = glob($path . "*.{in}", GLOB_BRACE);
+                                    if ($files) {
+                                        ?>
+                                        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                                            <!-- Card header -->
+                                            <div role="tab" id="headingOne1">
+                                                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                                                    <h5 class="font-weight-bold text-coekku">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small> <i class="fas fa-angle-down rotate-icon"></i></h5>
+                                                </a>
+                                            </div>
+                                            <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                                            <?php 
+                                                echo "<ol>";
+                                                foreach($files as $f) {
+                                                    $count++;
+                                                    $filename = str_replace($path, "", $f);
+                                                    echo "<li><a href='$f' target='_blank'>in</a> <a href='" .str_replace(".in",".sol",$f). "' target='_blank'>sol</a></li>";
+                                                }
+                                                echo "</ol>";
+                                            ?>
+                                            </div>
+                                        </div>
+                                        <script>document.getElementById("testcaseTitle").remove();</script>
+                                        <?php 
+                                        echo '<small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>';
                                     }
-                                    echo "</ul>";
-                                }
-                            } ?>
-                            <input type="file" class="mb-2" accept=".zip" name="testcase" id="testcase"/>
-                            <input type="hidden" name="testcaseFile" id="testcaseFile" value="" />
+                                } ?>
+                                <input type="file" class="mb-2" accept=".zip" name="testcase" id="testcase" <?php if ($count == 0) echo "required"; ?>/>
+                                <input type="hidden" name="testcaseFile" id="testcaseFile" value="" />
 
-                            <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
-                            <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
-                            
-                            <small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>
+                                <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
+                                <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
+                                
+                            </div>
                         </div>
+                        <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
                     </div>
-                    <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
                 </div>
             </div>
         </form>
