@@ -172,18 +172,20 @@
     function lastResult($uID, $pID, $conn) {
         $arr = lastSubmission($uID,$pID,$conn);
         if (!$arr) return " "; //Case not any submission yet.
-        else return $arr['result'] . " (" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")";
+        if ($arr['result'] == "W") return "<text data-wait=true data-sub-id=" . $arr['subID']. ">รอผลตรวจ...</text>";
+        return $arr['result'] . " (" . $arr['maxScore'] != 0 ? ($arr['score']/$arr['maxScore'])*$arr['probScore'] : "UNDEFINED" . ")";
     }
 
     function lastSubmission($uID, $pID, $conn) {
         if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
-        if ($stmt = $conn -> prepare("SELECT `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
+        if ($stmt = $conn -> prepare("SELECT `submission`.`id` as subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
             $stmt->bind_param('ii', $pID, $uID);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
                     $arr = array();
+                    $arr["subID"] = $row['subID'];
                     $arr["score"] = $row['score'];
                     $arr["maxScore"] = $row['maxScore'];
                     $arr["result"] = $row['result'];

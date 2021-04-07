@@ -33,7 +33,7 @@
         setTimeout(function() {
             ($('[data-wait=true]').each(function(index) {
                 var subID = $(this).data('sub-id');
-                $(this).load('../pages/prob_result.php?id='+subID+"&time");
+                $(this).load('../pages/prob_result.php?id='+subID+"&score");
                 if ($(this).html().indexOf("รอผลตรวจ...") === -1) {
                     $(this).removeAttr("data-wait");
                     console.log("Finished Juding " + subID + " -> " + $(this).html());  
