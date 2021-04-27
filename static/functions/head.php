@@ -32,6 +32,8 @@
     <!-- Custom Style -->
     <link href="../static/style.css" rel="stylesheet">
     <link href="../static/dark-mode.css" rel="stylesheet">
+    <!--link href="../vendor/mdbootstrap/addons/datatables-select.css" rel="stylesheet">
+    <link href="../vendor/mdbootstrap/addons/datatables.css" rel="stylesheet"-->
     <?php if (isDarkmode()) { ?><link href="../static/dataTable-dark-mode.css" rel="stylesheet"><?php } ?>
     
     <!-- Bootstrap -->
@@ -39,6 +41,8 @@
     <script src="../vendor/jquery-3.5.1.min.js"></script>
     <script src="../vendor/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="../vendor/mdbootstrap/mdb.min.js"></script>
+    <!--script type="text/javascript" src="../vendor/mdbootstrap/addons/datatables-select.js"></script>
+    <script type="text/javascript" src="../vendor/mdbootstrap/addons/datatables.js"></script-->
 
     <!-- Bootstrap-DateTimePicker-Table -->
     <link rel="stylesheet" href="../vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">

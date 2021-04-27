@@ -185,7 +185,7 @@
                                                 $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
                                                 <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-owner='true' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
                                                     <th scope='row'><?php echo $subUploadtime; ?></th>
-                                                    <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult ($subScore)"; ?></code></td>
+                                                    <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult"; if ($row['result'] != "W") echo " ($subScore)"; ?></code></td>
                                                 </tr>
                                             <?php }
                                             $stmt->free_result();
