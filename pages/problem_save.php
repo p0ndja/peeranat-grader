@@ -29,7 +29,7 @@
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
                 $locate ="../file/judge/prob/$id/";
                 if (!file_exists($locate))
-                    if (!mkdir($locate))
+                    if (!make_directory($locate))
                         die("Can't mkdir");
                 
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
@@ -78,7 +78,7 @@
                 $tmp_name = $_FILES['testcase']['tmp_name'];
                 $locate ="../file/judge/prob/$id/";
                 if (!file_exists($locate)) {
-                    if (!mkdir($locate)) die("Can't mkdir");
+                    if (!make_directory($locate)) die("Can't mkdir");
                 } else {
                     $files = glob($locate . "*.{in,sol,zip}", GLOB_BRACE); // get all file names
                     foreach($files as $file){ // iterate files
@@ -89,7 +89,6 @@
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
 
                 $zipFile = $locate.$name_file;
-
                 $zip = new ZipArchive;
                 $res = $zip->open($zipFile);
                 if ($res === TRUE) {
