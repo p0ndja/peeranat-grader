@@ -14,27 +14,33 @@
             <tbody class="text-nowrap">
                 <?php
                 $html = "";
-                if ($stmt = $conn -> prepare("SELECT id,name,properties,codename FROM `problem` ORDER BY id")) {
+                $admin = isAdmin();
+                $userID = isLogin() ? $_SESSION['user']->getID() : 0;
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = 1 AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem`")) {
                     //$stmt->bind_param('ii', $page, $limit);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['id']; $name = $row['name']; $codename = $row['codename'];
+                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode'];
                             
-                            $prop = json_decode($row['properties'],true);
+                            $prop = json_decode($row['probProp'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                             $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                            $hideMessage = "";
-                            if ($hide) $hideMessage = "<span class='badge badge-danger'>ซ่อน</span>";
-
-                            if (!$hide || isAdmin()) {
-                                $lastResult = isLogin() ? lastResult($_SESSION['user']->getID(), $id, $conn) : "";
-                                $html .= "<tr onclick='window.open(\"../problem/$id\")'>
+                            $hideMessage = ($hide) ? "<span class='badge badge-danger'>ซ่อน</span>" : "";
+                            if (!$hide || $admin) {
+                                $lastResult = $row['subResult'];
+                                $color;
+                                if (empty($lastResult)) $color = "";
+                                else if (str_contains($lastResult, "-") || str_contains($lastResult, "X") || str_contains($lastResult, "T"))
+                                    $color = "yellow lighten-4";
+                                else $color = "green accent-1";
+                                
+                                $html .= "<tr class='$color' onclick='window.open(\"../problem/$id\")'>
                                     <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                     <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a> $hideMessage</td>
-                                    <td data-order='".$rate."'>".rating($rate)."</td>
+                                    <td data-order='".$rate."'><b>".rating($rate)."</b></td>
                                     <td><code>$lastResult</code></td>
                                 </tr>";
                             }
