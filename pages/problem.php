@@ -16,8 +16,8 @@
                 $html = "";
                 $admin = isAdmin();
                 $userID = isLogin() ? $_SESSION['user']->getID() : 0;
-                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = 1 AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem`")) {
-                    //$stmt->bind_param('ii', $page, $limit);
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem`")) {
+                    $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
