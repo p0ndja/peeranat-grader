@@ -169,7 +169,7 @@
                                             <!-- Card header -->
                                             <div role="tab" id="headingOne1">
                                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
-                                                    <h5 class="font-weight-bold text-coekku">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small> <i class="fas fa-angle-down rotate-icon"></i></h5>
+                                                    <h5 class="font-weight-bold text-coekku">Testcase <i class="fas fa-angle-down rotate-icon"></i></h5>
                                                 </a>
                                             </div>
                                             <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
