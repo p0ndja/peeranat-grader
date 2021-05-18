@@ -81,10 +81,10 @@
                     <div class="card-body">
                         <div class="card-text">
                             <h5 class="font-weight-bold text-coekku">Task</h5>
-                            Time Limit: <?php echo $time; ?>
-                            <br>Memory Limit: <?php echo $mem; ?> ❓
-                            <br>Score: <?php echo $score; ?> pts.
-                            <br>Difficulty: <?php echo rating($rate); ?>
+                            <b>Time Limit:</b> <?php echo $time; ?>
+                            <br><b>Memory Limit:</b> <?php echo $mem; ?>
+                            <br><b>Score:</b> <?php echo $score; ?> pts.
+                            <br><b>Difficulty:</b> <?php echo rating($rate); ?>
                         </div>
                     </div>
                 </div>

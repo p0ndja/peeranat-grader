@@ -156,7 +156,7 @@
                         </div>
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="font-weight-bold text-coekku" id="testcaseTitle">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small></h5>
+                                <h5 class="font-weight-bold text-coekku" id="testcaseTitle">Testcase</h5>
                                 <?php
                                 if (isset($_GET['id'])) {
                                     $count = 0; 
@@ -189,7 +189,24 @@
                                         echo '<small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>';
                                     }
                                 } ?>
-                                <input type="file" class="mb-2" accept=".zip" name="testcase" id="testcase" <?php if ($count == 0) echo "required"; ?>/>
+                                <input type="file" accept=".zip" name="testcase" id="testcase" <?php if ($count == 0) echo "required"; ?>/>
+                                <script>
+                                var uploadField = document.getElementById("testcase");
+
+                                uploadField.onchange = function() {
+                                    if (this.value.split('.').pop() != "zip") {
+                                        alert("Please compress your testcase only in .zip!");
+                                        this.value = "";
+                                    }
+                                    //64 MB = 64 * 1024 * 1024 bytes
+                                    else if (this.files[0].size > 67108864) {
+                                        alert("Your file is larger than 64 Megabytes!");
+                                        this.value = "";
+                                    }
+                                    
+                                };
+                                </script>
+                                <small class="text-muted">Accept only .zip (Max: 64 Megabytes)</small>
                                 <input type="hidden" name="testcaseFile" id="testcaseFile" value="" />
 
                                 <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
