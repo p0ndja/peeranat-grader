@@ -156,7 +156,6 @@
                         </div>
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="font-weight-bold text-coekku" id="testcaseTitle">Testcase</h5>
                                 <?php
                                 if (isset($_GET['id'])) {
                                     $count = 0; 
@@ -184,10 +183,11 @@
                                             ?>
                                             </div>
                                         </div>
-                                        <script>document.getElementById("testcaseTitle").remove();</script>
                                         <?php 
                                         echo '<small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>';
-                                    }
+                                    } else { ?>
+                                        <h5 class="font-weight-bold text-coekku" id="testcaseTitle">Testcase</h5>
+                                    <?php }
                                 } ?>
                                 <input type="file" accept=".zip" name="testcase" id="testcase" <?php if ($count == 0) echo "required"; ?>/>
                                 <script>
