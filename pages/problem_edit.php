@@ -75,7 +75,7 @@
                                 processData: false,
                                 success: function(response){
                                     if(response != 0){
-                                        $("#pdfViewer").attr("src",response);
+                                        $("#pdfViewer").attr("src","../vendor/pdf.js/web/viewer.html?file=../../" + response);
                                         $("#probDoc").val(response); 
                                     }else{
                                         alert('file not uploaded');
@@ -86,7 +86,7 @@
                     });
                     </script>
                     <iframe
-                        src="../vendor/pdf.js/web/viewer.html?file=../../../../../<?php echo $probDoc?>"
+                        src="../vendor/pdf.js/web/viewer.html?file=../../../<?php echo $probDoc?>"
                         width="100%" height="600" class="z-depth-1" id="pdfViewer" name="pdfViewer"></iframe>
                 </div>
                 <div class="col-12 col-md-4">
