@@ -1,6 +1,7 @@
+<?php $admin = isAdmin(); ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coekku">Problem</h1>
-    <?php if (isAdmin()) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
+    <?php if ($admin) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
     <div class="table-responsive">
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
@@ -13,10 +14,8 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                $html = "";
-                $admin = isAdmin();
                 $userID = isLogin() ? $_SESSION['user']->getID() : 0;
-                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem`")) {
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` LIMIT 1) as subResult FROM `problem`")) {
                     $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -37,9 +36,9 @@
                                     $color = "yellow lighten-4";
                                 else $color = "green accent-1";
                                 
-                                $html .= "<tr class='$color' onclick='window.open(\"../problem/$id\")'>
-                                    <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
-                                    <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a> $hideMessage</td>
+                                echo "<tr style='cursor: pointer;' class='$color' onmousedown='window.open(\"../problem/$id\")'>
+                                    <th class='text-right' scope='row'>$id</th>
+                                    <td>$name <span class='badge badge-coekku'>$codename</span> $hideMessage</td>
                                     <td data-order='".$rate."'><b>".rating($rate)."</b></td>
                                     <td><code>$lastResult</code></td>
                                 </tr>";
@@ -48,7 +47,6 @@
                         $stmt->free_result();
                         $stmt->close();  
                     }
-                    echo $html;
                 }
                 ?>
             </tbody>
@@ -57,7 +55,7 @@
     <script>
         $(document).ready(function () {
             $('#problemTable').DataTable({
-                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ],
+                "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
                 'columnDefs': [ {
                     'targets': [1,3], // column index (start from 0)
                     'orderable': false, // set orderable false for selected columns
