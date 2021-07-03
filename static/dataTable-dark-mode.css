@@ -72,7 +72,7 @@ table.dataTable tbody tr,
 table.dataTable tbody th,
 table.dataTable tbody td{
     color: white !important;
-    background-color: #000 !important;
+    background-color: rgb(14, 14, 14) !important;
 }
 
 table.dataTable a {
@@ -85,7 +85,9 @@ table.dataTable a:hover {
     transition: 0.3s;
 }
 
-table.dataTable tbody tr:hover {
+table.dataTable tbody tr:hover,
+table.dataTable tbody th:hover,
+table.dataTable tbody td:hover {
     background-color: #262626 !important;
 }
 

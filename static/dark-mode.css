@@ -69,12 +69,12 @@
 }
 
 [data-theme="dark"] a {
-    color:#d42225;
+    color:#d14d4f;
     transition: 0.3s;
 }
 
 [data-theme="dark"] tr a {
-    color:#d42225 !important;
+    color:#d14d4f !important;
     transition: 0.3s;
 }
 
@@ -85,6 +85,11 @@
 
 [data-theme="dark"] tr a:hover {
     color: #df797b !important;
+    transition: 0.3s;
+}
+
+[data-theme="dark"] .text-coekku {
+    color: #d14d4f !important;
     transition: 0.3s;
 }
 
