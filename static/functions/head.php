@@ -3,9 +3,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Google Font -->
-    <link href="//fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
-    <link href="//fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+    <link href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Kanit:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
     <!-- Webcustom -->
     <link rel="shortcut icon" href="../static/elements/logo/favicon.ico" type="image/x-icon">
@@ -26,31 +26,24 @@
     <meta property="og:url" content="<?php echo $current_url; ?>" />
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css">
-    <link href="../vendor/mdbootstrap/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="../vendor/mdbootstrap-4.19.1/css/mdb.min.css" rel="stylesheet">
     
     <!-- Custom Style -->
     <link href="../static/style.css" rel="stylesheet">
     <link href="../static/dark-mode.css" rel="stylesheet">
-    <!--link href="../vendor/mdbootstrap/addons/datatables-select.css" rel="stylesheet">
-    <link href="../vendor/mdbootstrap/addons/datatables.css" rel="stylesheet"-->
     <?php if (isDarkmode()) { ?><link href="../static/dataTable-dark-mode.css" rel="stylesheet"><?php } ?>
     
     <!-- Bootstrap -->
-    <script src="../vendor/1.16.0-popper.min.js"></script>
-    <script src="../vendor/jquery-3.5.1.min.js"></script>
-    <script src="../vendor/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../vendor/mdbootstrap/mdb.min.js"></script>
-    <!--script type="text/javascript" src="../vendor/mdbootstrap/addons/datatables-select.js"></script>
-    <script type="text/javascript" src="../vendor/mdbootstrap/addons/datatables.js"></script-->
-
-    <!-- Bootstrap-DateTimePicker-Table -->
-    <link rel="stylesheet" href="../vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
-    <script src="../vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="../vendor/mdbootstrap-4.19.1/js/mdb.min.js"></script>
 
     <!-- Bootstrap-Table -->
-    <link href="../vendor/dataTable/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="../vendor/dataTable/jquery.dataTables.min.js"></script>
+    <link href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
     <link rel="stylesheet" href="../vendor/editor.md/css/editormd.css" />
@@ -65,19 +58,14 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
     
     <!-- SweetAlert -->
-    <script src="../vendor/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- Croppie -->
-    <link rel="stylesheet" href="../vendor/croppie/croppie.css" />
-    <script src="../vendor/croppie/croppie.js"></script>
-
-    <!-- Dropzone -->
-    <link rel="stylesheet" href="../vendor/dropzone/min/basic.min.css" />
-    <link rel="stylesheet" href="../vendor/dropzone/min/dropzone.min.css" />
-    <script src="../vendor/dropzone/dropzone.js"></script>
+    <link rel="stylesheet" href="//raw.githubusercontent.com/Foliotek/Croppie/master/croppie.css" />
+    <script src="//raw.githubusercontent.com/Foliotek/Croppie/master/croppie.js"></script>
     
     <!-- Fontawesome -->
-    <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" rel="stylesheet" />
 
     <script src="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
     <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
