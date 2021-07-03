@@ -23,7 +23,7 @@
     
     // Tooltips Initialization
     $(document).ready(function () {
-        $('.mdb-select').materialSelect();
+        if ($('.mdb-select')[0]) $('.mdb-select').materialSelect();
         $('[data-toggle="tooltip"]').tooltip();
         $('.btn-floating').unbind('click');
         $('.fixed-action-btn').unbind('click');
