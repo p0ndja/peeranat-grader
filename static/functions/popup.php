@@ -7,35 +7,29 @@
         var subID = $(this).data('id');
         var userID = $(this).data('uid');
         var owner = $(this).data('owner');
-            $.ajax({
-                type: 'GET',
-                url: '../pages/submission_gen.php',
-                data: {
-                    'id': subID
-                },
-                success: function (data) {
-                    $('#modalBody').html(data);
-                }
-            }).then(function() {
-                if (owner) {
-                    $.ajax({
-                        type: 'GET',
-                        url: '../pages/submission_code.php?target=' + subID,
-                        data: {
-                            'id': subID
-                        },
-                        success: function (data) {
-                            $('#modalBodyCode').html('<pre><code>' + data + '</code></pre>');
-                            $('pre > code').each(function() {
-                                hljs.highlightBlock(this);
-                            });
-                        }
-                    });
-                }
-            }).then(function() {
-                $('#modalTitle').html(title);
-            });
+        $.ajax({
+            type: 'GET',
+            url: '../pages/submission_gen.php',
+            data: { 'id': subID },
+            success: function (data) { $('#modalBody').html(data); }
+        }).then(function() {
+            if (owner) {
+                $.ajax({
+                    type: 'GET',
+                    url: '../pages/submission_code.php?target=' + subID,
+                    data: { 'id': subID },
+                    success: function (data) {
+                        $('#modalBodyCode').html('<pre><code>' + data + '</code></pre>');
+                        $('pre > code').each(function() {
+                            hljs.highlightBlock(this);
+                        });
+                    }
+                });
+            }
+        }).then(function() {
+            $('#modalTitle').html(title);
         });
+    });
 </script>
 <!-- Announcement Modal -->
 <div class="modal animated jackInTheBox fadeOut" id="announcementPopup" name="announcementPopup" tabindex="-1" role="dialog"
