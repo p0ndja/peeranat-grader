@@ -95,7 +95,7 @@
         }
 
         public function getProfile() {
-            if (empty($this->profile) || !file_exists($this->profile)) return "../static/elements/user.png";
+            if (empty($this->profile) || !file_exists($this->profile)) return "../static/elements/user.svg";
             return $this->profile;
         }
         public function setProfile(string $url) {
