@@ -72,7 +72,7 @@
                             $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
                             if (!$hide || (isAdmin())) {
-                                $lastResult = isLogin() ? lastResult($_SESSION['user']->getID(), $id, $conn) : "";
+                                $lastResult = isLogin() ? lastResult($_SESSION['user']->getID(), $id) : "";
                                 $html .= "<tr onclick='window.open(\"../problem/$id\")'>
                                     <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                     <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a></td>

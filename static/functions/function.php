@@ -43,6 +43,69 @@
         if (!isLogin()) return false;
         return $_SESSION['user']->isAdmin();
     }
+    
+    //checkTime is in second unit as UNIX TIME FORMAT.
+    function checkAuthKey(String $authKey, int $checkTime = 0) {
+        global $conn;
+        if (!isLogin()) return false;
+        $uid = $_SESSION['user']->getID();
+        if ($stmt = $conn->prepare("SELECT `tempAuthKey` FROM `user` WHERE `id` = ?")) {
+            $stmt->bind_param('i',$uid);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if (empty($row['tempAuthKey']) || $row['tempAuthKey'] == null) return false;
+                    $key = json_decode($row['tempAuthKey'], true);
+                    if ($authKey == $key['key']) {
+                        if ($checkTime > 0) return ((time() - ((int)$key['time'])) <= $checkTime);
+                        else                return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    function generateAuthKey(int $uid) {
+        global $conn;
+
+        if (!isValidUserID($uid)) return false;
+
+        $authKey = array(
+            "key" => generateRandom(8),
+            "time" => time()
+        );
+        $tempAuthKey = json_encode($authKey);
+
+        if ($stmt = $conn->prepare("UPDATE `user` SET `tempAuthKey` = ? WHERE `id` = ?")) {
+            $stmt->bind_param('si',$tempAuthKey,$uid);
+            if ($stmt->execute()) {
+                return $authKey['key'];
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function useAuthKey(String $authKey, int $checkTime = 0) {
+        global $conn;
+        if (!isLogin()) return false;
+        $uid = $_SESSION['user']->getID();
+        if (checkAuthKey($authKey, $checkTime)) {
+            if ($stmt = $conn->prepare("UPDATE `user` SET `tempAuthKey` = null WHERE `id` = ?")) {
+                $stmt->bind_param('i',$uid);
+                return $stmt->execute();
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
     function getUserData(int $id) {
         global $conn;
@@ -59,9 +122,25 @@
         return null;
     }
 
-    function countCategory($category, $conn) {
+    function getProbData(int $id) {
+        global $conn;
+        if ($stmt = $conn->prepare('SELECT * FROM `problem` WHERE id = ?')) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row;
+                }
+            }
+        }
+        return null;
+    }
+
+    function countCategory($category) {
+        global $conn;
         if ($stmt = $conn-> prepare("SELECT count(id) AS cat FROM `editorial` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND JSON_EXTRACT(`properties`,'$.category') = ? ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated')")) {
-        $stmt->bind_param('s', $category);
+            $stmt->bind_param('s', $category);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
@@ -72,55 +151,6 @@
         }
     }
 
-    function getAnySQL($sql, $val, $key, $key_val, $conn) {
-        if ($sql == null || $val == null || $key == null || $key_val == null || $conn == null) return false;
-        return mysqli_fetch_array(mysqli_query($conn, "SELECT `$val` from `$sql` WHERE $key = '$key_val'"), MYSQLI_ASSOC)[$val];
-    }
-
-    function saveAnySQL($sql, $col, $val, $key, $key_val, $conn) {
-        if ($sql == null || $key == null || $key_val == null || $conn == null) return false;
-        return mysqli_query($conn, "UPDATE `$sql` SET `$col` = $val WHERE `$key` = '$key_val'");
-    }
-
-    function getUserID($input, $method, $conn) {
-        return getAnySQL('user', 'id', $method, $input, $conn);
-    }
-
-    function saveUserdata($id, $data, $val, $conn) {
-        if (saveAnySQL('user', $data, $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-    //saveUserdata('604019', 'username', 'PondJaTH', $conn);\
-
-    function getProbdata($id, $data, $conn) {
-        return getAnySQL('problem', $data, 'id', $id, $conn);
-    }
-
-    function saveProbdata($id, $data, $val, $conn) {
-        if (saveAnySQL('problem', $data, $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-
-    function getSubmissiondata($id, $data, $conn) {
-        return getAnySQL('submission', $data, 'id', $id, $conn);
-    }
-
-    function saveSubmissiondata($id, $data, $val, $conn) {
-        if (saveAnySQL('submission', $data, $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-
-    /*
-    function getContestdata($id, $data, $conn) {
-        return getAnySQL('contest', $data, 'id', $id, $conn);
-    }
-
-    function saveContestdata($id, $data, $val, $conn) {
-        if (saveAnySQL('contest', $data, $val, 'id', $id, $conn)) return true;
-        return false;
-    }
-    */
-
     function isDarkmode() {
         if (isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'] == true)
             return true;
@@ -129,17 +159,29 @@
         return false;
     }
 
-    function isValidUserID($id, $conn) {
-        $query = "SELECT `id` FROM `user` WHERE id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) return true;
+    function isValidUserID($id) {
+        global $conn;
+        if ($stmt = $conn->prepare("SELECT `id` FROM `user` WHERE `id` = ? LIMIT 1")) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                return true;
+            }
+        }
         return false;
     }
 
-    function isValidProbID($id, $conn) {
-        $query = "SELECT `id` FROM `problem` WHERE id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) return true;
+    function isValidProbID($id) {
+        global $conn;
+        if ($stmt = $conn->prepare("SELECT `id` FROM `problem` WHERE `id` = ? LIMIT 1")) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -162,23 +204,24 @@
         }
     }
 
-    function isPassed($uID, $pID, $conn) {
-        $arr = lastSubmission($uID,$pID,$conn);
+    function isPassed($uID, $pID) {
+        $arr = lastSubmission($uID,$pID);
         if (!$arr) return 0; //Case not any submission yet.
         if ($arr['score'] == $arr['maxScore']) return 1; //Case full score.
         if ($arr['score'] != 0 && $arr['score'] < $arr['maxScore']) return -1;
     }
 
-    function lastResult($uID, $pID, $conn) {
-        $arr = lastSubmission($uID,$pID,$conn);
+    function lastResult($uID, $pID) {
+        $arr = lastSubmission($uID,$pID);
         if (!$arr) return " "; //Case not any submission yet.
         if ($arr['result'] == "W") return "<text data-wait=true data-sub-id=" . $arr['subID']. ">รอผลตรวจ...</text>";
         return $arr['result'] . " (" . $arr['maxScore'] != 0 ? ($arr['score']/$arr['maxScore'])*$arr['probScore'] : "UNDEFINED" . ")";
     }
 
-    function lastSubmission($uID, $pID, $conn) {
-        if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
-        if ($stmt = $conn -> prepare("SELECT `submission`.`id` as subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
+    function lastSubmission($uID, $pID) {
+        global $conn;
+        if (!isValidUserID($uID) || !isValidProbID($pID)) return 0;
+        if ($stmt = $conn->prepare("SELECT `submission`.`id` as subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
             $stmt->bind_param('ii', $pID, $uID);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -201,10 +244,6 @@
         
     }
 
-    function prob($id, $conn) {
-        return getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span>";
-    }
-
     function countScore($result, $full = 100) {
         return number_format((float) count_chars(strtoupper($result))[80]*($full/strlen($result)), 2, '.', '');
     }
@@ -214,21 +253,6 @@
         if (isDarkmode()) $targetDir = "dark";
         $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
         return $files[rand(0,count($files)-1)];
-    }
-
-    function getProfileIMG($conn) {
-        if (!isLogin()) return "../static/elements/user.svg";
-        $uid = $_SESSION['user']->getID();
-        if ($stmt = $conn -> prepare("SELECT `profile` FROM `user` WHERE id = ?")) {
-            $stmt->bind_param('i', $uid);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows == 1) {
-                while ($row = $result->fetch_assoc()) {
-                    return (!empty($row['profile']) ? $row['profile'] : "../static/elements/user.svg");
-                }
-            }
-        }
     }
 ?>
 <?php
@@ -332,9 +356,10 @@
 <?php die(); }} ?>
 
 <?php
-    function needAdmin($conn) {
+    function needAdmin() {
+        global $conn;
     if (!isLogin()) { needLogin(); die(); return false; }
-    if (!isAdmin($_SESSION['user']->getID(), $conn)) { ?>
+    if (!isAdmin($_SESSION['user']->getID())) { ?>
 <script>
     swal({
         title: "ACCESS DENIED",
@@ -423,7 +448,7 @@
         return substr_compare($haystack, $needle, -strlen($needle)) === 0;
     }
     
-    if (isLogin() && !isValidUserID($_SESSION['user']->getID(), $conn)) {
+    if (isLogin() && !isValidUserID($_SESSION['user']->getID())) {
         session_destroy();
         header("Location: ../home/");
     }

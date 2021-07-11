@@ -4,9 +4,8 @@
 
     $user = ""; $name = "";
     if (isLogin()) {
-        $id = $_SESSION['user']->getID();
-        $user = getUserdata($id, 'username', $conn);
-        $name = getUserdata($id, 'displayname', $conn);;
+        $user = $_SESSION['user']->getUsername();
+        $name = $_SESSION['user']->getDisplayname();
     }
 ?>
 <form method="post" action="../pages/donation_submit_save.php" enctype="multipart/form-data">

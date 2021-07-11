@@ -44,9 +44,9 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
         $_SESSION['error'] = "พบข้อผิดพลาดในการเข้าถึงฐานข้อมูล";
     }
     
-    $id = latestIncrement($dbdatabase, 'user', $conn);
-    if ($stmt = $conn -> prepare("INSERT INTO `user` (id, username, password, displayname, email) VALUES (?,?,?,?,?)")) {
-        $stmt->bind_param('issss', $id, $user, $pass, $name, $email);
+    $id = latestIncrement($dbdatabase, 'user');
+    if ($stmt = $conn -> prepare("INSERT INTO `user` (id, username, password, displayname, email) VALUES (?,?,?,?,?,?)")) {
+        $stmt->bind_param('isssss', $id, $user, $pass, $name, $email);
         if (!$stmt->execute()) {
             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
             $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";

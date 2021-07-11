@@ -57,7 +57,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="font-weight-bold text-coekku">Category</h5>
-                        <?php $cat = array("Java"=>countCategory("Java", $conn), "Python"=>countCategory("Python", $conn), "C"=>countCategory("C",$conn), "LCA"=>countCategory("LCA",$conn),"General"=>countCategory("General",$conn),"Update"=>countCategory("Update",$conn)); ?>
+                        <?php $cat = array("Java"=>countCategory("Java"), "Python"=>countCategory("Python"), "C"=>countCategory("C"), "LCA"=>countCategory("LCA"),"General"=>countCategory("General"),"Update"=>countCategory("Update")); ?>
                         <p>
                             <ul>
                                 <li><a href="../editorial/category=Java">Java (<?php echo $cat["Java"]; ?>)</a></li>

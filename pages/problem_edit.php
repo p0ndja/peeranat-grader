@@ -1,4 +1,4 @@
-<?php needAdmin($conn); 
+<?php needAdmin(); 
     $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];

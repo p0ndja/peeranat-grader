@@ -17,7 +17,7 @@
                 $subMemory = $row['memory'] ? $row['memory'] . " MB": randomErrorMessage(); //MB
                 $subUploadtime = $row['uploadtime']; ?>
                 <p>User: <code><?php echo $subUser; ?></code>
-                <br>Problem: <?php echo prob($subProb, $conn); ?>
+                <br>Problem: <?php $spb = new Problem($subProb); echo $spb->display(); ?>
                 <br>Language: <code><?php echo $subLang; ?></code>
                 <br>Result: <code <?php if ($row['result'] == 'W') echo "data-sub-id='$id' data-wait=true"; ?>><?php echo $subResult; ?></code>
                 <br>Running Time: <code><?php echo $subRuntime; ?> ms</code>

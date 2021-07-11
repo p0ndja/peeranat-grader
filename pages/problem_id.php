@@ -14,7 +14,7 @@
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                 $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                if ($hide && (!isLogin() || !isAdmin($_SESSION['user']->getID(), $conn)))
+                if ($hide && (!isLogin() || !isAdmin($_SESSION['user']->getID())))
                 header("Location: ../problem/");
                 
                 $accept = array();
