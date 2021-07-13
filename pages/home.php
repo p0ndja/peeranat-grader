@@ -1,5 +1,5 @@
 <?php if (in_array((int) date("dm"), array(2212,1103,810))) { ?><div id="emojiRain"></div><script src="../vendor/emojirain.js"></script><?php } ?>
-<div class="homepage" style="padding-top: 64px;">
+<div class="homepage" style="padding-top: 64px; min-height: 100vh;">
     <div class="container-fluid h-100 w-100">
         <div class="h-100 w-100 row align-items-center">
             <div class="d-none d-md-block col-md-1"></div>
@@ -45,16 +45,12 @@
                         } ?>
                 </div>
                 <div class="fadeIn animated">
-                    <?php
-                        $files = glob("../static/elements/index/*.*", GLOB_BRACE);
-                        $targetSrc = $files[rand(0,count($files)-1)];
-                    ?>
-                    <img src="<?php echo $targetSrc; ?>" class="mt-3 img-fluid w-100 d-block d-md-none">
+                    <img src="../static/elements/3323617.svg" class="mt-3 img-fluid w-100 d-block d-md-none">
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
                 <div class="fadeIn animated">
-                    <img src="<?php echo $targetSrc; ?>" class="img-fluid w-100">
+                    <img src="../static/elements/3323617.svg" class="img-fluid w-100">
                 </div>
             </div>
         </div>
