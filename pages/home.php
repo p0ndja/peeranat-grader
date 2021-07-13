@@ -45,12 +45,12 @@
                         } ?>
                 </div>
                 <div class="fadeIn animated">
-                    <img src="../static/elements/3323617.svg" class="mt-3 img-fluid w-100 d-block d-md-none">
+                    <img src="../static/elements/3323617.svg" onContextMenu="return false;" class="mt-3 img-fluid w-100 d-block d-md-none">
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
                 <div class="fadeIn animated">
-                    <img src="../static/elements/3323617.svg" class="img-fluid w-100">
+                    <img src="../static/elements/3323617.svg" onContextMenu="return false;" class="img-fluid w-100">
                 </div>
             </div>
         </div>

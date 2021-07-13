@@ -26,6 +26,7 @@
         }
         
         if ($stmt->execute()) {
+            $_SESSION['user']->setProfile($profile_url);
             $_SESSION['swal_success'] = "สำเร็จ!";
             $_SESSION['swal_success_msg'] = "แก้ไขโปรไฟล์ #$id สำเร็จแล้ว!";
             echo "Edited";
