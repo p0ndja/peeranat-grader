@@ -24,8 +24,14 @@
             $stmt = $conn->prepare("UPDATE `user` SET displayname=?, email=?, profile=? WHERE id = ?");
             $stmt->bind_param('sssi', $name, $email, $profile_url, $id);
         }
+
+        if ($email != $real_email) {
+            //TODO: Verify new email
+        }
         
         if ($stmt->execute()) {
+            $_SESSION['user']->setName($name);
+            $_SESSION['user']->setEmail($email);
             $_SESSION['user']->setProfile($profile_url);
             $_SESSION['swal_success'] = "สำเร็จ!";
             $_SESSION['swal_success_msg'] = "แก้ไขโปรไฟล์ #$id สำเร็จแล้ว!";
