@@ -7,7 +7,7 @@
     } else if (isLogin()) {
         $user = $_SESSION['user'];
     } else {
-        header("Location: ../home/")
+        header("Location: ../home/");
     }
 ?>
 <div class="container" style="padding-top: 88px;">
