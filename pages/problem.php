@@ -15,7 +15,7 @@
             <tbody class="text-nowrap">
                 <?php
                 $userID = isLogin() ? $_SESSION['user']->getID() : 0;
-                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` LIMIT 1) as subResult FROM `problem`")) {
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem`")) {
                     $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -32,7 +32,7 @@
                                 $lastResult = $row['subResult'];
                                 $color;
                                 if (empty($lastResult)) $color = "";
-                                else if (str_contains($lastResult, "-") || str_contains($lastResult, "X") || str_contains($lastResult, "T"))
+                                else if (str_contains($lastResult, "-") || str_contains($lastResult, "X") || str_contains($lastResult, "T") || str_contains($lastResult, "Compile Error"))
                                     $color = "yellow lighten-4";
                                 else $color = "green accent-1";
                                 
