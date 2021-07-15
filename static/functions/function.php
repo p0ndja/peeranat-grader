@@ -362,7 +362,7 @@
     function needAdmin() {
         global $conn;
     if (!isLogin()) { needLogin(); die(); return false; }
-    if (!isAdmin($_SESSION['user']->getID())) { ?>
+    if (!isAdmin()) { ?>
 <script>
     swal({
         title: "ACCESS DENIED",

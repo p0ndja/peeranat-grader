@@ -1,12 +1,12 @@
 <?php
-    $html = ""; $id = $_GET['id'];
-    if ($stmt = $conn -> prepare("SELECT id,name,score,memory,time,codename,writer,properties FROM `problem` WHERE id = ?")) {
+    $id = $_GET['id'];
+    if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ? LIMIT 1")) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $author = $row['writer']; 
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $author = $row['author']; 
                 if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
             
                 $prop = json_decode($row['properties'],true);
@@ -14,7 +14,7 @@
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                 $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                if ($hide && (!isLogin() || !isAdmin($_SESSION['user']->getID())))
+                if ($hide && (!isLogin() || !isAdmin()))
                 header("Location: ../problem/");
                 
                 $accept = array();
@@ -170,7 +170,6 @@
                                 </thead>
                                 <tbody class="text-nowrap">
                                 <?php
-                                    $html = "";
                                     if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id,`submission`.`score` as score,`submission`.`maxScore` as maxScore,`submission`.`uploadtime` as uploadtime,`submission`.`result` as result,`problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
                                         $user = $_SESSION['user']->getID();
                                         $stmt->bind_param('ii', $user, $id);
@@ -193,7 +192,6 @@
                                         } else {
                                             echo "<tr><td colspan='2' class='text-center'>No submission yet!</td></tr>";
                                         }
-                                        echo $html;
                                     }
                                     ?>
                                 </tbody>

@@ -113,7 +113,7 @@
             if (!empty($data)) {
                 $this->name = $data['name'];
                 $this->codename = $data['codename'];
-                $this->writer = $data['writer'];
+                $this->writer = empty($data['author']) ? "" : $data['author'];
                 $this->score = $data['score'];
                 $this->memory = $data['memory'];
                 $this->time = $data['time'];
