@@ -1,5 +1,5 @@
 <?php if (isLogin()) header("Location: ../"); ?>
-<div class="container" id="container" style="padding-top: 88px">
+<div class="container" id="container" style="padding-top: 88px; min-height: 85vh;">
     <div class="center">
     <h1 class="display-5 font-weight-bold text-center text-coekku text-uppercase">Register <i class="fas fa-edit"></i></h1>
     <form method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
