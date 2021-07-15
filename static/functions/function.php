@@ -8,16 +8,24 @@
         return mysqli_fetch_array(mysqli_query($conn,"SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$dbdatabase' AND TABLE_NAME = '$db'"), MYSQLI_ASSOC)["AUTO_INCREMENT"];
     }
     
-    function make_directory($path) {
-        $path = explode("/", $path);
+    function make_directory($p) {
+        $path = explode("/", $p);
         $stackPath = "";
-        for ($i = 0; $i < count($path); $i++) {
+        for ($i = 0; $i < count($path); $i++) {            
             $stackPath .= $path[$i] . "/";
-            if (file_exists($stackPath . $path[$i] . "/"))
-                continue;
-            mkdir($stackPath . $path[$i] . "/");
+            if (file_exists($stackPath)) continue;
+            mkdir($stackPath, 0777, true);
         }
         return file_exists($stackPath);
+    }
+
+    //Remove Directory (delTree) by nbari@dalmp.com
+    function remove_directory($dir) {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? remove_directory("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
     }
 
     function login(String $username, String $password) {
@@ -152,11 +160,7 @@
     }
 
     function isDarkmode() {
-        if (isset($_SESSION['dark_mode']) && $_SESSION['dark_mode'] == true)
-            return true;
-        if (!isset($_SESSION['dark_mode']))
-            $_SESSION['dark_mode'] = false;
-        return false;
+        return (isset($_SESSION['dark_mode'])) ? $_SESSION['dark_mode'] : false;
     }
 
     function isValidUserID($id) {
@@ -240,8 +244,7 @@
             } else {
                 return 0;
             }
-        }
-        
+        } 
     }
 
     function countScore($result, $full = 100) {

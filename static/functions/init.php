@@ -28,7 +28,7 @@
         const ROLES = array(Role::ADMIN);
     }
 
-    class Language {
+    abstract class Language {
         const JAVA = "Java";
         const PYTHON = "Python";
         const C = "C";
@@ -126,7 +126,7 @@
 
     class User {
         protected int $id;
-        protected String $user, $email, $role, $name;
+        protected String $user, $email, $name;
         public $profile, $properties;
 
         public function getID() {

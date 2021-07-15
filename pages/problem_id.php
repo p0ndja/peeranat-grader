@@ -183,7 +183,7 @@
                                                 $subScore = $row['maxScore'] != 0 ? ($row['score']/$row['maxScore'])*$row['probScore'] : "UNDEFINED";
                                                 //$subRuntime = $row['runningtime']/1000;
                                                 $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
-                                                <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-owner='true' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>'>
+                                                <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup'>
                                                     <th scope='row'><?php echo $subUploadtime; ?></th>
                                                     <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult"; if ($row['result'] != "W") echo " ($subScore)"; ?></code></td>
                                                 </tr>

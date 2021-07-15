@@ -1,11 +1,10 @@
-<div class="container" id="container" style="padding-top: 88px; min-height:100vh">
+<div class="container" id="container" style="padding-top: 88px; min-height:100vh;">
     <div class="center">
         <form method="post" action="../pages/password_lookup.php" enctype="multipart/form-data">
             <h1 class="display-5 font-weight-bold text-center text-coekku">Forget Password <i class="fas fa-question"></i></h1>
             <div class="card">
                 <!--Body-->
                 <div class="card-body mb-1">
-                    <h1 class="display-5 text-center"></h1>
                     <h6 class="text-center">ส่งคำร้องรีเซ็ตรหัสผ่าน (หากตัวยันยืนตัวตนไม่ขึ้น กรุณาดำเนินการหน้านี้ใหม่อีกครั้ง)</h6>
                     <div class="md-form form-sm mb-5">
                         <i class="fas fa-users prefix"></i>

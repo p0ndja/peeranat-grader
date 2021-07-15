@@ -20,7 +20,7 @@
                 "accept" => $_POST['lang']
             ));
             
-            $id = $isCreate ? latestIncrement('graderga', 'problem', $conn) : $_GET['id'];
+            $id = $isCreate ? latestIncrement('graderga', 'problem') : $_GET['id'];
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $file = glob($locate . $probCodename . "*.pdf");

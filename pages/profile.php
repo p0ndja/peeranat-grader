@@ -3,7 +3,7 @@
     $user = -1;
     if (isset($_GET['id'])) {
         $user = new User((int) $_GET['id']);    
-        if ($user->getID() == 1) header("Location: ../home/");
+        if ($user->getID() == -1) header("Location: ../home/");
     } else if (isLogin()) {
         $user = $_SESSION['user'];
     } else {
