@@ -11,7 +11,7 @@
             $probScore = $_POST['score'];
             $probTime = $_POST['time'];
             $probMemory = $_POST['memory'];
-            $probAuthor = $_POST['writer'];
+            $probAuthor = $_POST['author'];
             
             $properties = json_encode(array(
                 "hide" => (bool) $_POST['hide'],
@@ -22,23 +22,23 @@
             
             $id = $isCreate ? latestIncrement('graderga', 'problem') : $_GET['id'];
 
+            $locate ="../file/judge/prob/$id/";
+            if (!file_exists($locate))
+                if (!make_directory($locate))
+                    die("Can't mkdir");
+
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $file = glob($locate . $probCodename . "*.pdf");
                 foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
                 $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
-                $locate ="../file/judge/prob/$id/";
-                if (!file_exists($locate))
-                    if (!make_directory($locate))
-                        die("Can't mkdir");
-                
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
             print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $properties, $probAuthor));
             if ($isCreate) {
-                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, writer, properties) VALUES (?,?,?,?,?,?,?)")) {
+                if ($stmt = $conn -> prepare("INSERT INTO `problem` (name, codename, score, memory, time, author, properties) VALUES (?,?,?,?,?,?,?)")) {
                     $stmt->bind_param('ssiiiss', $probName, $probCodename, $probScore, $probMemory, $probTime, $probAuthor, $properties);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
@@ -55,7 +55,7 @@
                     echo "Can't establish database";
                 }
             } else {
-                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, writer=?, properties=? WHERE id = ?")) {
+                if ($stmt = $conn -> prepare("UPDATE `problem` SET name=?, codename=?, score=?, memory=?, time=?, author=?, properties=? WHERE id = ?")) {
                     $stmt->bind_param('ssiiissi', $probName, $probCodename, $probScore, $probMemory, $probTime, $probAuthor, $properties, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
@@ -96,7 +96,6 @@
                     $zip->close();
                 }
             }
-
         }
     }
     header("Location: ../problem/$id");

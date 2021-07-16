@@ -8,7 +8,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer'];
+                    $probName = $row['name']; $probCodename = $row['codename']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['author'];
                     
                     $prop = json_decode($row['properties'], true);
 
@@ -51,8 +51,8 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="md-form">
-                            <input type="text" id="writer" name="writer" class="form-control" value="<?php if (!empty($probAuthor)) echo $probAuthor; ?>"/>
-                            <label class="form-label" for="writer">Author</label>
+                            <input type="text" id="author" name="author" class="form-control" value="<?php if (!empty($probAuthor)) echo $probAuthor; ?>"/>
+                            <label class="form-label" for="author">Author</label>
                         </div>
                     </div>
                 </div>
@@ -157,8 +157,8 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <?php
+                                $count = 0; 
                                 if (isset($_GET['id'])) {
-                                    $count = 0; 
                                     $id = (int) $_GET['id'];
                                     $path = "../file/judge/prob/$id/";
                                     $files = glob($path . "*.{in}", GLOB_BRACE);

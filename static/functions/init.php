@@ -68,10 +68,10 @@
             $this->name = $name;
         }
 
-        public function getWriter() {
+        public function getAuthor() {
             return $this->writer;
         }
-        public function setWriter(String $writer) {
+        public function setAuthor(String $writer) {
             $this->writer = $writer;
         }
 
