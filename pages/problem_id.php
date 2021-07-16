@@ -182,7 +182,7 @@
                                                 $subScore = $row['maxScore'] != 0 ? ($row['score']/$row['maxScore'])*$row['probScore'] : "UNDEFINED";
                                                 //$subRuntime = $row['runningtime']/1000;
                                                 $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
-                                                <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;' data-toggle='modal' data-target='#modalPopup'>
+                                                <tr style="cursor: pointer;" onclick='launchSubmissionModal(<?php echo $subID; ?>)' data-toggle='modal' data-target='#modalPopup'>
                                                     <th scope='row'><?php echo $subUploadtime; ?></th>
                                                     <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id=" . $subID; ?>><code><?php echo "$subResult"; if ($row['result'] != "W") echo " ($subScore)"; ?></code></td>
                                                 </tr>
@@ -204,3 +204,21 @@
         </div>
     </div>
 </div>
+<script>
+    function launchSubmissionModal(id) {
+        document.getElementById("modalTitle").innerHTML = "Submission #" + id;
+        document.getElementById("modalBody").innerHTML = '<div class="d-flex justify-content-center"><img class="img-fluid" align="center" src="<?php echo randomLoading(); ?>"></div>';
+        
+        $.ajax({
+            type: 'POST',
+            url: '../pages/submission_gen.php',
+            data: { 'id': id, 'who': <?php echo (isLogin()) ? $_SESSION['user']->getID() : -1; ?> },
+            success: function (data) { 
+                document.getElementById("modalBody").innerHTML = data;
+                $('pre > code').each(function() {
+                    hljs.highlightBlock(this);
+                });
+            }
+        })
+    }
+</script>
