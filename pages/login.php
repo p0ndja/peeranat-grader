@@ -19,6 +19,7 @@
                         class="form-control form-control-sm validate" required>
                     <label for="login_password">Password</label>
                 </div>
+                <div class="h-captcha" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div>
                 <button type="submit" class="btn btn-block btn-coekku mb-3">Login</button>
                 <input type="hidden" name="method" value="loginPage">
                 <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../register/" class="text-pharm">สมัครเข้าใช้งานที่นี่!</a>
@@ -28,3 +29,12 @@
     </form>
     </div>
 </div>
+<script>
+    $("form").submit(function(event) {
+        var hcaptchaVal = $('[name=h-captcha-response]').value;
+        if (hcaptchaVal === "") {
+            event.preventDefault();
+            swal("Oops","Please complete captcha!", "error");
+        }
+    });
+</script>

@@ -15,7 +15,7 @@
         if ($result->num_rows > 0) {
 
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $writer = $row['writer']; $memory = $row['memory']; $time = $row['time'];
+                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $score = $row['score']; $author = $row['author']; $memory = $row['memory']; $time = $row['time'];
                 $prop = json_decode($row['properties'],true);
                 $acceptType = array_key_exists("accept", $prop) ? $prop["accept"] : array("Python","Java","C","Cpp");
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
@@ -25,7 +25,7 @@
                     "id" => $id,
                     "name" => $name,
                     "codename" => $codename,
-                    "author" => $writer,
+                    "author" => $author,
                     "score" => $score,
                     "memory" => $memory,
                     "time" => $time,
