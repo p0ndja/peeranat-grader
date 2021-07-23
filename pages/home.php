@@ -2,8 +2,8 @@
 <div class="homepage" style="padding-top: 64px; min-height: 100vh;">
     <div class="container-fluid h-100 w-100">
         <div class="h-100 w-100 row align-items-center">
-            <div class="d-none d-md-block col-md-1"></div>
-            <div class="col-12 col-md-5">
+            <div class="d-none d-lg-block col-lg-1"></div>
+            <div class="col-12 col-lg-5">
                 <div class="bounceInDown animated">
                     <h1 class="font-weight-bold text-coekku display-4">Grader.ga</h1>
                     <h4 class="font-weight-normal">The Computer Engineering of <b class="text-nowrap">Khon Kaen University</b><br>Student-Made grader.</h4>
@@ -44,10 +44,10 @@
                         } ?>
                 </div>
                 <div class="fadeIn animated">
-                    <img src="../static/elements/3323617.svg" onContextMenu="return false;" class="mt-3 img-fluid w-100 d-block d-md-none">
+                    <img src="../static/elements/3323617.svg" onContextMenu="return false;" class="mt-3 img-fluid w-100 d-block d-lg-none">
                 </div>
             </div>
-            <div class="col-12 col-md-6 d-none d-md-block">
+            <div class="col-12 col-lg-6 d-none d-lg-block">
                 <div class="fadeIn animated">
                     <img src="../static/elements/3323617.svg" onContextMenu="return false;" class="img-fluid w-100">
                 </div>
