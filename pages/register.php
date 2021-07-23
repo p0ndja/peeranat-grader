@@ -31,6 +31,7 @@
                         class="form-control form-control-sm validate" required>
                     <label for="register_name">Display name</label>
                 </div>
+                <div class="h-captcha" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div>
                 <button type="submit" class="btn btn-block btn-coekku mb-3">Register</button>
                 <input type="hidden" name="method" value="registerPage">
                 <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../login/" class="text-pharm">ต้องการเข้าสู่ระบบ!</a>
@@ -39,3 +40,12 @@
     </form>
     </div>
 </div>
+<script>
+    $("form").submit(function(event) {
+        var hcaptchaVal = $('[name=h-captcha-response]').value;
+        if (hcaptchaVal === "") {
+            event.preventDefault();
+            swal("Oops","Please complete captcha!", "error");
+        }
+    });
+</script>
