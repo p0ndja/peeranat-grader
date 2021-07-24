@@ -6,7 +6,7 @@
     $email = $_GET['email'];
 
     global $conn;
-    if ($stmt = $conn->prepare("SELECT `id`,`username`,`password` FROM `user` WHERE json_extract(`tempAuthKey`. `$.key`) = ? AND email = ? LIMIT 1")) {
+    if ($stmt = $conn->prepare("SELECT `id`,`username`,`password` FROM `user` WHERE json_extract(`tempAuthKey`,`$.key`) = ? AND email = ? LIMIT 1")) {
         $stmt->bind_param('ss', $key, $email);
         $stmt->execute();
         $result = $stmt->get_result();
