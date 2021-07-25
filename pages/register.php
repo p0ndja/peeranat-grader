@@ -41,11 +41,13 @@
     </div>
 </div>
 <script>
-    $("form").submit(function(event) {
-        var hcaptchaVal = $('[name=h-captcha-response]').value;
-        if (hcaptchaVal === "") {
-            event.preventDefault();
-            swal("Oops","Please complete captcha!", "error");
-        }
+    $(document).ready(function () {
+        $("form").submit(function(event) {
+            var hcaptchaVal = $('[name=h-captcha-response]').value;
+            if (hcaptchaVal === undefined) {
+                event.preventDefault();
+                swal("Oops","Please complete captcha!", "error");
+            }
+        });
     });
 </script>
