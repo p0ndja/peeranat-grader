@@ -2,7 +2,7 @@
 <div class="container" id="container" style="padding-top: 88px; min-height: 85vh;">
     <div class="center">
     <h1 class="display-5 font-weight-bold text-center text-coekku">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
-    <form method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
+    <form id="loginForm" method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
         <div class="card z-depth-1">
             <!--Body-->
             <div class="card-body mb-1">
@@ -30,7 +30,7 @@
     </div>
 </div>
 <script>
-    $("form").submit(function(event) {
+    $("#loginForm").submit(function(event) {
         var hcaptchaVal = $('[name=h-captcha-response]').value;
         if (hcaptchaVal === "") {
             event.preventDefault();
