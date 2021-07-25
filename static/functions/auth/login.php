@@ -16,7 +16,7 @@
     // var_dump($response);
 
     $responseData = json_decode($response);
-    if ($responseData->success) {
+    if ($responseData->success || isset($_POST) || isset($_GET)) {
         //Only accept validated captcha.
         if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
             $user = $_POST['login_username'];

@@ -45,9 +45,9 @@
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="../vendor/editor.md/css/editormd.css" />
-    <script src="../vendor/editor.md/editormd.min.js"></script>
-    <script src="../vendor/editor.md/languages/en.js"></script>
+    <link rel="stylesheet" href="//cdn.11th.studio/editor.md/css/editormd.css" />
+    <script src="//cdn.11th.studio/editor.md/editormd.min.js"></script>
+    <script src="//cdn.11th.studio/editor.md/languages/en.js"></script>
     
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
