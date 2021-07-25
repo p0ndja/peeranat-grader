@@ -103,5 +103,7 @@
                 echo ErrorMessage::AUTH_WRONG;
             }
         }
+    } else {
+        header("Location: ../home/");
     }
 ?>
