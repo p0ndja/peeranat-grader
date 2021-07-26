@@ -34,7 +34,7 @@
                 <div class="h-captcha" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div>
                 <button type="submit" class="btn btn-block btn-coekku mb-3">Register</button>
                 <input type="hidden" name="method" value="registerPage">
-                <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a> หรือ <a href="../login/" class="text-pharm">ต้องการเข้าสู่ระบบ!</a>
+                <div class="text-center"><a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่าน</a> | <a href="../login/" class="text-pharm">ล็อกอิน</a></div>
             </div>
         </div>
     </form>
