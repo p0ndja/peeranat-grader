@@ -70,3 +70,5 @@
     <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
 
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5249401084148971" crossorigin="anonymous"></script>
