@@ -35,7 +35,11 @@ RewriteRule ^login/$ pages/page_loader.php?target=login.php
 RewriteRule ^logout/$ static/functions/auth/logout.php
 RewriteRule ^register/$ pages/page_loader.php?target=register.php
 
-Options +FollowSymlinks
 Options +Indexes
 IndexOptions +FancyIndexing
 DirectoryIndex .index.php .index.html index.php index.html .redirect.html redirect.html landing.html landing.php .landing.html .landing.php .redirect.php redirect.php
+
+php_value post_max_size 128M
+php_value upload_max_filesize 128M
+php_value display_errors On
+php_value max_execution_time 300
