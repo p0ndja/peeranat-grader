@@ -14,14 +14,14 @@
     <link rel="apple-touch-icon" sizes="152x152" href="../static/elements/logo/logo_ios152.png">
 
     <?php $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-<meta property="og:image" content="//grader.ga/static/elements/logo/logo.jpg" />
+<meta property="og:image" content="//grader.pondja.com/static/elements/logo/logo.jpg" />
     <meta property="og:image:width" content="194" />
     <meta property="og:image:height" content="194" />
     <meta property="og:title" content="Grader.GA" />
     <title>Grader.GA</title>
     <meta property="og:description" content="The Computer Engineering of Khon Kaen University Student-Made grader." />
     <meta name="twitter:card" content="summary"></meta>
-    <link rel="image_src" href="//grader.ga/static/elements/logo/logo.jpg" />
+    <link rel="image_src" href="//grader.pondja.com/static/elements/logo/logo.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<?php echo $current_url; ?>" />
 
@@ -45,9 +45,9 @@
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="//cdn.11th.studio/editor.md/css/editormd.css" />
-    <script src="//cdn.11th.studio/editor.md/editormd.min.js"></script>
-    <script src="//cdn.11th.studio/editor.md/languages/en.js"></script>
+    <link rel="stylesheet" href="//pandao.github.io/editor.md/css/editormd.min.css" />
+    <script src="//pandao.github.io/editor.md/editormd.min.js"></script>
+    <script src="//pandao.github.io/editor.md/languages/en.js"></script>
     
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
@@ -60,8 +60,8 @@
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- Croppie -->
-    <link rel="stylesheet" href="//cdn.11th.studio/croppie/croppie.css" />
-    <script src="//cdn.11th.studio/croppie/croppie.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
     
     <!-- Fontawesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -69,8 +69,8 @@
     <script src="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
     <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" type="text/css">
 
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 

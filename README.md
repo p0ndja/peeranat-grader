@@ -1,7 +1,7 @@
 # Grader.ga
 The The Computer Engineering of Khon Kaen University Student-Made grader.
 
-This is **Website** part of our [grader.ga](https://grader.ga/) project, you can look at our juding system at [Nepumi-Jr/Garedami](https://github.com/Nepumi-Jr/Garedami)
+This is **Website** part of our [grader.ga](https://grader.pondja.com/) project, you can look at our juding system at [Nepumi-Jr/Garedami](https://github.com/Nepumi-Jr/Garedami)
 
 ### Feature
 ---
