@@ -1,18 +1,5 @@
 <?php
-
-    $maildb = array(
-        "hostname" => "203.159.94.111",
-        "username" => "p0ndja",
-        "password" => "P0ndJ@1103",
-        "table" => "p0ndja"
-    );
-
-    $mailsender = array(
-        "name"=>"Grader.ga",
-        "email"=>"p0ndja.dev@gmail.com",
-        "password"=>"nlertkybrcvwvssg"
-    );
-    $mailsenderData = json_encode($mailsender);
+    require_once 'conf.php';
 
     global $mailconn;
     $mailconn = new mysqli($maildb["hostname"], $maildb["username"], $maildb["password"], $maildb["table"]);
