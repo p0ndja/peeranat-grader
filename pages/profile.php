@@ -44,7 +44,7 @@
                                     </div>
                                     <input type="text" class="form-control mr-sm-3" id="name" name="name"
                                         placeholder="<?php echo $user->getName(); ?>"
-                                        value="<?php echo $user->getName(); ?>" disabled>
+                                        value="<?php echo $user->getName(); ?>">
                                 </div>
                                 <!-- name -->
                                 <!-- Security Zone -->
