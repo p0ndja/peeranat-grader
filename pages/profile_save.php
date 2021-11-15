@@ -34,7 +34,7 @@
             $_SESSION['user']->setEmail($email);
             $_SESSION['user']->setProfile($profile_url);
             $_SESSION['swal_success'] = "สำเร็จ!";
-            $_SESSION['swal_success_msg'] = "แก้ไขโปรไฟล์ #$id สำเร็จแล้ว!";
+            $_SESSION['swal_success_msg'] = "แก้ไขโปรไฟล์สำเร็จ!";
             echo "Edited";
         } else {
             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
