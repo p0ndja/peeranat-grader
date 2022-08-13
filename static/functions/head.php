@@ -45,16 +45,9 @@
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="//pandao.github.io/editor.md/css/editormd.min.css" />
-    <script src="//pandao.github.io/editor.md/editormd.min.js"></script>
-    <script src="//pandao.github.io/editor.md/languages/en.js"></script>
-    
-    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+    <link rel="stylesheet" href="../vendor/editor.md/css/editormd.min.css" />
+    <script src="../vendor/editor.md/editormd.min.js"></script>
+    <script src="../vendor/editor.md/languages/en.js"></script>
     
     <!-- SweetAlert -->
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
