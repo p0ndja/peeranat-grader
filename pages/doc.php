@@ -2,7 +2,7 @@
     $id = $_GET['id'];
     $codename = $_GET['codename'];
     //print_r("../file/judge/prob/$id/$codename*.pdf");
-    $file = glob("../file/judge/prob/$id/$codename*.pdf");
+    $file = glob("../file/judge/prob/$id/*.pdf");
     //print_r($file);
     if ($file) {
         header("Content-type: application/pdf");

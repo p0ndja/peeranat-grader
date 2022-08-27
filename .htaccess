@@ -29,6 +29,8 @@ RewriteRule ^resetpassword/$ pages/page_loader.php?target=password_reset.php [L]
 
 RewriteRule ^api/(.*)$ static/functions/api/$1.php
 
+RewriteRule ^admin/(.*)$ pages/page_loader.php?target=admin_$1.php [QSA]
+
 RewriteRule ^doc/([0-9]+)-(.*)$ pages/doc.php?id=$1&codename=$2
 
 RewriteRule ^login/$ pages/page_loader.php?target=login.php

@@ -42,4 +42,5 @@
         }
         header("Location: ../problem/$probID");
     }
+    header("Location: ../problem/");
 ?>

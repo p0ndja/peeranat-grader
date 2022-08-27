@@ -17,11 +17,11 @@
 <meta property="og:image" content="//grader.pondja.com/static/elements/logo/logo.jpg" />
     <meta property="og:image:width" content="194" />
     <meta property="og:image:height" content="194" />
-    <meta property="og:title" content="Grader.ga" />
-    <title>Grader.ga</title>
-    <meta property="og:description" content="The Computer Engineering of Khon Kaen University Student-Made grader." />
+    <meta property="og:title" content="Grader.peeranat.net" />
+    <title>Grader.peeranat.net</title>
+    <!--meta property="og:description" content="The Computer Engineering of Khon Kaen University Student-Made grader." /--!>
     <meta name="twitter:card" content="summary"></meta>
-    <link rel="image_src" href="//grader.pondja.com/static/elements/logo/logo.jpg" />
+    <link rel="image_src" href="//grader.peeranat.net/static/elements/logo/logo.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<?php echo $current_url; ?>" />
 
@@ -45,16 +45,9 @@
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="//pandao.github.io/editor.md/css/editormd.min.css" />
-    <script src="//pandao.github.io/editor.md/editormd.min.js"></script>
-    <script src="//pandao.github.io/editor.md/languages/en.js"></script>
-    
-    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+    <link rel="stylesheet" href="../vendor/editor.md/css/editormd.min.css" />
+    <script src="../vendor/editor.md/editormd.min.js"></script>
+    <script src="../vendor/editor.md/languages/en.js"></script>
     
     <!-- SweetAlert -->
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
