@@ -11,7 +11,7 @@
                     $latest_filename = $file;
             }
     }
-    if ($latest_filename != null)) {
+    if ($latest_filename != null) {
         header("Content-type: application/pdf");
         readfile($latest_filename);
     } else {
