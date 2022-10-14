@@ -40,7 +40,7 @@
                 </li>
                 <?php if (isLogin()) { ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $_SESSION['user']->getProfile(); ?>" class="rounded-circle" width="20" alt="Profile"> <?php echo htmlspecialchars($_SESSION['user']->getDisplayname()); ?></a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $_SESSION['user']->getProfile(); ?>" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['user']->getDisplayname(); ?></a>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <div class="dropdown-divider"></div>
