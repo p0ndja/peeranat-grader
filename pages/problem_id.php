@@ -6,7 +6,7 @@
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $author = $row['author']; 
+                $id = $row['id']; $name = htmlspecialchars($row['name']); $codename = htmlspecialchars($row['codename']); $mem = $row['memory'] . " Megabyte"; $time = $row['time'] . " Millisecond"; $score = $row['score']; $author = $row['author']; 
                 if ($row['time'] > 1) $time .= "s"; if ($row['memory'] > 1) $mem .= "s";
             
                 $prop = json_decode($row['properties'],true);

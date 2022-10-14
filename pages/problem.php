@@ -21,7 +21,7 @@
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode'];
+                            $id = $row['probID']; $name = htmlspecialchars($row['probName']); $codename = htmlspecialchars($row['probCode']);
                             
                             $prop = json_decode($row['probProp'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;

@@ -1,6 +1,7 @@
 <?php
 
     function usergen($name, $properties) {
+        $name = htmlspecialchars($name);
         if (empty($properties)) return $name;
         $dec = json_decode($properties, true);
         $rainbow = array_key_exists("rainbow", $dec) ? (bool) $dec['rainbow'] : false;
@@ -10,7 +11,7 @@
     }
 
     function probgen($name, $codename) {
-        return "$name <span class='badge badge-coekku'>$codename</span>";
+        return htmlspecialchars($name)." <span class='badge badge-coekku'>$codename</span>";
     }
 
     require_once '../static/functions/connect.php';
