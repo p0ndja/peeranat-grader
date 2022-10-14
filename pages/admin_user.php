@@ -26,7 +26,7 @@
             });
         });
     </script>
-    --!>
+    -->
     <div class="table-responsive">
         <table class="table table-sm table-striped w-100 d-block d-md-table" id="problemTable">
             <thead>
@@ -55,8 +55,8 @@
 
                             <tr id="row_<?php echo $id; ?>">
                                 <th class='text-right' scope='row'><?php echo $id; ?></th>
-                                <td><div id="name_<?php echo $id; ?>"><?php echo $name; ?></div></td>
-                                <td><div id="email_<?php echo $id; ?>"><?php echo $email; ?></div></td>
+                                <td><div id="name_<?php echo $id; ?>"><?php echo htmlspecialchars($name); ?></div></td>
+                                <td><div id="email_<?php echo $id; ?>"><?php echo htmlspecialchars($email); ?></div></td>
                                 <td><div id="role_<?php echo $id; ?>"><?php echo ($admin) ? "Admin" : "Student"; ?></div></td>
                                 <td><div id="func_<?php echo $id; ?>"><i class="text-warning fas fa-pencil-alt" onClick="functionButton(<?php echo $id; ?>);"></i> <i class="text-danger fas fa-trash-alt" onClick="deleteButton(<?php echo $id; ?>);"></i></div></td>
                             </tr>
