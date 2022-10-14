@@ -140,7 +140,7 @@
             return $this->user;
         }
         public function setUsername(String $username) {
-            $this->user = $username;
+            $this->user = htmlspecialchars($username);
         }
 
         public function getName() {
@@ -153,14 +153,14 @@
             return $name;
         }
         public function setName(String $name) {
-            $this->name = $name;
+            $this->name = htmlspecialchars($name);
         }
 
         public function getEmail() {
             return $this->email;
         }
         public function setEmail(String $email) {
-            $this->email = $email;
+            $this->email = htmlspecialchars($email);
         }
 
         public function getProfile() {
@@ -201,9 +201,9 @@
             $this->id = $id;
             $data = getUserData($id);
             if (!empty($data)) {
-                $this->name = $data['displayname'];
-                $this->email = $data['email'];
-                $this->user = $data['username'];
+                $this->name = htmlspecialchars($data['displayname']);
+                $this->email = htmlspecialchars($data['email']);
+                $this->user = htmlspecialchars($data['username']);
                 $this->profile = $data['profile'];
                 $this->properties = json_decode($data['properties'], true);
             } else {
