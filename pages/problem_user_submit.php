@@ -1,7 +1,7 @@
 <?php
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
-    function acceptFileExArr($type) {
+    function acceptFileExtArr($type) {
         switch($type) {
             case "C":
                 $accept = array(".c", ".i");
