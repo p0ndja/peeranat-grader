@@ -37,7 +37,7 @@
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (!in_array($ext, acceptFileExtArr($userCodeLang))) {
                 $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
+                $_SESSION['swal_error_msg'] = "External Exception: $userCodeLang สามารถรับได้เฉพาะไฟล์ " . implode(", ",acceptFileExtArr($userCodeLang)) . " เท่านั้น";
                 header("Location: ../problem/$probID");
                 die();
             }
