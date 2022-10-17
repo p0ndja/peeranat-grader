@@ -74,7 +74,7 @@
                 $stmt->bind_param('issss', $id, $user, $pass, $name, $email);
                 if (!$stmt->execute()) {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                    $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                 } else {
                     $_SESSION['user'] = login($user, $pass);
                     $_SESSION['swal_success'] = "สมัครสมาชิกสำเร็จ!";

@@ -16,6 +16,7 @@
         const DATABASE_ESTABLISH = "ERROR 40 : Cannot established with the database";
         const DATABASE_QUERY = "ERROR 41 : Cannot query with the database";
         const DATABASE_ERROR = "ERROR 49 : Unexpected internal database error";
+        const DATABASE_CONFLICT = "ERROR 42 : Database conflict with the database";
 
         const SESSION_INVALID = "ERROR 60 : Session is invalid";
         

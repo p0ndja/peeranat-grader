@@ -10,7 +10,7 @@
             $stmt->bind_param('si', $properties,$problem_id);
             if (!$stmt->execute()) {
                 $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                 die($conn->error);
             } else {
                 $_SESSION['swal_success'] = "สำเร็จ!";

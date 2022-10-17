@@ -38,7 +38,7 @@
             echo "Edited";
         } else {
             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-            $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
+            $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY."\n".$conn->error;
             echo "Can't establish database";
         }
         
