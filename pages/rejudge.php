@@ -8,14 +8,14 @@
                 $stmt->bind_param('i', $problem_id);
                 if (!$stmt->execute()) {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                    $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                    $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                 } else {
                     $_SESSION['swal_success'] = "สำเร็จ!";
                     $_SESSION['swal_success_msg'] = "Rejudge โจทย์ข้อ #$problem_id แล้ว";
                 }
             } else {
                 $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
             }
             header("Location: ../problem/$problem_id");
         } else if (isset($_GET['method'])) {
@@ -24,14 +24,14 @@
                     if ($stmt = $conn -> prepare("UPDATE `submission` SET result='W' WHERE result = 'JudgeError'")) {
                         if (!$stmt->execute()) {
                             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                            $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                            $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                         } else {
                             $_SESSION['swal_success'] = "สำเร็จ!";
                             $_SESSION['swal_success_msg'] = "Rejudge โจทย์ทุกข้อที่ JudgeError แล้ว";
                         }
                     } else {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                     }
                     break;
                 case "Submission":
@@ -41,14 +41,14 @@
                         $stmt->bind_param('i', $id);
                         if (!$stmt->execute()) {
                             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                            $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                            $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                         } else {
                             $_SESSION['swal_success'] = "สำเร็จ!";
                             $_SESSION['swal_success_msg'] = "Rejudge Submission #$id แล้ว";
                         }
                     } else {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                     }
                     break;
                 case "Problem":
@@ -58,14 +58,14 @@
                         $stmt->bind_param('i', $id);
                         if (!$stmt->execute()) {
                             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                            $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                            $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                         } else {
                             $_SESSION['swal_success'] = "สำเร็จ!";
                             $_SESSION['swal_success_msg'] = "Rejudge โจทย์ข้อ #$problem_id แล้ว";
                         }
                     } else {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                     }
                     break;
                 default:

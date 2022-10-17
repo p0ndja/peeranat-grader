@@ -19,7 +19,7 @@
             }
         }
         $_SESSION['swal_error'] = "ไม่สามารถรีเซ็ตรหัสผ่าน";
-        $_SESSION['swal_error_msg'] = "พบข้อผิดพลาด: ข้อมูลไม่ตรงกับฐานข้อมูล";
+        $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_CONFLICT;
         header("Location: ../../../home/");
         die();
     }

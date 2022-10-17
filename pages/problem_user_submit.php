@@ -1,7 +1,29 @@
 <?php
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
-
+    function acceptFileExArr($type) {
+        switch($type) {
+            case "C":
+                $accept = array(".c", ".i");
+                break;
+            case "Cpp":
+                $accept = array(".cpp", ".cc", ".cxx", ".c++", ".hpp",".hh",".hxx",".h++",".h",".ii");
+                break;
+            case "Python":
+                $accept = array(".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy");
+                break;
+            case "Java":
+                $accept = array(".java", ".jav"); 
+                break;
+            case "TXT":
+                $accept = array(".txt");
+                break;
+            default:
+                $accept = array();
+                break;
+        }
+        return $accept;
+    }
     if (isLogin()) {
         $userID = $_SESSION['user']->getID();
         $probID = $_POST['probID'];
@@ -13,6 +35,12 @@
             $tmp = $_FILES['submission']['tmp_name'];
             
             $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (!in_array($ext, acceptFileExtArr($userCodeLang))) {
+                $_SESSION['swal_error'] = "พบข้อผิดพลาด";
+                $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
+                header("Location: ../problem/$probID");
+                die();
+            }
             $name_file = "$probCodename-$fileName.$ext";
             
             $locate ="../file/judge/upload/$userID/";
@@ -29,7 +57,7 @@
                 $stmt->bind_param('iiss', $userID, $probID, $userCodeLang, $userCodeLocate);
                 if (!$stmt->execute()) {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                    $_SESSION['swal_error_msg'] = ErrorMessage::DATABASE_QUERY;
                 } else {
                     $_SESSION['swal_success'] = "สำเร็จ!";
                     $_SESSION['swal_success_msg'] = "ส่งโค้ตสำเร็จ";
