@@ -40,7 +40,7 @@
                     }
                     echo "</code></pre>"; ?>
                     <?php if (file_exists($row['script'])) { ?>
-                        <p class="text-right mb-0 mt-0"><small><a href="<?php echo $row['script']; ?>" download target="_blank">Download Code <i class="fas fa-download"></i></a></small></p>
+                        <p class="text-right mb-0 mt-0"><small><a href="<?php echo $row['script']; ?>" download="<?php echo $subID.".".pathinfo($row['script'], PATHINFO_EXTENSION);?>" target="_blank">Download Code <i class="fas fa-download"></i></a></small></p>
                     <?php } ?>
                     <?php 
                 } ?>
